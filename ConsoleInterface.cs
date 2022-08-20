@@ -19,8 +19,10 @@ class RespondParser
     {
         List<Distro> dl = new List<Distro>();
         string[] lines = text.Replace("\r", "").Split('\n');
+        int lineNumber = 0;
         foreach (string line in lines)
         {
+            int PNumber = lineNumber++;
             bool PDefault=false;
             if (line.Length == 0) continue;
             if (line.Equals(lines[0])) continue;
@@ -40,7 +42,7 @@ class RespondParser
             string PName = fields2[0];
             string PState = fields2[1];
             int PVersion = int.Parse(fields2[2]);
-            dl.Add(new Distro() { Name = PName, State = PState, Version = PVersion , Default=PDefault});
+            dl.Add(new Distro() { Number = PNumber, Name = PName, State = PState, Version = PVersion , Default=PDefault});
         }
         return dl;
     }
@@ -134,18 +136,20 @@ public class Distro
 {
     public Distro()
     {
+        this.Number = 0;
         this.Name = "noname";
         this.State = "nostate";
         this.Version = 0;
         this.Default = false;
     }
+    public int Number { get; set; }
     public string Name { get; set; }
     public string State { get; set; }
     public int Version { get; set; }
     public bool Default { get; set; }
     public override string ToString()//override text output
     {
-        if (this.Default) return this.Name + ", WSL" + this.Version + ", " + this.State+", Set as default";
-        return this.Name + ", WSL" + this.Version + ", " + this.State;
+        if (this.Default) return this.Number.ToString() + ". " + this.Name + ", WSL" + this.Version + ", " + this.State+", Set as default";
+        return this.Number.ToString() + ". " + this.Name + ", WSL" + this.Version + ", " + this.State;
     }
 }

@@ -1,18 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace wslcontrol_gui
 {
@@ -67,6 +56,7 @@ namespace wslcontrol_gui
             RunCommandButton.IsEnabled = false;
             TerminateButton.IsEnabled = false;
             SetDefaultButton.IsEnabled = false;
+            OpenInExplorerButton.IsEnabled = false;
         }
         private void RefreshDistros()
         {
@@ -100,8 +90,8 @@ namespace wslcontrol_gui
             {
                 if (selectedDistro.Version == 2) WSL2WarningLabel.Visibility = Visibility.Visible;
                 if (selectedDistro.Version == 1) WSL2WarningLabel.Visibility = Visibility.Collapsed;
-                if (selectedDistro.State == "Running") TerminateButton.IsEnabled = true;
-                if (selectedDistro.State == "Stopped") TerminateButton.IsEnabled = false;
+                if (selectedDistro.State == "Running") { TerminateButton.IsEnabled = true; OpenInExplorerButton.IsEnabled = true; }
+                if (selectedDistro.State == "Stopped") { TerminateButton.IsEnabled = false; OpenInExplorerButton.IsEnabled = false; }
                 RunCommandButton.IsEnabled = true;
                 LaunchButton.IsEnabled = true;
                 InstallUninstallButton.IsEnabled = true;
@@ -146,7 +136,7 @@ namespace wslcontrol_gui
         }
         private void WaitAndRefresh()
         {
-            Thread.Sleep(500);
+            Thread.Sleep(250);
             RefreshDistros();
         }
 
@@ -166,6 +156,25 @@ namespace wslcontrol_gui
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
             RefreshDistros();
+        }
+        private void OpenThisInExplorer_Click(object sender, RoutedEventArgs e)
+        {
+            int selectedDistroNumber = ((Distro)DistroList.SelectedItem).Number;
+            RefreshDistros();
+            DistroList.SelectedIndex = selectedDistroNumber-1;
+            Distro selectedDistro = (Distro)DistroList.SelectedItem;
+            if ((selectedDistro != null) && (selectedDistro.State=="Running"))
+            {
+                ShellExecuteBp a = new(selectedDistro.Name);
+            }
+            else
+            {
+                ShellExecuteBp a = new();
+            }
+        }
+        private void OpenAllInExplorer_Click(object sender, RoutedEventArgs e)
+        {
+            ShellExecuteBp a = new();
         }
         //public string GetSelectedDistro()
         //{
