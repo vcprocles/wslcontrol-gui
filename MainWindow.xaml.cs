@@ -5,12 +5,8 @@ using System.Windows.Controls;
 
 namespace wslcontrol_gui
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        //List<Distro> items = new List<Distro>();
         WSLInterface wsli = new();
         public MainWindow()
         {
@@ -24,29 +20,10 @@ namespace wslcontrol_gui
                 MessageBox.Show(ex.Message);
                 Close();
             }
-            //FilloutTestDistros();
         }
-        //private void FilloutTestDistros()
-        //{
-        //    items.Add(new Distro() { Name = "Ubuntu", State = "Running", Version = 1 });
-        //    items.Add(new Distro() { Name = "Debian", State = "Running", Version = 2 });
-        //    items.Add(new Distro() { Name = "opensuse-tumbleweed", State = "Stopped", Version = 1 });
-        //    DistroList.ItemsSource = items;
-        //}
         private void SetInitialStatuses()
         {
             DeactivateAllButtons();
-            switch (wsli.GetCurrentDefaultWSLVersion())
-            {
-                case 1:
-                    WSLVersionSelected1.IsChecked = true;
-                    break;
-                case 2:
-                    WSLVersionSelected2.IsChecked = true;
-                    break;
-                default:
-                    throw new Exception("Is WSL installed?");
-            }
             RefreshDistros();
         }
         private void DeactivateAllButtons()
@@ -57,6 +34,7 @@ namespace wslcontrol_gui
             TerminateButton.IsEnabled = false;
             SetDefaultButton.IsEnabled = false;
             OpenInExplorerButton.IsEnabled = false;
+            ThisDistroSettingsButton.IsEnabled=false;
         }
         private void RefreshDistros()
         {
@@ -68,15 +46,6 @@ namespace wslcontrol_gui
         {
             wsli.ShutdownWSL();
             WaitAndRefresh();
-        }
-
-        private void WSLVersionSelected1_Checked(object sender, RoutedEventArgs e)
-        {
-            wsli.SetDefaultVersion(1);
-        }
-        private void WSLVersionSelected2_Checked(object sender, RoutedEventArgs e)
-        {
-            wsli.SetDefaultVersion(2);
         }
         private void RefreshButtons()
         {
@@ -96,6 +65,7 @@ namespace wslcontrol_gui
                 LaunchButton.IsEnabled = true;
                 InstallUninstallButton.IsEnabled = true;
                 SetDefaultButton.IsEnabled = true;
+                ThisDistroSettingsButton.IsEnabled = true;
                 if (selectedDistro.State == "Installing")
                 {
                     TerminateButton.IsEnabled = false;
@@ -115,11 +85,6 @@ namespace wslcontrol_gui
         {
             wsli.OpenDistro(((Distro)DistroList.SelectedItem).Name);
         }
-
-        //private void NotImplementedException()
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         private void RunCommandButton_Click(object sender, RoutedEventArgs e)
         {
@@ -176,10 +141,20 @@ namespace wslcontrol_gui
         {
             ShellExecuteBp a = new();
         }
-        //public string GetSelectedDistro()
-        //{
-        //    return ((Distro)DistroList.SelectedItem).Name;
-        //}
+
+        private void GlobalSettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalSettings inputwindow = new GlobalSettings(wsli);
+            inputwindow.Owner = this;
+            inputwindow.Show();
+        }
+
+        private void ThisDistroSettings_Click(object sender, RoutedEventArgs e)
+        {
+            SelectedSettings inputwindow = new SelectedSettings(((Distro)DistroList.SelectedItem).Name, wsli);
+            inputwindow.Owner = this;
+            inputwindow.Show();
+        }
     }
 
 }

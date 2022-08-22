@@ -5,69 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wslcontrol_gui"
         mc:Ignorable="d"
-        Title="WSLControl-gui" Height="600" MinHeight="230" Width="500" MinWidth="575" ResizeMode="CanResize">
+        Title="WSLControl-gui" Height="600" MinHeight="230" Width="700" MinWidth="575" ResizeMode="CanResize">
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <ListView Name="DistroList" SelectionChanged="DistroList_SelectionChanged" Margin="5,5,5,0" SelectionMode="Single"/>
-
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <Label Name="WSL2WarningLabel" Padding="5,5,5,5" MaxWidth="395" Visibility="Collapsed">
-                <TextBlock TextWrapping="Wrap" Visibility="Visible" FontWeight="Normal" FontStyle="Italic" Width="385">WARNING: Terminating WSL2 instance doesn't release system resources, use Shutdown instead</TextBlock>
-            </Label>
-            <Grid Grid.Row="1">
-                <Label Grid.Row="1">Options for selected distro:</Label>
+        
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <ListView Grid.Column="0" Name="DistroList" SelectionChanged="DistroList_SelectionChanged" Margin="5,5,5,0" SelectionMode="Single"/>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" Name="disdist"/>
+                    <RowDefinition Height="auto" Name="term"/>
+                    <RowDefinition Height="auto" Name="com"/>
+                    <RowDefinition Height="auto" Name="def"/>
+                    <RowDefinition Height="auto" Name="termin"/>
+                    <RowDefinition Height="auto" Name="unins"/>
+                    <RowDefinition Height="auto" Name="explr"/>
+                    <RowDefinition Height="auto" Name="prefthis"/>
+                    <RowDefinition Height="auto" Name="alldist"/>
+                    <RowDefinition Height="auto" Name="shutdwn"/>
+                    <RowDefinition Height="auto" Name="wslroot"/>
+                    <RowDefinition Height="auto" Name="globpref"/>
+                    <RowDefinition Height="auto" Name="refreshlist"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0">Options for selected distro:</Label>
+                <Button Grid.Row="1" Name="LaunchButton" Content="Launch in terminal" Width="auto" Height="30" Margin="5,5,5,5" Click="LaunchButton_Click"/>
+                <Button Grid.Row="2" Name="RunCommandButton" Content="Run command..." Width="auto" Height="30" Margin="5,5,5,5" Click="RunCommandButton_Click"/>
+                <Button Grid.Row="3" Name="SetDefaultButton" Content="Set as default" Width="auto" Height="30" Margin="5,5,5,5" Click="SetDefaultButton_Click"/>
+                <Button Grid.Row="4" Name="TerminateButton" Content="Terminate" Width="auto" Height="30" Margin="5,5,5,5" Click="TerminateButton_Click"/>
+                <Button Grid.Row="5"  Name="InstallUninstallButton" Content="Uninstall" Width="auto" Height="30" Margin="5,5,5,5" Click="InstallUninstallButton_Click"/>
+                <Button Grid.Row="6" Name="OpenInExplorerButton" Content="Open in Explorer" Width="auto" Height="30" Margin="5,5,5,5" Click="OpenThisInExplorer_Click"/>
+                <Button Grid.Row="7" Name="ThisDistroSettingsButton" Content="Settings" Width="auto" Height="30" Margin="5,5,5,5" Click="ThisDistroSettings_Click"/>
+                <Label Grid.Row="8">Options for all distros:</Label>
+                <Button Grid.Row="9" Height="30" Name="ShutdownButton" Margin="5,5,5,5" ToolTip="Terminates all distros and releases system resources from WSL2 virtual machine" Click="ShutdownButton_Click">Shutdown Windows Subsystem for Linux</Button>
+                <Button Grid.Row="10" Height="30" Name="OpenAllInExplorer" Content="Open WSL root" Margin="5,5,5,5" Click="OpenAllInExplorer_Click"/>
+                <Button Grid.Row="11" Name="GlobalSettingsButton" Content="Global Settings" Width="auto" Height="30" Margin="5,5,5,5" Click="GlobalSettingsButton_Click"/>
+                <Button Grid.Row="12" Height="30" Name="RefreshButton" Content="Refresh list" Margin="5,5,5,5" Click="RefreshButton_Click"/>
             </Grid>
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-				<Button Grid.Column="0" Name="LaunchButton" Content="Launch in terminal" Width="auto" Height="30" Margin="5,5,5,5" Click="LaunchButton_Click"/>
-				<Button Grid.Column="1" Name="RunCommandButton" Content="Run command..." Width="auto" Height="30" Margin="5,5,5,5" Click="RunCommandButton_Click"/>
-				<Button Grid.Column="2" Name="SetDefaultButton" Content="Set as default" Width="auto" Height="30" Margin="5,5,5,5" Click="SetDefaultButton_Click"/>
-				            </Grid>
-            <Grid Grid.Row="4">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-					<ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-                <Button MaxHeight="30" VerticalAlignment="Top" Margin="5,5,5,5" Name="ShutdownButton" ToolTip="Terminates all distros and releases system resources from WSL2 virtual machine" Click="ShutdownButton_Click">Shutdown Windows Subsystem for Linux</Button>
-				<Button MaxHeight="30" VerticalAlignment="Top" Grid.Column="1" Margin="0,5,5,0" Name="OpenAllInExplorer" Content="Open WSL root" Click="OpenAllInExplorer_Click"/> <!-- idk how to name this-->
-				<Button MaxHeight="30" VerticalAlignment="Top" Grid.Column="2" Margin="0,5,5,5" Name="RefreshButton" Content="Refresh list" Click="RefreshButton_Click"/>
-            </Grid>
-            <Grid Grid.Row="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="3" Margin="5,5,5,5">Default WSL version for new distros:</TextBlock>
-                <RadioButton Grid.Row="3" Grid.Column="1"  Margin="5,6,5,4" Content="WSL1" GroupName="WSLVersionRadio" Name="WSLVersionSelected1" Checked="WSLVersionSelected1_Checked"/>
-                <RadioButton Grid.Row="3" Grid.Column="2"  Margin="5,6,5,4" Content="WSL2" GroupName="WSLVersionRadio" Name="WSLVersionSelected2" Checked="WSLVersionSelected2_Checked"/>
-            </Grid>
-			<Grid Grid.Row="3">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="1*"/>
-					<ColumnDefinition Width="1*"/>
-					<ColumnDefinition Width="1*"/>
-				</Grid.ColumnDefinitions>
-				<Button Grid.Column="0" Name="TerminateButton" Content="Terminate" Width="auto" Height="30" Margin="5,5,5,5" Click="TerminateButton_Click"/>
-				<Button Grid.Column="1"  Name="InstallUninstallButton" Content="Uninstall" Width="auto" Height="30" Margin="5,5,5,5" Click="InstallUninstallButton_Click"/>
-				<Button Grid.Column="2" Name="OpenInExplorerButton" Content="Open in Explorer" Width="auto" Height="30" Margin="5,5,5,5" Click="OpenThisInExplorer_Click"/>
-			</Grid>
         </Grid>
+        <Label Grid.Row="1" Name="WSL2WarningLabel" Padding="5,5,5,5" Visibility="Collapsed">
+            <TextBlock TextWrapping="Wrap" Visibility="Visible" FontWeight="Normal" FontStyle="Italic">WARNING: Terminating WSL2 instance doesn't always release system resources, use Shutdown instead</TextBlock>
+        </Label>
     </Grid>
 </Window>
