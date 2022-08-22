@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wslcontrol_gui"
         mc:Ignorable="d"
-        Title="GlobalSettings" Height="450" Width="800">
+        Title="GlobalSettings" Height="450" Width="450">
     <Grid>
-        <Grid>
+        <Grid VerticalAlignment="Top" MaxHeight="30">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition/>
@@ -17,5 +17,26 @@
             <RadioButton Grid.Row="3" Grid.Column="1"  Margin="5,6,5,4" Content="WSL1" GroupName="WSLVersionRadio" Name="WSLVersionSelected1" Checked="WSLVersionSelected1_Checked"/>
             <RadioButton Grid.Row="3" Grid.Column="2"  Margin="5,6,5,4" Content="WSL2" GroupName="WSLVersionRadio" Name="WSLVersionSelected2" Checked="WSLVersionSelected2_Checked"/>
         </Grid>
+        <Label Content="Following settings apply only for WSL2" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top"/>
+        <Label Content="Path to custom kernel" HorizontalAlignment="Left" Margin="18,138,0,0" VerticalAlignment="Top"/>
+        <Label Content="RAM limit" HorizontalAlignment="Left" Margin="18,56,0,0" VerticalAlignment="Top"/>
+        <Label Content="CPU cores" HorizontalAlignment="Left" Margin="18,87,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="localhost forwarding" HorizontalAlignment="Left" Margin="18,118,0,0" VerticalAlignment="Top" IsChecked="True"/>
+        <Label Content="Custom kernel command line arguments" HorizontalAlignment="Left" Margin="18,176,0,0" VerticalAlignment="Top"/>
+        <Label Content="Swap file size" HorizontalAlignment="Left" Margin="18,0,0,0" VerticalAlignment="Center"/>
+        <Label Content="Custom path to swap file" HorizontalAlignment="Left" Margin="18,235,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="Allow Windows to reclaim memory" HorizontalAlignment="Left" Margin="18,274,0,0" VerticalAlignment="Top" IsChecked="True"/>
+        <CheckBox Content="GUI applications" HorizontalAlignment="Left" Margin="18,305,0,0" VerticalAlignment="Top" IsChecked="True"/>
+        <CheckBox Content="Debug console" HorizontalAlignment="Left" Margin="18,334,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="Nested virtualization (allow accelerated VMs)" HorizontalAlignment="Left" Margin="18,367,0,0" VerticalAlignment="Top" IsChecked="True"/>
+        <Label Content="Timeout before shutdown" HorizontalAlignment="Left" Margin="15,387,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="167,391,0,0" TextWrapping="Wrap" Text="6000" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="167,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="248,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="85,60,0,0" TextWrapping="Wrap" Text="6.4GB" VerticalAlignment="Top" Width="61" TextChanged="TextBox_TextChanged"/>
+        <TextBox HorizontalAlignment="Left" Margin="89,91,0,0" TextWrapping="Wrap" Text="8" VerticalAlignment="Top" Width="58"/>
+        <TextBox HorizontalAlignment="Left" Margin="155,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="102,0,0,0" TextWrapping="Wrap" Text="2GB" VerticalAlignment="Center" Width="41"/>
+
     </Grid>
 </Window>

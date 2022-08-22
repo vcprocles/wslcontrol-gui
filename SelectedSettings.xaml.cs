@@ -23,5 +23,6 @@ namespace wslcontrol_gui
         {
             InitializeComponent();
         }
+
     }
 }

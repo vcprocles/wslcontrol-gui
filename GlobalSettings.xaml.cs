@@ -44,5 +44,15 @@ namespace wslcontrol_gui
         {
             wsli.SetDefaultVersion(2);
         }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
