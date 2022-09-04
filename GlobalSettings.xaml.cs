@@ -20,6 +20,7 @@ namespace wslcontrol_gui
     public partial class GlobalSettings : Window
     {
         WSLInterface wsli;
+        IniParseWrapGlobal ini;
         public GlobalSettings(WSLInterface wsli_extern)
         {
             InitializeComponent();
@@ -35,6 +36,7 @@ namespace wslcontrol_gui
                 default:
                     throw new Exception("Unexpected behaviour");
             }
+            ini = new IniParseWrapGlobal();
         }
         private void WSLVersionSelected1_Checked(object sender, RoutedEventArgs e)
         {
@@ -45,12 +47,62 @@ namespace wslcontrol_gui
             wsli.SetDefaultVersion(2);
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        private void RamSizeTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void CoreCountTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void LocalhostForward_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CustomKernel_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void KernelArgs_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void SwapSizeTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void SwapfilePath_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void MemReclaimCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void WSLgCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DebugConsoleCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void NestedVirtTick_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ShutdownTimeout_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }

@@ -21,22 +21,24 @@
         <Label Content="Path to custom kernel" HorizontalAlignment="Left" Margin="18,138,0,0" VerticalAlignment="Top"/>
         <Label Content="RAM limit" HorizontalAlignment="Left" Margin="18,56,0,0" VerticalAlignment="Top"/>
         <Label Content="CPU cores" HorizontalAlignment="Left" Margin="18,87,0,0" VerticalAlignment="Top"/>
-        <CheckBox Content="localhost forwarding" HorizontalAlignment="Left" Margin="18,118,0,0" VerticalAlignment="Top" IsChecked="True"/>
+        <CheckBox Content="localhost forwarding" Name="LocalhostForward" HorizontalAlignment="Left" Margin="18,118,0,0" VerticalAlignment="Top" IsChecked="True" Checked="LocalhostForward_Checked"/>
         <Label Content="Custom kernel command line arguments" HorizontalAlignment="Left" Margin="18,176,0,0" VerticalAlignment="Top"/>
         <Label Content="Swap file size" HorizontalAlignment="Left" Margin="18,0,0,0" VerticalAlignment="Center"/>
         <Label Content="Custom path to swap file" HorizontalAlignment="Left" Margin="18,235,0,0" VerticalAlignment="Top"/>
-        <CheckBox Content="Allow Windows to reclaim memory" HorizontalAlignment="Left" Margin="18,274,0,0" VerticalAlignment="Top" IsChecked="True"/>
-        <CheckBox Content="GUI applications" HorizontalAlignment="Left" Margin="18,305,0,0" VerticalAlignment="Top" IsChecked="True"/>
-        <CheckBox Content="Debug console" HorizontalAlignment="Left" Margin="18,334,0,0" VerticalAlignment="Top"/>
-        <CheckBox Content="Nested virtualization (allow accelerated VMs)" HorizontalAlignment="Left" Margin="18,367,0,0" VerticalAlignment="Top" IsChecked="True"/>
+        <CheckBox Content="Allow Windows to reclaim memory" Name="MemReclaimCheckBox" HorizontalAlignment="Left" Margin="18,274,0,0" VerticalAlignment="Top" IsChecked="True" Checked="MemReclaimCheckBox_Checked"/>
+        <CheckBox Content="GUI applications" Name="WSLgCheckBox" HorizontalAlignment="Left" Margin="18,305,0,0" VerticalAlignment="Top" IsChecked="True" Checked="WSLgCheckBox_Checked"/>
+        <CheckBox Content="Debug console" Name="DebugConsoleCheckBox" HorizontalAlignment="Left" Margin="18,334,0,0" VerticalAlignment="Top" Checked="DebugConsoleCheckBox_Checked"/>
+        <CheckBox Content="Nested virtualization (allow accelerated VMs)" Name="NestedVirtTick" HorizontalAlignment="Left" Margin="18,363,0,0" VerticalAlignment="Top" IsChecked="True" Checked="NestedVirtTick_Checked"/>
         <Label Content="Timeout before shutdown" HorizontalAlignment="Left" Margin="15,387,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="167,391,0,0" TextWrapping="Wrap" Text="6000" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="167,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="248,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="85,60,0,0" TextWrapping="Wrap" Text="6.4GB" VerticalAlignment="Top" Width="61" TextChanged="TextBox_TextChanged"/>
-        <TextBox HorizontalAlignment="Left" Margin="89,91,0,0" TextWrapping="Wrap" Text="8" VerticalAlignment="Top" Width="58"/>
-        <TextBox HorizontalAlignment="Left" Margin="155,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="102,0,0,0" TextWrapping="Wrap" Text="2GB" VerticalAlignment="Center" Width="41"/>
+        <TextBox HorizontalAlignment="Left" Name="ShutdownTimeout" Margin="167,391,0,0" TextWrapping="Wrap" Text="6000" VerticalAlignment="Top" Width="120" TextChanged="ShutdownTimeout_TextChanged"/>
+        <TextBox HorizontalAlignment="Left" Name="SwapfilePath" Margin="167,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="SwapfilePath_TextChanged"/>
+        <TextBox HorizontalAlignment="Left" Name="KernelArgs" Margin="248,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="KernelArgs_TextChanged"/>
+        <TextBox HorizontalAlignment="Left" Name="RamLimitTextBox" Margin="85,60,0,0" TextWrapping="Wrap" Text="6.4GB" VerticalAlignment="Top" Width="61" TextChanged="RamSizeTextBox_TextChanged"/>
+        <TextBox HorizontalAlignment="Left" Name="CoreCountTextBox" Margin="89,91,0,0" TextWrapping="Wrap" Text="8" VerticalAlignment="Top" Width="58" TextChanged="CoreCountTextBox_TextChanged"/>
+        <TextBox HorizontalAlignment="Left" Name="CustomKernel" Margin="155,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="CustomKernel_TextChanged"/>
+        <TextBox HorizontalAlignment="Left" Name="SwapSizeTextBox" Margin="102,0,0,0" TextWrapping="Wrap" Text="2GB" VerticalAlignment="Center" Width="41" TextChanged="SwapSizeTextBox_TextChanged"/>
+        <Slider HorizontalAlignment="Left" Margin="188,60,0,0" VerticalAlignment="Top" Width="120"/>
+        <Slider HorizontalAlignment="Left" Margin="188,95,0,0" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>

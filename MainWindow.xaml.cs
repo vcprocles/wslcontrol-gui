@@ -5,6 +5,7 @@ using System.Windows.Controls;
 
 namespace wslcontrol_gui
 {
+
     public partial class MainWindow : Window
     {
         WSLInterface wsli = new();
