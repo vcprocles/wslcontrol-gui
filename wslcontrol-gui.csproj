@@ -6,12 +6,14 @@
     <RootNamespace>wslcontrol_gui</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-	<Version>1.1</Version>
+	<Version>1.1.1</Version>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
     <StartupObject></StartupObject>
     <Platforms>AnyCPU</Platforms>
     <DebugType>embedded</DebugType>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+    <ApplicationIcon>wslcguiicon.ico</ApplicationIcon>
+    <Company>vcprocles</Company>
   </PropertyGroup>
 	
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -27,6 +29,11 @@
 	
   <ItemGroup>
     <PackageReference Include="PeanutButter.INI" Version="3.0.15" />
+  </ItemGroup>
+
+	
+  <ItemGroup>
+    <Content Include="wslcguiicon.ico" />
   </ItemGroup>
 
 </Project>
