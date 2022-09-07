@@ -6,6 +6,7 @@ using System.Windows.Documents;
 class IniParseWrap
 {
     protected PeanutButter.INI.INIFile? parser;
+    protected string path;
     //public IniParseWrapGlobal()//constructor
     //{
     //    //string homeFolder = Environment.SpecialFolder.UserProfile.ToString();
@@ -15,15 +16,12 @@ class IniParseWrap
     {
         parser.SetValue(section, key, value);
     }
-    protected void RemovePrivateUnusedParameters(string section, string key)
+    private void RemovePrivateUnusedParameters()//TODO figure out how to clean out the unused keys
+                                                //not critical,though
     {
-        if (parser?.GetValue(section, key) == null)
+        foreach (var a in parser["wsl2"].Keys)
         {
-            parser?.RemoveValue(section, key);
-        }
-        if (parser?.GetSection(section) == null)
-        {
-            parser?.RemoveSection(section);
+            if (a is "") parser["wsl2"].Remove(a);
         }
     }
     protected string ReadParameter(string section, string key)
@@ -34,6 +32,11 @@ class IniParseWrap
         }
         else return null;
     }
+    public void WriteOut()
+    {
+        RemovePrivateUnusedParameters();
+        parser.Persist(path);
+    }
 }
 class IniParseWrapGlobal : IniParseWrap
 {
@@ -42,6 +45,7 @@ class IniParseWrapGlobal : IniParseWrap
     {
         string homeFolder = Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile);
         string pathToWSLConfig = homeFolder +"\\.wslconfig";
+        path = pathToWSLConfig;
         parser=new INIFile(pathToWSLConfig);
     }
     

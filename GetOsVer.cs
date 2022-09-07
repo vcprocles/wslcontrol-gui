@@ -6,7 +6,7 @@ class OsVer
     public OsVer()
     {
         RegistryKey registryKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion")!;
-        string buildstr = registryKey.GetValue("UBR")!.ToString()!;
+        string buildstr = registryKey.GetValue("CurrentBuild")!.ToString()!;
         build = int.Parse(buildstr);
     }
     public int build;

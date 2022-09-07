@@ -48,7 +48,7 @@ namespace wslcontrol_gui
             }
             InitializeSetOrDefault();
         }
-        private void InitializeSetOrDefault()
+        private void InitializeSetOrDefault() //TODO
         {
 
         }
@@ -126,6 +126,10 @@ namespace wslcontrol_gui
             TextBox a = sender as TextBox;
             ini.SetParameter("vmIdleTimeout", a.Text);
         }
-        
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            ini.WriteOut();
+        }
     }
 }
