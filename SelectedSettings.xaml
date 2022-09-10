@@ -45,14 +45,14 @@
         <TextBox HorizontalAlignment="Left" Margin="495,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
         <Rectangle HorizontalAlignment="Left" Height="84" Margin="383,135,0,0" Stroke="Black" VerticalAlignment="Top" Width="247"/>
         <Label Content="Interop" HorizontalAlignment="Left" Margin="397,135,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="52"/>
-        <CheckBox Content="Allow launching Windows processes" HorizontalAlignment="Left" Margin="397,168,0,0" VerticalAlignment="Top" Height="15" Width="211" IsChecked="True"/>
-        <CheckBox Content="Append Windows' %PATH% to $PATH" HorizontalAlignment="Left" Margin="397,196,0,0" VerticalAlignment="Top" Height="15" Width="219" IsChecked="True"/>
+        <CheckBox Name="WindowsProcessesCreation" Content="Allow launching Windows processes" HorizontalAlignment="Left" Margin="397,168,0,0" VerticalAlignment="Top" Height="15" Width="211" IsChecked="True"/>
+        <CheckBox Name="AppendPath" Content="Append Windows' %PATH% to $PATH" HorizontalAlignment="Left" Margin="397,196,0,0" VerticalAlignment="Top" Height="15" Width="219" IsChecked="True"/>
         <Rectangle HorizontalAlignment="Left" Height="59" Margin="383,225,0,0" Stroke="Black" VerticalAlignment="Top" Width="247"/>
         <Label Content="Default username" HorizontalAlignment="Left" Margin="383,225,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="110"/>
-        <TextBox HorizontalAlignment="Left" Margin="390,251,0,0" TextWrapping="Wrap" Text="name from first start" VerticalAlignment="Top" Width="120" Height="18"/>
+        <TextBox Name="DefaultUsername" HorizontalAlignment="Left" Margin="390,251,0,0" TextWrapping="Wrap" ToolTip="By default: name from first start" VerticalAlignment="Top" Width="120" Height="18"/>
         <Rectangle HorizontalAlignment="Left" Height="59" Margin="383,292,0,0" Stroke="Black" VerticalAlignment="Top" Width="247"/>
         <Label Content="Command to run on boot" HorizontalAlignment="Left" Margin="386,294,0,0" VerticalAlignment="Top" Height="26" Width="146"/>
-        <TextBox HorizontalAlignment="Left" Margin="390,322,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="226" Height="18"/>
+        <TextBox Name="CommandOnBoot" HorizontalAlignment="Left" Margin="390,322,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="226" Height="18"/>
         <TextBox HorizontalAlignment="Left" Margin="154,167,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="48" Height="18"/>
         <TextBox HorizontalAlignment="Left" Margin="154,193,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="49" Height="18"/>
     </Grid>

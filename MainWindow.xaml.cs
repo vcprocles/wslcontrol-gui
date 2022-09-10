@@ -26,6 +26,7 @@ namespace wslcontrol_gui
         private void SetInitialStatuses()
         {
             DeactivateAllButtons();
+            if (os.build < 19041) { GlobalSettingsButton.IsEnabled = false; }
             RefreshDistros();
         }
         private void DeactivateAllButtons()
@@ -65,6 +66,7 @@ namespace wslcontrol_gui
                 if (selectedDistro.State == "Running") { TerminateButton.IsEnabled = true; OpenInExplorerButton.IsEnabled = true; }
                 if (selectedDistro.State == "Stopped") { TerminateButton.IsEnabled = false; OpenInExplorerButton.IsEnabled = false; }
                 if (os.elevated == false) { ThisDistroSettingsButton.IsEnabled = false; } else { ThisDistroSettingsButton.IsEnabled = true; }
+                if (os.build < 19041) { GlobalSettingsButton.IsEnabled = false; }
                 RunCommandButton.IsEnabled = true;
                 LaunchButton.IsEnabled = true;
                 InstallUninstallButton.IsEnabled = true;

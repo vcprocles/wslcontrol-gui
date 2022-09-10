@@ -22,7 +22,7 @@ class IniParseWrap
             if (a is "") parser["wsl2"].Remove(a);
         }
     }
-    protected string ReadParameter(string section, string key)
+    public string ReadParameter(string section, string key)
     {
         if (parser.HasSection(section) && parser.HasSetting(section, key))
         {
@@ -83,6 +83,7 @@ class IniParseWrapSpecific : IniParseWrap //might need to move this to the diffe
         }
         else initial = "\\\\wsl.localhost\\";
         string fullPath=initial+distroName+"\\";
+        parser = new INIFile(fullPath);
     }
     public void SetParameterMountOptions(string key, string value)
     {
