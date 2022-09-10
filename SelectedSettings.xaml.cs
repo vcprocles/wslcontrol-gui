@@ -7,10 +7,15 @@ namespace wslcontrol_gui
     /// </summary>
     public partial class SelectedSettings : Window
     {
+        OsInfo os = new();
         public SelectedSettings(string selectedDistro, WSLInterface wsli)
         {
             InitializeComponent();
+            DisableUnsupported();
         }
+        private void DisableUnsupported()
+        {
 
+        }
     }
 }

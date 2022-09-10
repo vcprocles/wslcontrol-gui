@@ -10,7 +10,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Label Margin="0,0,149,0">Console window will be opened in the background, ignore and don't close it</Label>
+        <Label Margin="0,0,149,0">Console window may be opened in the background, ignore and don't close it</Label>
         <Rectangle HorizontalAlignment="Left" Height="319" Margin="10,32,0,0" Stroke="Black" VerticalAlignment="Top" Width="362"/>
         <CheckBox Content="Enable" HorizontalAlignment="Left" Margin="23,59,0,0" VerticalAlignment="Top" IsChecked="True" Height="15" Width="55"/>
         <Label Content="Automount" HorizontalAlignment="Left" Margin="23,32,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="75"/>

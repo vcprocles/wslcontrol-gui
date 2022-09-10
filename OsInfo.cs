@@ -2,9 +2,9 @@
 using System;
 using System.Security.Principal;
 
-class OsVer
+class OsInfo
 {
-    public OsVer()
+    public OsInfo()
     {
         RegistryKey registryKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion")!;
         string buildstr = registryKey.GetValue("CurrentBuild")!.ToString()!;

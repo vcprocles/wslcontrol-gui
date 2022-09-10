@@ -4,7 +4,7 @@ using System;
 
 public partial class ShellExecuteBp
 {
-    OsVer os = new();
+    OsInfo os = new();
     public ShellExecuteBp(String Distro)
     {
         if (os.build < 22000)

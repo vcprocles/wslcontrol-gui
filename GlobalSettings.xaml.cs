@@ -7,7 +7,7 @@ namespace wslcontrol_gui
     public partial class GlobalSettings : Window
     {
         WSLInterface wsli;
-        OsVer os = new();
+        OsInfo os = new();
         IniParseWrapGlobal ini;
         public GlobalSettings(WSLInterface wsli_extern)
         {

@@ -9,7 +9,7 @@ namespace wslcontrol_gui
     public partial class MainWindow : Window
     {
         WSLInterface wsli = new();
-        OsVer os = new();
+        OsInfo os = new();
         public MainWindow()
         {
             InitializeComponent();

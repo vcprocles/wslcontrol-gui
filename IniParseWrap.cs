@@ -69,7 +69,7 @@ class IniParseWrapGlobal : IniParseWrap //holy, it's finally somewhat done
 class IniParseWrapSpecific : IniParseWrap //might need to move this to the different executable, because elevation is needed
                                           //made using this require elevation for the whole program, as that would not require to have multiple executables
 {
-    OsVer os = new();
+    OsInfo os = new();
     //private bool manuallyStartWSL = false;
     //^probably would need that for W10, TODO
     public IniParseWrapSpecific(Distro distro)
