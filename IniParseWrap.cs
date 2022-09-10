@@ -1,11 +1,9 @@
 ﻿using PeanutButter.INI;
 using System;
-using System.Threading;
-using System.Windows.Documents;
 
 class IniParseWrap
 {
-    protected PeanutButter.INI.INIFile? parser;
+    protected PeanutButter.INI.INIFile parser; //Move this to chilren?
     protected string path;
     //public IniParseWrapGlobal()//constructor
     //{
@@ -38,7 +36,7 @@ class IniParseWrap
         parser.Persist(path);
     }
 }
-class IniParseWrapGlobal : IniParseWrap
+class IniParseWrapGlobal : IniParseWrap //holy, it's finally somewhat done
 {
     const string section = "wsl2";
     public IniParseWrapGlobal()//constructor
@@ -69,9 +67,11 @@ class IniParseWrapGlobal : IniParseWrap
 
 }
 class IniParseWrapSpecific : IniParseWrap //might need to move this to the different executable, because elevation is needed
+                                          //made using this require elevation for the whole program, as that would not require to have multiple executables
 {
     OsVer os = new();
-    private bool manuallyStartWSL = false;
+    //private bool manuallyStartWSL = false;
+    //^probably would need that for W10, TODO
     public IniParseWrapSpecific(Distro distro)
     {
         string distroName = distro.Name;
@@ -79,7 +79,7 @@ class IniParseWrapSpecific : IniParseWrap //might need to move this to the diffe
         if (os.build < 22000)
         {
             initial = "\\\\wsl$\\";
-            manuallyStartWSL=true;
+            //manuallyStartWSL=true;
         }
         else initial = "\\\\wsl.localhost\\";
         string fullPath=initial+distroName+"\\";

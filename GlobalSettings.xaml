@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wslcontrol_gui"
         mc:Ignorable="d"
-        Title="GlobalSettings" Height="450" Width="450" Closed="Window_Closed">
+        Title="GlobalSettings" Height="450" Width="450" Closed="Window_Closed" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="13*"/>
@@ -44,6 +44,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="167,61,0,0" TextWrapping="Wrap" Text="For example: 5GB" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <TextBlock HorizontalAlignment="Left" Margin="167,0,0,0" TextWrapping="Wrap" Text="For example: 2GB" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
         <TextBlock HorizontalAlignment="Left" Margin="74,27,0,0" TextWrapping="Wrap" Text="Leave the textboxes empty for the default settings" VerticalAlignment="Top" Grid.Column="1"/>
+        <Button x:Name="ResetToDefaultsButton" Grid.Column="1" Content="Reset to defaults" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Click="ResetButton_Click" IsEnabled="False"/>
 
     </Grid>
 </Window>

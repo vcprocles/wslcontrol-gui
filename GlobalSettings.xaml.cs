@@ -1,23 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace wslcontrol_gui
 {
-    /// <summary>
-    /// Interaction logic for Window1.xaml
-    /// </summary>
     public partial class GlobalSettings : Window
     {
         WSLInterface wsli;
@@ -48,9 +34,62 @@ namespace wslcontrol_gui
             }
             InitializeSetOrDefault();
         }
-        private void InitializeSetOrDefault() //TODO
+        private void InitializeSetOrDefault() //TODO: make a class/enum to make stuff easier to manage?
         {
-
+            //WSL version is marked independently from other stuff
+            //ram limit
+            RamLimitTextBox.Text = ini.ReadParameter("memory");
+            //cpu cores
+            CoreCountTextBox.Text = ini.ReadParameter("processors");
+            //localhost forwarding
+           // LocalhostForward.IsChecked = bool.Parse(ini.ReadParameter("localhostForwarding"));
+            bool check_localhostForward;
+            if (bool.TryParse(ini.ReadParameter("localhostForwarding"), out check_localhostForward))
+            {
+                LocalhostForward.IsChecked = check_localhostForward;
+            }
+            else LocalhostForward.IsChecked = true; //as default
+            //path to custom kernel
+            CustomKernel.Text = ini.ReadParameter("kernel");
+            //command line arguments
+            KernelArgs.Text = ini.ReadParameter("kernelCommandLine");
+            //swap file size
+            SwapSizeTextBox.Text = ini.ReadParameter("swap");
+            //custom swap
+            SwapfilePath.Text = ini.ReadParameter("swapFile");
+            //memory reclaim
+            bool memReclaim;
+            if (bool.TryParse(ini.ReadParameter("pageReporting"), out memReclaim))
+            {
+                MemReclaimCheckBox.IsChecked = memReclaim; 
+            }
+            else MemReclaimCheckBox.IsChecked = true; //as default
+            //gui apps
+            //WSLgCheckBox.IsChecked = bool.Parse(ini.ReadParameter("guiApplications"));
+            bool wslg;
+            if (bool.TryParse(ini.ReadParameter("guiApplications"),out wslg))
+            {
+                WSLgCheckBox.IsChecked = wslg;
+            }   
+            else WSLgCheckBox.IsChecked = true;
+            //debug console
+            //DebugConsoleCheckBox.IsChecked = bool.Parse(ini.ReadParameter("debugConsole"));
+            bool debugConsole;
+            if (bool.TryParse(ini.ReadParameter("debugConsole"), out debugConsole))
+            {
+                DebugConsoleCheckBox.IsChecked = debugConsole;
+            }
+            else DebugConsoleCheckBox.IsChecked = false; //as default
+            //nested vm
+            //NestedVirtTick.IsChecked = bool.Parse(ini.ReadParameter("nestedVirtualization"));
+            bool nestVm = true;
+            if (bool.TryParse(ini.ReadParameter("pageReporting"), out nestVm))
+            {
+                NestedVirtTick.IsChecked = nestVm;
+            }
+            else NestedVirtTick.IsChecked = true; //as default
+            //timeout
+            ShutdownTimeout.Text = ini.ReadParameter("vmIdleTimeout");
         }
         private void WSLVersionSelected1_Checked(object sender, RoutedEventArgs e)
         {
@@ -130,6 +169,11 @@ namespace wslcontrol_gui
         private void Window_Closed(object sender, EventArgs e)
         {
             ini.WriteOut();
+        }
+
+        private void ResetButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

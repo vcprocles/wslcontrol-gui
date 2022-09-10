@@ -9,6 +9,7 @@ namespace wslcontrol_gui
     public partial class MainWindow : Window
     {
         WSLInterface wsli = new();
+        OsVer os = new();
         public MainWindow()
         {
             InitializeComponent();
@@ -42,6 +43,7 @@ namespace wslcontrol_gui
             DistroList.ItemsSource = wsli.GetDistros();
             DistroList.SelectedItem = null;
             WSL2WarningLabel.Visibility = Visibility.Collapsed;
+            if (os.elevated == false) { AdminRightsLabel.Visibility = Visibility.Visible; }
         }
         private void ShutdownButton_Click(object sender, RoutedEventArgs e)
         {
@@ -62,11 +64,11 @@ namespace wslcontrol_gui
                 if (selectedDistro.Version == 1) WSL2WarningLabel.Visibility = Visibility.Collapsed;
                 if (selectedDistro.State == "Running") { TerminateButton.IsEnabled = true; OpenInExplorerButton.IsEnabled = true; }
                 if (selectedDistro.State == "Stopped") { TerminateButton.IsEnabled = false; OpenInExplorerButton.IsEnabled = false; }
+                if (os.elevated == false) { ThisDistroSettingsButton.IsEnabled = false; } else { ThisDistroSettingsButton.IsEnabled = true; }
                 RunCommandButton.IsEnabled = true;
                 LaunchButton.IsEnabled = true;
                 InstallUninstallButton.IsEnabled = true;
                 SetDefaultButton.IsEnabled = true;
-                ThisDistroSettingsButton.IsEnabled = true;
                 if (selectedDistro.State == "Installing")
                 {
                     TerminateButton.IsEnabled = false;
@@ -129,7 +131,11 @@ namespace wslcontrol_gui
             RefreshDistros();
             DistroList.SelectedIndex = selectedDistroNumber-1;
             Distro selectedDistro = (Distro)DistroList.SelectedItem;
-            if ((selectedDistro != null) && (selectedDistro.State=="Running"))
+            if ((selectedDistro != null) && (selectedDistro.State == "Running"))
+            {
+                ShellExecuteBp a = new(selectedDistro.Name);
+            }
+            else if ((selectedDistro != null) && os.build>22000) //W11 doesn't need the distro running
             {
                 ShellExecuteBp a = new(selectedDistro.Name);
             }

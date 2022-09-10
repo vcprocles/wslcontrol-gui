@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wslcontrol_gui"
         mc:Ignorable="d"
-        Title="WSLControl-gui" Height="600" MinHeight="230" Width="700" MinWidth="575" ResizeMode="CanResize">
+        Title="WSLControl-gui" Height="600" MinHeight="560" Width="700" MinWidth="575" ResizeMode="CanResize">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -50,8 +50,13 @@
                 <Button Grid.Row="12" Height="30" Name="RefreshButton" Content="Refresh list" Margin="5,5,5,5" Click="RefreshButton_Click"/>
             </Grid>
         </Grid>
-        <Label Grid.Row="1" Name="WSL2WarningLabel" Padding="5,5,5,5" Visibility="Collapsed">
-            <TextBlock TextWrapping="Wrap" Visibility="Visible" FontWeight="Normal" FontStyle="Italic">WARNING: Terminating WSL2 instance doesn't always release system resources, use Shutdown instead</TextBlock>
-        </Label>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Padding="5,5,5,5" TextWrapping="Wrap" Name="WSL2WarningLabel" Visibility="Collapsed" FontStyle="Italic">WARNING: Terminating WSL2 instance doesn't always release system resources, use Shutdown instead</TextBlock>
+            <TextBlock Grid.Row="1" Padding="5,5,5,5" TextWrapping="Wrap" Name="AdminRightsLabel" Visibility="Collapsed" FontStyle="Italic">Changing distro-specific settings requires to run this app as an administrator</TextBlock>
+        </Grid>
     </Grid>
 </Window>
