@@ -42,7 +42,7 @@ namespace wslcontrol_gui
             //cpu cores
             CoreCountTextBox.Text = ini.ReadParameter("processors");
             //localhost forwarding
-           // LocalhostForward.IsChecked = bool.Parse(ini.ReadParameter("localhostForwarding"));
+           //LocalhostForward.IsChecked = bool.Parse(ini.ReadParameter("localhostForwarding"));
             bool check_localhostForward;
             if (bool.TryParse(ini.ReadParameter("localhostForwarding"), out check_localhostForward))
             {

@@ -63,8 +63,9 @@ namespace wslcontrol_gui
             {
                 if (selectedDistro.Version == 2) WSL2WarningLabel.Visibility = Visibility.Visible;
                 if (selectedDistro.Version == 1) WSL2WarningLabel.Visibility = Visibility.Collapsed;
-                if (selectedDistro.State == "Running") { TerminateButton.IsEnabled = true; OpenInExplorerButton.IsEnabled = true; }
-                if (selectedDistro.State == "Stopped") { TerminateButton.IsEnabled = false; OpenInExplorerButton.IsEnabled = false; }
+                OpenInExplorerButton.IsEnabled = true;
+                if (selectedDistro.State == "Running") { TerminateButton.IsEnabled = true; }
+                if (selectedDistro.State == "Stopped") { TerminateButton.IsEnabled = false;}
                 if (os.elevated == false) { ThisDistroSettingsButton.IsEnabled = false; } else { ThisDistroSettingsButton.IsEnabled = true; }
                 if (os.build < 19041) { GlobalSettingsButton.IsEnabled = false; }
                 RunCommandButton.IsEnabled = true;
@@ -160,7 +161,7 @@ namespace wslcontrol_gui
 
         private void ThisDistroSettings_Click(object sender, RoutedEventArgs e)
         {
-            SelectedSettings inputwindow = new SelectedSettings(((Distro)DistroList.SelectedItem).Name, wsli);
+            SelectedSettings inputwindow = new SelectedSettings((Distro)DistroList.SelectedItem, wsli);
             inputwindow.Owner = this;
             inputwindow.Show();
         }

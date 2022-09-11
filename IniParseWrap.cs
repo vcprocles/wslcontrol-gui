@@ -22,7 +22,15 @@ class IniParseWrap
             if (a is "") parser["wsl2"].Remove(a);
         }
     }
-    public string ReadParameter(string section, string key)
+    //public string ReadParameter(string section, string key)
+    //{
+    //    if (parser.HasSection(section) && parser.HasSetting(section, key))
+    //    {
+    //        return parser.GetValue(section, key);
+    //    }
+    //    else return null;
+    //}
+    public string? ReadParameter(string section, string key) //TODO: hide it the f away and use Hungarian-notated stuff below
     {
         if (parser.HasSection(section) && parser.HasSetting(section, key))
         {
@@ -34,6 +42,43 @@ class IniParseWrap
     {
         RemovePrivateUnusedParameters();
         parser.Persist(path);
+    }
+    public string sReadParameter(string section, string key, out bool err)
+    {
+        err = false;
+        string? a = ReadParameter(section, key);
+        if (a != null) return a;
+        err = true;
+        return "";
+    }
+    public int iReadParameter(string section, string key, out bool err)
+    {
+        int a;
+        err = false;
+        bool b;
+        if (int.TryParse(sReadParameter(section, key, out err), out a))
+        {
+            return a;
+        }
+        else
+        {
+            err = true;
+            return 0xDEAD;
+        }
+    }
+    public bool bReadParameter(string section, string key, out bool err)
+    {
+        bool a;
+        err = false;
+        if (bool.TryParse(sReadParameter(section, key, out err), out a))
+        {
+            return a;
+        }
+        else
+        {
+            err = true;
+            return false;
+        }
     }
 }
 class IniParseWrapGlobal : IniParseWrap //holy, it's finally somewhat done
@@ -82,7 +127,7 @@ class IniParseWrapSpecific : IniParseWrap //might need to move this to the diffe
             //manuallyStartWSL=true;
         }
         else initial = "\\\\wsl.localhost\\";
-        string fullPath=initial+distroName+"\\";
+        string fullPath=initial+distroName+"\\etc\\wsl.conf";
         parser = new INIFile(fullPath);
     }
     public void SetParameterMountOptions(string key, string value)
