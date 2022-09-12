@@ -26,12 +26,9 @@
     <None Remove="publish\**" />
     <Page Remove="publish\**" />
   </ItemGroup>
-	
   <ItemGroup>
     <PackageReference Include="PeanutButter.INI" Version="3.0.15" />
   </ItemGroup>
-
-	
   <ItemGroup>
     <Content Include="wslcguiicon.ico" />
   </ItemGroup>
