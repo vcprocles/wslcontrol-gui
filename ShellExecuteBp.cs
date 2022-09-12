@@ -4,13 +4,28 @@ using System;
 
 public partial class ShellExecuteBp
 {
+    OsInfo os = new();
     public ShellExecuteBp(String Distro)
     {
-        ShellExecute(IntPtr.Zero, "open", "explorer.exe", "\\\\wsl$\\"+Distro, "", ShowCommands.SW_NORMAL);
+        if (os.build < 22000)
+        {
+            ShellExecute(IntPtr.Zero, "open", "explorer.exe", "\\\\wsl$\\" + Distro, "", ShowCommands.SW_NORMAL);//checked and working for Windows 10
+        }
+        else
+        {
+            ShellExecute(IntPtr.Zero, "open", "explorer.exe", "\\\\wsl.localhost\\" + Distro, "", ShowCommands.SW_NORMAL);//for Windows 11
+        }
     }
     public ShellExecuteBp()
     {
-        ShellExecute(IntPtr.Zero, "open", "explorer.exe", "\\\\wsl$\\", "", ShowCommands.SW_NORMAL);
+        if (os.build <22000)
+        {
+            ShellExecute(IntPtr.Zero, "open", "explorer.exe", "\\\\wsl$\\", "", ShowCommands.SW_NORMAL);
+        }
+        else
+        {
+            ShellExecute(IntPtr.Zero, "open", "explorer.exe", "\\\\wsl.localhost\\", "", ShowCommands.SW_NORMAL); //for Windows 11
+        }
     }
 
     public enum ShowCommands : int

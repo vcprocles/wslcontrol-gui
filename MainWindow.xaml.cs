@@ -5,13 +5,11 @@ using System.Windows.Controls;
 
 namespace wslcontrol_gui
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window
     {
-        //List<Distro> items = new List<Distro>();
         WSLInterface wsli = new();
+        OsInfo os = new();
         public MainWindow()
         {
             InitializeComponent();
@@ -24,29 +22,11 @@ namespace wslcontrol_gui
                 MessageBox.Show(ex.Message);
                 Close();
             }
-            //FilloutTestDistros();
         }
-        //private void FilloutTestDistros()
-        //{
-        //    items.Add(new Distro() { Name = "Ubuntu", State = "Running", Version = 1 });
-        //    items.Add(new Distro() { Name = "Debian", State = "Running", Version = 2 });
-        //    items.Add(new Distro() { Name = "opensuse-tumbleweed", State = "Stopped", Version = 1 });
-        //    DistroList.ItemsSource = items;
-        //}
         private void SetInitialStatuses()
         {
             DeactivateAllButtons();
-            switch (wsli.GetCurrentDefaultWSLVersion())
-            {
-                case 1:
-                    WSLVersionSelected1.IsChecked = true;
-                    break;
-                case 2:
-                    WSLVersionSelected2.IsChecked = true;
-                    break;
-                default:
-                    throw new Exception("Is WSL installed?");
-            }
+            if (os.build < 19041) { GlobalSettingsButton.IsEnabled = false; }
             RefreshDistros();
         }
         private void DeactivateAllButtons()
@@ -57,26 +37,19 @@ namespace wslcontrol_gui
             TerminateButton.IsEnabled = false;
             SetDefaultButton.IsEnabled = false;
             OpenInExplorerButton.IsEnabled = false;
+            ThisDistroSettingsButton.IsEnabled=false;
         }
         private void RefreshDistros()
         {
             DistroList.ItemsSource = wsli.GetDistros();
             DistroList.SelectedItem = null;
             WSL2WarningLabel.Visibility = Visibility.Collapsed;
+            if (os.elevated == false) { AdminRightsLabel.Visibility = Visibility.Visible; }
         }
         private void ShutdownButton_Click(object sender, RoutedEventArgs e)
         {
             wsli.ShutdownWSL();
             WaitAndRefresh();
-        }
-
-        private void WSLVersionSelected1_Checked(object sender, RoutedEventArgs e)
-        {
-            wsli.SetDefaultVersion(1);
-        }
-        private void WSLVersionSelected2_Checked(object sender, RoutedEventArgs e)
-        {
-            wsli.SetDefaultVersion(2);
         }
         private void RefreshButtons()
         {
@@ -90,8 +63,11 @@ namespace wslcontrol_gui
             {
                 if (selectedDistro.Version == 2) WSL2WarningLabel.Visibility = Visibility.Visible;
                 if (selectedDistro.Version == 1) WSL2WarningLabel.Visibility = Visibility.Collapsed;
-                if (selectedDistro.State == "Running") { TerminateButton.IsEnabled = true; OpenInExplorerButton.IsEnabled = true; }
-                if (selectedDistro.State == "Stopped") { TerminateButton.IsEnabled = false; OpenInExplorerButton.IsEnabled = false; }
+                OpenInExplorerButton.IsEnabled = true;
+                if (selectedDistro.State == "Running") { TerminateButton.IsEnabled = true; }
+                if (selectedDistro.State == "Stopped") { TerminateButton.IsEnabled = false;}
+                if (os.elevated == false) { ThisDistroSettingsButton.IsEnabled = false; } else { ThisDistroSettingsButton.IsEnabled = true; }
+                if (os.build < 19041) { GlobalSettingsButton.IsEnabled = false; }
                 RunCommandButton.IsEnabled = true;
                 LaunchButton.IsEnabled = true;
                 InstallUninstallButton.IsEnabled = true;
@@ -115,11 +91,6 @@ namespace wslcontrol_gui
         {
             wsli.OpenDistro(((Distro)DistroList.SelectedItem).Name);
         }
-
-        //private void NotImplementedException()
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         private void RunCommandButton_Click(object sender, RoutedEventArgs e)
         {
@@ -163,7 +134,11 @@ namespace wslcontrol_gui
             RefreshDistros();
             DistroList.SelectedIndex = selectedDistroNumber-1;
             Distro selectedDistro = (Distro)DistroList.SelectedItem;
-            if ((selectedDistro != null) && (selectedDistro.State=="Running"))
+            if ((selectedDistro != null) && (selectedDistro.State == "Running"))
+            {
+                ShellExecuteBp a = new(selectedDistro.Name);
+            }
+            else if ((selectedDistro != null) && os.build>22000) //W11 doesn't need the distro running
             {
                 ShellExecuteBp a = new(selectedDistro.Name);
             }
@@ -176,10 +151,20 @@ namespace wslcontrol_gui
         {
             ShellExecuteBp a = new();
         }
-        //public string GetSelectedDistro()
-        //{
-        //    return ((Distro)DistroList.SelectedItem).Name;
-        //}
+
+        private void GlobalSettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalSettings inputwindow = new GlobalSettings(wsli);
+            inputwindow.Owner = this;
+            inputwindow.Show();
+        }
+
+        private void ThisDistroSettings_Click(object sender, RoutedEventArgs e)
+        {
+            SelectedSettings inputwindow = new SelectedSettings((Distro)DistroList.SelectedItem, wsli);
+            inputwindow.Owner = this;
+            inputwindow.Show();
+        }
     }
 
 }

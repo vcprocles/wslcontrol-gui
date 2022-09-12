@@ -60,7 +60,7 @@ public class ConsoleInterface
         processInfo.Arguments = parameters;
         processInfo.RedirectStandardOutput = true;
         processInfo.StandardOutputEncoding = System.Text.Encoding.Unicode;//important
-        process = Process.Start(processInfo);
+        process = Process.Start(processInfo)!;
         if (process == null) return "0";
         process.WaitForExit();
         string outputString = process.StandardOutput.ReadToEnd();

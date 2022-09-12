@@ -1,0 +1,50 @@
+﻿<Window x:Class="wslcontrol_gui.GlobalSettings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wslcontrol_gui"
+        mc:Ignorable="d"
+        Title="GlobalSettings" Height="450" Width="450" Closed="Window_Closed" ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="13*"/>
+            <ColumnDefinition Width="17*"/>
+        </Grid.ColumnDefinitions>
+        <Grid VerticalAlignment="Top" MaxHeight="30" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="3" Margin="5,5,5,5">Default WSL version for new distros:</TextBlock>
+            <RadioButton Grid.Row="3" Grid.Column="1"  Margin="5,6,5,4" Content="WSL1" GroupName="WSLVersionRadio" Name="WSLVersionSelected1" Checked="WSLVersionSelected1_Checked"/>
+            <RadioButton Grid.Row="3" Grid.Column="2"  Margin="5,6,5,4" Content="WSL2" GroupName="WSLVersionRadio" Name="WSLVersionSelected2" Checked="WSLVersionSelected2_Checked"/>
+        </Grid>
+        <Label Content="Following settings apply only for WSL2" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label Content="Path to custom kernel" HorizontalAlignment="Left" Margin="18,138,0,0" VerticalAlignment="Top"/>
+        <Label Content="RAM limit" HorizontalAlignment="Left" Margin="18,56,0,0" VerticalAlignment="Top"/>
+        <Label Content="CPU cores" HorizontalAlignment="Left" Margin="18,87,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="localhost forwarding" Name="LocalhostForward" HorizontalAlignment="Left" Margin="18,118,0,0" VerticalAlignment="Top" IsChecked="True" Click="LocalhostForward_Checked"/>
+        <Label Content="Custom kernel command line arguments" HorizontalAlignment="Left" Margin="18,176,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label Content="Swap file size" HorizontalAlignment="Left" Margin="18,0,0,0" VerticalAlignment="Center"/>
+        <Label Content="Custom path to swap file" HorizontalAlignment="Left" Margin="18,235,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="Allow Windows to reclaim memory" Name="MemReclaimCheckBox" HorizontalAlignment="Left" Margin="18,274,0,0" VerticalAlignment="Top" IsChecked="True" Click="MemReclaimCheckBox_Checked" Grid.ColumnSpan="2"/>
+        <CheckBox Content="GUI applications" Name="WSLgCheckBox" HorizontalAlignment="Left" Margin="18,305,0,0" VerticalAlignment="Top" IsChecked="True" Click="WSLgCheckBox_Checked"/>
+        <CheckBox Content="Debug console" Name="DebugConsoleCheckBox" HorizontalAlignment="Left" Margin="18,334,0,0" VerticalAlignment="Top" Click="DebugConsoleCheckBox_Checked"/>
+        <CheckBox Content="Nested virtualization (allow accelerated VMs)" Name="NestedVirtTick" HorizontalAlignment="Left" Margin="18,363,0,0" VerticalAlignment="Top" IsChecked="True" Click="NestedVirtTick_Checked" Grid.ColumnSpan="2"/>
+        <Label Content="Timeout before shutdown" HorizontalAlignment="Left" Margin="15,387,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Name="ShutdownTimeout" Margin="167,391,0,0" TextWrapping="Wrap" Text="6000" VerticalAlignment="Top" Width="120" TextChanged="ShutdownTimeout_TextChanged" Grid.ColumnSpan="2"/>
+        <TextBox HorizontalAlignment="Left" Name="SwapfilePath" Margin="167,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="SwapfilePath_TextChanged" Grid.ColumnSpan="2"/>
+        <TextBox HorizontalAlignment="Left" Name="KernelArgs" Margin="53,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="KernelArgs_TextChanged" Grid.Column="1"/>
+        <TextBox HorizontalAlignment="Left" Name="RamLimitTextBox" Margin="85,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" TextChanged="RamSizeTextBox_TextChanged"/>
+        <TextBox HorizontalAlignment="Left" Name="CoreCountTextBox" Margin="89,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="58" TextChanged="CoreCountTextBox_TextChanged"/>
+        <TextBox HorizontalAlignment="Left" Name="CustomKernel" Margin="155,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="CustomKernel_TextChanged" Grid.ColumnSpan="2"/>
+        <TextBox HorizontalAlignment="Left" Name="SwapSizeTextBox" Margin="102,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="41" TextChanged="SwapSizeTextBox_TextChanged"/>
+        <TextBlock HorizontalAlignment="Left" Margin="167,61,0,0" TextWrapping="Wrap" Text="For example: 5GB" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <TextBlock HorizontalAlignment="Left" Margin="167,0,0,0" TextWrapping="Wrap" Text="For example: 2GB" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+        <TextBlock HorizontalAlignment="Left" Margin="74,27,0,0" TextWrapping="Wrap" Text="Leave the textboxes empty for the default settings" VerticalAlignment="Top" Grid.Column="1"/>
+        <Button x:Name="ResetToDefaultsButton" Grid.Column="1" Content="Reset to defaults" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Click="ResetButton_Click" IsEnabled="False"/>
+
+    </Grid>
+</Window>
