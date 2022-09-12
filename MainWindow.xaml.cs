@@ -44,7 +44,7 @@ namespace wslcontrol_gui
             DistroList.ItemsSource = wsli.GetDistros();
             DistroList.SelectedItem = null;
             WSL2WarningLabel.Visibility = Visibility.Collapsed;
-            if (os.elevated == false) { AdminRightsLabel.Visibility = Visibility.Visible; }
+            //if (os.elevated == false) { AdminRightsLabel.Visibility = Visibility.Visible; }
         }
         private void ShutdownButton_Click(object sender, RoutedEventArgs e)
         {
