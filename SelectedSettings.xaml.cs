@@ -9,6 +9,11 @@ namespace wslcontrol_gui
     {
         OsInfo os = new();
         IniParseWrapSpecific ini;
+        enum SwitchStates
+        {
+            Enable,
+            Disable   
+        }
         private static Distro distro;
         public SelectedSettings(Distro selectedDistro, WSLInterface wsli)
         {
@@ -47,8 +52,8 @@ namespace wslcontrol_gui
             bool processFstab = ini.bReadParameter(section,"mountFsTab",out err);
             if (err) processFstab = true;
             //windows fs path
-            string WindowsPath = ini.sReadParameter(section,"root",out err);
-            if (err) WindowsPath = "/mnt/";
+            string windowsPath = ini.sReadParameter(section,"root",out err);
+            if (err) windowsPath = "/mnt/";
             string mountOptions = ini.sReadParameter(section, "options", out err);//swap this for more complex configurator
             if (err) mountOptions = "";
 
@@ -85,13 +90,110 @@ namespace wslcontrol_gui
             if (err) commandOnBoot = "";
             #endregion
             #region setting gathered stuff
-
+            EnableAutomountCheckMark.IsChecked = automount;
+            if (!automount) AutomountSwitch(SwitchStates.Disable);
+            ProcessFstabCheckmark.IsChecked = processFstab;
+            WinFsPathBox.Text = windowsPath;
+            MountOptionsTextBox.Text = mountOptions;
+            HostsTick.IsChecked=hostsGen;
+            ResolvTick.IsChecked=resolvGen;
+            CustomHostnameBox.Text=hostname;
+            WindowsProcessesCreation.IsChecked=winProcessesStart;
+            AppendPath.IsChecked=appendPath;
+            DefaultUsername.Text = defaultUser;
+            CommandOnBoot.Text=commandOnBoot;
             #endregion
         }
 
-        private void AutomountSwitch(bool state)
+        private void AutomountSwitch(SwitchStates a)
+        {
+            if (ProcessFstabCheckmark == null) return;
+            if (a == SwitchStates.Enable)
+            {
+                ProcessFstabCheckmark.IsEnabled = true;
+                WinFsPathBox.IsEnabled = true;
+                WinFsPathLabel.IsEnabled = true;
+                MountOptionsLabel.IsEnabled = true;
+                MountOptionsTextBox.IsEnabled = true;
+            }
+            else if (a == SwitchStates.Disable)
+            {
+                ProcessFstabCheckmark.IsEnabled = false;
+                WinFsPathBox.IsEnabled = false;
+                WinFsPathLabel.IsEnabled = false;
+                MountOptionsLabel.IsEnabled = false;
+                MountOptionsTextBox.IsEnabled = false;
+            }
+            else throw new Exception("Unexpected behaviour");
+        }
+
+        private void EnableAutomountCheckMark_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckBox a = sender as CheckBox;
+            if (a.IsChecked.Value==true)
+            {
+                AutomountSwitch(SwitchStates.Enable);
+                ini.SetParameter("automount", "enable", a.IsChecked.ToString());
+            }
+            else
+            {
+                AutomountSwitch(SwitchStates.Disable);
+                ini.SetParameter("automount", "enable", a.IsChecked.ToString());
+            }
+        }
+
+        private void ProcessFstabCheckmark_Checked(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void WinFsPathBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void MountOptionsTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void HostsTick_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ResolvTick_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CustomHostnameBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void WindowsProcessesCreation_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AppendPath_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DefaultUsername_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void CommandOnBoot_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            ini.WriteOut();//get access error
         }
     }
 }

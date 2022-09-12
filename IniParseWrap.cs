@@ -10,7 +10,7 @@ class IniParseWrap
     //    //string homeFolder = Environment.SpecialFolder.UserProfile.ToString();
     //    //string pathToWSLConfig = homeFolder;
     //}
-    protected void SetParameter(string section, string key, string value)
+    public void SetParameter(string section, string key, string value)
     {
         parser.SetValue(section, key, value);
     }
