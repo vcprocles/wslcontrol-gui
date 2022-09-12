@@ -6,7 +6,7 @@
     <RootNamespace>wslcontrol_gui</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-	<Version>1.1.1</Version>
+	<Version>1.2</Version>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
     <StartupObject></StartupObject>
     <Platforms>AnyCPU</Platforms>
