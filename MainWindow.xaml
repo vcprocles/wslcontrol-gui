@@ -42,7 +42,7 @@
                 <Button Grid.Row="4" Name="TerminateButton" Content="Terminate" Width="auto" Height="30" Margin="5,5,5,5" Click="TerminateButton_Click"/>
                 <Button Grid.Row="5"  Name="InstallUninstallButton" Content="Uninstall" Width="auto" Height="30" Margin="5,5,5,5" Click="InstallUninstallButton_Click"/>
                 <Button Grid.Row="6" Name="OpenInExplorerButton" Content="Open in Explorer" Width="auto" Height="30" Margin="5,5,5,5" Click="OpenThisInExplorer_Click"/>
-                <Button Grid.Row="7" Name="ThisDistroSettingsButton" Content="Settings" Width="auto" Height="30" Margin="5,5,5,5" Click="ThisDistroSettings_Click"/>
+                <Button Visibility="Hidden" Grid.Row="7" Name="ThisDistroSettingsButton" Content="Settings" Width="auto" Height="30" Margin="5,5,5,5" Click="ThisDistroSettings_Click"/>
                 <Label Grid.Row="8">Options for all distros:</Label>
                 <Button Grid.Row="9" Height="30" Name="ShutdownButton" Margin="5,5,5,5" ToolTip="Terminates all distros and releases system resources from WSL2 virtual machine" Click="ShutdownButton_Click">Shutdown Windows Subsystem for Linux</Button>
                 <Button Grid.Row="10" Height="30" Name="OpenAllInExplorer" Content="Open WSL root" Margin="5,5,5,5" Click="OpenAllInExplorer_Click"/>
