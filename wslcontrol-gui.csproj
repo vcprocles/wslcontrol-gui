@@ -35,6 +35,7 @@
     <Page Remove="Pages\PerDistroPrefs.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="ModernWpfUI" Version="0.9.6" />
     <PackageReference Include="PeanutButter.INI" Version="3.0.20" />
   </ItemGroup>
   <ItemGroup>
