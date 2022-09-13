@@ -12,7 +12,7 @@
     <Platforms>AnyCPU</Platforms>
     <DebugType>embedded</DebugType>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
-    <ApplicationIcon>wslcguiicon.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\wslcguiicon.ico</ApplicationIcon>
     <Company>vcprocles</Company>
   </PropertyGroup>
 	
@@ -30,7 +30,7 @@
     <PackageReference Include="PeanutButter.INI" Version="3.0.15" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="wslcguiicon.ico" />
+    <Content Include="Assets\wslcguiicon.ico" />
   </ItemGroup>
 
 </Project>
