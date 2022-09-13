@@ -5,7 +5,7 @@ using System.Windows.Controls;
 
 namespace wslcontrol_gui
 {
-    public partial class SelectedSettings : Window
+    public partial class PerDistroPrefs : Window
     {
         OsInfo os = new();
         IniParseWrapSpecific ini;
@@ -15,7 +15,7 @@ namespace wslcontrol_gui
             Disable   
         }
         private static Distro distro;
-        public SelectedSettings(Distro selectedDistro, WSLInterface wsli)
+        public PerDistroPrefs(Distro selectedDistro, WSLInterface wsli)
         {
             distro = selectedDistro;
             ini = new(distro);

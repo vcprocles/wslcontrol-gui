@@ -8,8 +8,8 @@ namespace wslcontrol_gui
 
     public partial class MainWindow : Window
     {
-        WSLInterface wsli = new();
-        OsInfo os = new();
+        readonly WSLInterface wsli = new();
+        readonly OsInfo os = new();
         public MainWindow()
         {
             InitializeComponent();
@@ -26,7 +26,6 @@ namespace wslcontrol_gui
         private void SetInitialStatuses()
         {
             DeactivateAllButtons();
-            if (os.build < 19041) { GlobalSettingsButton.IsEnabled = false; }
             RefreshDistros();
         }
         private void DeactivateAllButtons()
@@ -37,14 +36,13 @@ namespace wslcontrol_gui
             TerminateButton.IsEnabled = false;
             SetDefaultButton.IsEnabled = false;
             OpenInExplorerButton.IsEnabled = false;
-            ThisDistroSettingsButton.IsEnabled=false;
+            //ThisDistroSettingsButton.IsEnabled=false;
         }
         private void RefreshDistros()
         {
             DistroList.ItemsSource = wsli.GetDistros();
             DistroList.SelectedItem = null;
             WSL2WarningLabel.Visibility = Visibility.Collapsed;
-            //if (os.elevated == false) { AdminRightsLabel.Visibility = Visibility.Visible; }
         }
         private void ShutdownButton_Click(object sender, RoutedEventArgs e)
         {
@@ -65,8 +63,7 @@ namespace wslcontrol_gui
                 if (selectedDistro.Version == 1) WSL2WarningLabel.Visibility = Visibility.Collapsed;
                 OpenInExplorerButton.IsEnabled = true;
                 if (selectedDistro.State == "Running") { TerminateButton.IsEnabled = true; }
-                if (selectedDistro.State == "Stopped") { TerminateButton.IsEnabled = false;}
-                if (os.elevated == false) { ThisDistroSettingsButton.IsEnabled = false; } else { ThisDistroSettingsButton.IsEnabled = true; }
+                if (selectedDistro.State == "Stopped") { TerminateButton.IsEnabled = false; }
                 if (os.build < 19041) { GlobalSettingsButton.IsEnabled = false; }
                 RunCommandButton.IsEnabled = true;
                 LaunchButton.IsEnabled = true;
@@ -89,13 +86,15 @@ namespace wslcontrol_gui
 
         private void LaunchButton_Click(object sender, RoutedEventArgs e)
         {
-            wsli.OpenDistro(((Distro)DistroList.SelectedItem).Name);
+            WSLInterface.OpenDistro(((Distro)DistroList.SelectedItem).Name);
         }
 
         private void RunCommandButton_Click(object sender, RoutedEventArgs e)
         {
-            CommandInput inputwindow = new CommandInput(((Distro)DistroList.SelectedItem).Name,wsli);
-            inputwindow.Owner = this;
+            CommandInput inputwindow = new(((Distro)DistroList.SelectedItem).Name, wsli)
+            {
+                Owner = this
+            };
             inputwindow.Show();
         }
 
@@ -132,39 +131,41 @@ namespace wslcontrol_gui
         {
             int selectedDistroNumber = ((Distro)DistroList.SelectedItem).Number;
             RefreshDistros();
-            DistroList.SelectedIndex = selectedDistroNumber-1;
+            DistroList.SelectedIndex = selectedDistroNumber - 1;
             Distro selectedDistro = (Distro)DistroList.SelectedItem;
             if ((selectedDistro != null) && (selectedDistro.State == "Running"))
             {
-                ShellExecuteBp a = new(selectedDistro.Name);
+                var _ = new ShellExecuteBp(selectedDistro.Name);
             }
-            else if ((selectedDistro != null) && os.build>22000) //W11 doesn't need the distro running
+            else if ((selectedDistro != null) && os.build > 22000) //W11 doesn't need the distro running
             {
-                ShellExecuteBp a = new(selectedDistro.Name);
+                var _ = new ShellExecuteBp(selectedDistro.Name);
             }
             else
             {
-                ShellExecuteBp a = new();
+                var _ = new ShellExecuteBp();
             }
         }
         private void OpenAllInExplorer_Click(object sender, RoutedEventArgs e)
         {
-            ShellExecuteBp a = new();
+            var _ = new ShellExecuteBp();
         }
 
         private void GlobalSettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            GlobalSettings inputwindow = new GlobalSettings(wsli);
-            inputwindow.Owner = this;
+            GlobalPrefs inputwindow = new(wsli)
+            {
+                Owner = this
+            };
             inputwindow.Show();
         }
 
-        private void ThisDistroSettings_Click(object sender, RoutedEventArgs e)
-        {
-            SelectedSettings inputwindow = new SelectedSettings((Distro)DistroList.SelectedItem, wsli);
-            inputwindow.Owner = this;
-            inputwindow.Show();
-        }
+        //private void ThisDistroSettings_Click(object sender, RoutedEventArgs e)
+        //{
+        //    PerDistroPrefs inputwindow = new PerDistroPrefs((Distro)DistroList.SelectedItem, wsli);
+        //    inputwindow.Owner = this;
+        //    inputwindow.Show();
+        //}
     }
 
 }

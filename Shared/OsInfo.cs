@@ -1,17 +1,19 @@
 ﻿using Microsoft.Win32;
-using System;
 using System.Security.Principal;
 
-class OsInfo
+namespace wslcontrol_gui
 {
-    public OsInfo()
+    class OsInfo
     {
-        RegistryKey registryKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion")!;
-        string buildstr = registryKey.GetValue("CurrentBuild")!.ToString()!;
-        build = int.Parse(buildstr);
-        elevated = (new WindowsPrincipal(WindowsIdentity.GetCurrent()))
-             .IsInRole(WindowsBuiltInRole.Administrator);
+        public OsInfo()
+        {
+            RegistryKey registryKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion")!;
+            string buildstr = registryKey.GetValue("CurrentBuild")!.ToString()!;
+            build = int.Parse(buildstr);
+            elevated = (new WindowsPrincipal(WindowsIdentity.GetCurrent()))
+                 .IsInRole(WindowsBuiltInRole.Administrator);
+        }
+        public int build;
+        public bool elevated;
     }
-    public int build;
-    public bool elevated;
 }
