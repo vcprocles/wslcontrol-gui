@@ -1,0 +1,15 @@
+﻿<Window x:Class="wslcontrol_gui.OnlineInstall"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wslcontrol_gui"
+        mc:Ignorable="d"
+        Title="OnlineInstall" Height="450" Width="800">
+    <Grid>
+        <ListBox Height="300" Width="300" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,10,490,124"/>
+        <Button Content="Install" HorizontalAlignment="Left" Margin="178,335,0,0" VerticalAlignment="Top"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="88,345,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

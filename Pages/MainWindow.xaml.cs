@@ -160,6 +160,25 @@ namespace wslcontrol_gui
             inputwindow.Show();
         }
 
+        private void OnlineInstall_Click(object sender, RoutedEventArgs e)
+        {
+            OnlineInstall installwindow = new()
+            {
+                Owner = this
+            };
+            installwindow.Show();
+        }
+
+        private void ImportTar_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void ExportTar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         //private void ThisDistroSettings_Click(object sender, RoutedEventArgs e)
         //{
         //    PerDistroPrefs inputwindow = new PerDistroPrefs((Distro)DistroList.SelectedItem, wsli);
