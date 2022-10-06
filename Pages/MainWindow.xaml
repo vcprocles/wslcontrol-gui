@@ -21,6 +21,9 @@
             <ListView Grid.Column="0" Name="DistroList" SelectionChanged="DistroList_SelectionChanged" Margin="5,5,5,0" SelectionMode="Single"/>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto" Name="disdist"/>
                     <RowDefinition Height="auto" Name="term"/>
                     <RowDefinition Height="auto" Name="com"/>
@@ -35,19 +38,22 @@
                     <RowDefinition Height="auto" Name="globpref"/>
                     <RowDefinition Height="auto" Name="refreshlist"/>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0">Options for selected distro:</Label>
-                <Button Grid.Row="1" Name="LaunchButton" Content="Launch in terminal" Width="auto" Height="30" Margin="5,5,5,5" Click="LaunchButton_Click"/>
-                <Button Grid.Row="2" Name="RunCommandButton" Content="Run command..." Width="auto" Height="30" Margin="5,5,5,5" Click="RunCommandButton_Click"/>
-                <Button Grid.Row="3" Name="SetDefaultButton" Content="Set as default" Width="auto" Height="30" Margin="5,5,5,5" Click="SetDefaultButton_Click"/>
-                <Button Grid.Row="4" Name="TerminateButton" Content="Terminate" Width="auto" Height="30" Margin="5,5,5,5" Click="TerminateButton_Click"/>
-                <Button Grid.Row="5"  Name="InstallUninstallButton" Content="Uninstall" Width="auto" Height="30" Margin="5,5,5,5" Click="InstallUninstallButton_Click"/>
-                <Button Grid.Row="6" Name="OpenInExplorerButton" Content="Open in Explorer" Width="auto" Height="30" Margin="5,5,5,5" Click="OpenThisInExplorer_Click"/>
-                <!--<Button Visibility="Hidden" Grid.Row="7" Name="ThisDistroSettingsButton" Content="Settings" Width="auto" Height="30" Margin="5,5,5,5" Click="ThisDistroSettings_Click"/>-->
-                <Label Grid.Row="8">Options for all distros:</Label>
-                <Button Grid.Row="9" Height="30" Name="ShutdownButton" Margin="5,5,5,5" ToolTip="Terminates all distros and releases system resources from WSL2 virtual machine" Click="ShutdownButton_Click">Shutdown Windows Subsystem for Linux</Button>
-                <Button Grid.Row="10" Height="30" Name="OpenAllInExplorer" Content="Open WSL root" Margin="5,5,5,5" Click="OpenAllInExplorer_Click"/>
-                <Button Grid.Row="11" Name="GlobalSettingsButton" Content="Global Settings" Width="auto" Height="30" Margin="5,5,5,5" Click="GlobalSettingsButton_Click"/>
-                <Button Grid.Row="12" Height="30" Name="RefreshButton" Content="Refresh list" Margin="5,5,5,5" Click="RefreshButton_Click"/>
+                <Button Content="Online install" Grid.Row="0" Height="30" Margin="5,5,5,5"/>
+                <Button Content="Import distro .tar" Grid.Row="1" Height="30" Margin="5,5,5,5"/>
+                <Button Content="Export distro .tar" Grid.Row="2" Height="30" Margin="5,5,5,5"/>
+                <Label Grid.Row="3">Options for selected distro:</Label>
+                <Button Grid.Row="4" Name="LaunchButton" Content="Launch in terminal" Width="auto" Height="30" Margin="5,5,5,5" Click="LaunchButton_Click"/>
+                <Button Grid.Row="5" Name="RunCommandButton" Content="Run command..." Width="auto" Height="30" Margin="5,5,5,5" Click="RunCommandButton_Click"/>
+                <Button Grid.Row="6" Name="SetDefaultButton" Content="Set as default" Width="auto" Height="30" Margin="5,5,5,5" Click="SetDefaultButton_Click"/>
+                <Button Grid.Row="7" Name="TerminateButton" Content="Terminate" Width="auto" Height="30" Margin="5,5,5,5" Click="TerminateButton_Click"/>
+                <Button Grid.Row="8"  Name="InstallUninstallButton" Content="Uninstall" Width="auto" Height="30" Margin="5,5,5,5" Click="InstallUninstallButton_Click"/>
+                <Button Grid.Row="9" Name="OpenInExplorerButton" Content="Open in Explorer" Width="auto" Height="30" Margin="5,5,5,5" Click="OpenThisInExplorer_Click"/>
+                <Button Visibility="Hidden" Grid.Row="10" Name="ThisDistroSettingsButton" Content="Settings" Width="auto" Height="30" Margin="5,5,5,5" Click="ThisDistroSettings_Click"/>
+                <Label Grid.Row="11">Options for all distros:</Label>
+                <Button Grid.Row="12" Height="30" Name="ShutdownButton" Margin="5,5,5,5" ToolTip="Terminates all distros and releases system resources from WSL2 virtual machine" Click="ShutdownButton_Click">Shutdown Windows Subsystem for Linux</Button>
+                <Button Grid.Row="13" Height="30" Name="OpenAllInExplorer" Content="Open WSL root" Margin="5,5,5,5" Click="OpenAllInExplorer_Click"/>
+                <Button Grid.Row="14" Name="GlobalSettingsButton" Content="Global Settings" Width="auto" Height="30" Margin="5,5,5,5" Click="GlobalSettingsButton_Click"/>
+                <Button Grid.Row="15" Height="30" Name="RefreshButton" Content="Refresh list" Margin="5,5,5,5" Click="RefreshButton_Click"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="1">
