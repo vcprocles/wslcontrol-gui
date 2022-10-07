@@ -19,7 +19,7 @@ namespace wslcontrol_gui
     /// </summary>
     public partial class OnlineInstall : Window
     {
-        public OnlineInstall()
+        public OnlineInstall(WSLInterface wsli)
         {
             InitializeComponent();
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -162,7 +163,7 @@ namespace wslcontrol_gui
 
         private void OnlineInstall_Click(object sender, RoutedEventArgs e)
         {
-            OnlineInstall installwindow = new()
+            OnlineInstall installwindow = new(wsli)
             {
                 Owner = this
             };
@@ -171,12 +172,24 @@ namespace wslcontrol_gui
 
         private void ImportTar_Click(object sender, RoutedEventArgs e)
         {
-            
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "WSL .tar(*.tar)|*.tar|VM Images (*.vhdx)|*.vhdx";
+            openFile.Multiselect = false;
+            openFile.Title = "Select file to import...";
+            openFile.ShowDialog(this);
+            string importFile=openFile.FileName;
+            //TODO: write backend to pass this to wsli
         }
 
         private void ExportTar_Click(object sender, RoutedEventArgs e)
         {
-
+            SaveFileDialog saveFile = new SaveFileDialog();
+            saveFile.Filter = "WSL .tar(*.tar)|*.tar|VM Images (*.vhdx)|*.vhdx";
+            saveFile.Title = "Select path and filename to export...";
+            saveFile.AddExtension = true;
+            saveFile.ShowDialog(this);
+            string exportFile = saveFile.FileName;
+            //TODO: write backend to pass this to wsli
         }
 
         //private void ThisDistroSettings_Click(object sender, RoutedEventArgs e)
