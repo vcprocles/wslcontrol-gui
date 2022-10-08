@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 namespace wslcontrol_gui
 {
@@ -42,6 +43,11 @@ namespace wslcontrol_gui
                 dl.Add(new Distro() { Number = PNumber, Name = PName, State = PState, Version = PVersion, Default = PDefault });
             }
             return dl;
+        }
+        public static List<OnlineDistro> ParseOnlineDistroList(string text)
+        {
+            //TODO: write another unreadable parser
+            throw new NotImplementedException();
         }
 
     }
@@ -111,6 +117,10 @@ namespace wslcontrol_gui
         {
             return RespondParser.ParseDistroList(PassToWSL("-l -v"));
         }
+        public List<OnlineDistro> GetOnlineDistros()
+        {
+            return RespondParser.ParseOnlineDistroList(PassToWSL("-l -o"));
+        }
         public void UnregisterDistro(string distro)
         {
             PassToWSL("--unregister " + distro);
@@ -127,6 +137,43 @@ namespace wslcontrol_gui
         {
             PassToWSL("-s " + distro);
         }
+        public void ImportDistro(string distroName, string importFilePath, DistType type, int WSLVersion)
+        {
+            throw new NotImplementedException();
+            string distroInstallPath = "none at the moment";//TODO
+            if (type == DistType.vhdx)
+            {
+                PassToWSL("--import "+distroName+" "+distroInstallPath+" "+importFilePath+" --version "+WSLVersion.ToString()+" "+"--vhd");
+            }
+            else if (type == DistType.tar)
+            {
+                PassToWSL("--import " + distroName + " " + distroInstallPath + " " + importFilePath + " --version " + WSLVersion.ToString());
+            }
+        }
+        public void ExportDistro(string distroName, string exportPath, DistType type)
+        {
+            if (type == DistType.vhdx)
+            {
+                PassToWSL("--export "+distroName+" "+exportPath+" --vhd");
+            }    
+            else if (type == DistType.tar)
+            {
+                PassToWSL("--export " + distroName + " " + exportPath);
+            }
+        }
+        public void InstallOnlineDistro(string distroName)
+        {
+            PassToWSL("--install "+distroName+" -n");
+        }
+        public void InitializeWSLFirstStart()
+        {
+            PassToWSL("--install");
+        }
+    }
+    public enum DistType
+    {
+        vhdx,
+        tar
     }
 
     public class Distro
@@ -148,6 +195,21 @@ namespace wslcontrol_gui
         {
             if (this.Default) return this.Number.ToString() + ". " + this.Name + ", WSL" + this.Version + ", " + this.State + ", Set as default";
             return this.Number.ToString() + ". " + this.Name + ", WSL" + this.Version + ", " + this.State;
+        }
+    }
+    public class OnlineDistro : Distro
+    {
+        public OnlineDistro()
+        {
+            this.Number = 0;
+            this.Name = "noname";
+            this.State = "nostate";
+            this.Version = 0;
+            this.Default = false;
+        }
+        public override string ToString() //override text output
+        {
+            return base.ToString();
         }
     }
 }

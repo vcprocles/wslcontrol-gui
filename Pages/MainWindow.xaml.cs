@@ -1,8 +1,10 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.IO;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using wslcontrol_gui.Pages;
 
 namespace wslcontrol_gui
 {
@@ -96,7 +98,7 @@ namespace wslcontrol_gui
             {
                 Owner = this
             };
-            inputwindow.Show();
+            inputwindow.ShowDialog();
         }
 
         private void TerminateButton_Click(object sender, RoutedEventArgs e)
@@ -158,7 +160,7 @@ namespace wslcontrol_gui
             {
                 Owner = this
             };
-            inputwindow.Show();
+            inputwindow.ShowDialog();
         }
 
         private void OnlineInstall_Click(object sender, RoutedEventArgs e)
@@ -167,7 +169,7 @@ namespace wslcontrol_gui
             {
                 Owner = this
             };
-            installwindow.Show();
+            installwindow.ShowDialog();
         }
 
         private void ImportTar_Click(object sender, RoutedEventArgs e)
@@ -178,7 +180,21 @@ namespace wslcontrol_gui
             openFile.Title = "Select file to import...";
             openFile.ShowDialog(this);
             string importFile=openFile.FileName;
-            //TODO: write backend to pass this to wsli
+            ImportVersionAlert importDialog = new()
+            {
+                Owner = this
+            };
+            importDialog.ShowDialog();
+            string distroName = importDialog.DistroName;
+            int wslVersion = importDialog.WSLVersion;
+            if (Path.GetExtension(importFile) == "tar")
+            {
+                wsli.ImportDistro(distroName, importFile, DistType.tar, wslVersion);
+            }
+            else if (Path.GetExtension(importFile) == "vhdx")
+            {
+                wsli.ImportDistro(distroName, importFile, DistType.vhdx, wslVersion);
+            }
         }
 
         private void ExportTar_Click(object sender, RoutedEventArgs e)
@@ -189,14 +205,22 @@ namespace wslcontrol_gui
             saveFile.AddExtension = true;
             saveFile.ShowDialog(this);
             string exportFile = saveFile.FileName;
-            //TODO: write backend to pass this to wsli
+            string distroName = "";//TODO
+            if (Path.GetExtension(exportFile) == "tar")
+            {
+                wsli.ExportDistro(distroName, exportFile, DistType.tar);
+            }
+            else if (Path.GetExtension(exportFile) == "vhdx")
+            {
+                wsli.ExportDistro(distroName, exportFile, DistType.vhdx);
+            }
         }
 
         //private void ThisDistroSettings_Click(object sender, RoutedEventArgs e)
         //{
         //    PerDistroPrefs inputwindow = new PerDistroPrefs((Distro)DistroList.SelectedItem, wsli);
         //    inputwindow.Owner = this;
-        //    inputwindow.Show();
+        //    inputwindow.ShowDialog();
         //}
     }
 
