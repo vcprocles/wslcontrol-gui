@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Style="{DynamicResource CustomWindowStyle}"
         Title="SelectedSettings" Height="420
-        " Width="653" ResizeMode="NoResize"  Closed="Window_Closed">
+        " Width="653" ResizeMode="NoResize"  Closed="Window_Closed" WindowStartupLocation="CenterOwner">
     <Grid HorizontalAlignment="Left" Width="800">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

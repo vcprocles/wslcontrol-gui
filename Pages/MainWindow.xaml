@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:wslcontrol_gui"
         mc:Ignorable="d"
         Style="{DynamicResource CustomWindowStyle}"
-        Title="WSLControl-gui" Height="600" MinHeight="560" Width="700" MinWidth="575" ResizeMode="CanResize">
+        Title="WSLControl" Height="600" MinHeight="560" Width="700" MinWidth="575" ResizeMode="CanResize">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -40,8 +40,8 @@
                     <RowDefinition Height="auto" Name="refreshlist"/>
                 </Grid.RowDefinitions>
                 <Button Content="Online install" Grid.Row="0" Height="30" Margin="5,5,5,2" Name="OnlineInstall" Click="OnlineInstall_Click"/>
-                <Button Content="Import distro .tar" Grid.Row="1" Height="30" Margin="5,2,5,2" Name="ImportTar" Click="ImportTar_Click"/>
-                <Button Content="Export distro .tar" Grid.Row="7" Height="30" Margin="5,2,5,2" Name="ExportTar" Click="ExportTar_Click"/>
+                <Button Content="Import distro .tar/.vhdx" Grid.Row="1" Height="30" Margin="5,2,5,2" Name="ImportTar" Click="ImportTar_Click"/>
+                <Button Content="Export distro .tar/.vhdx" Grid.Row="7" Height="30" Margin="5,2,5,2" Name="ExportTar" Click="ExportTar_Click"/>
                 <Label Grid.Row="2">Options for selected distro:</Label>
                 <Button Grid.Row="3" Name="LaunchButton" Content="Launch in terminal" Width="auto" Height="30" Margin="5,2,5,2" Click="LaunchButton_Click"/>
                 <Button Grid.Row="4" Name="RunCommandButton" Content="Run command..." Width="auto" Height="30" Margin="5,2,5,2" Click="RunCommandButton_Click"/>

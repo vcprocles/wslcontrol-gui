@@ -6,11 +6,20 @@
         xmlns:local="clr-namespace:wslcontrol_gui"
         mc:Ignorable="d"
         Style="{DynamicResource CustomWindowStyle}"
-        Title="OnlineInstall" Height="450" Width="800">
+        Title="Online distribution installation" WindowStartupLocation="CenterOwner" Width="350" Height="390" ResizeMode="NoResize">
     <Grid>
-        <ListBox Height="300" Width="300" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,10,490,124"/>
-        <Button Content="Install" HorizontalAlignment="Left" Margin="178,335,0,0" VerticalAlignment="Top"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="88,345,0,0" VerticalAlignment="Top"/>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <ListBox Grid.Row="0" Height="300" Width="auto" Margin="5,5,5,5" Name="OnlineDistroList" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1" Content="Install" Name="InstallButton" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Width="150" Click="InstallButton_Click"/>
+            <Button Grid.Column="0" Content="Cancel" Name="CancelButton" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Width="150" Click="CancelButton_Click"/>
+        </Grid>
     </Grid>
 </Window>

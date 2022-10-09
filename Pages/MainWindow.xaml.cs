@@ -118,7 +118,7 @@ namespace wslcontrol_gui
         }
         private void WaitAndRefresh()
         {
-            Thread.Sleep(250);
+            Thread.Sleep(250);//long operation
             RefreshDistros();
         }
 
@@ -231,13 +231,15 @@ namespace wslcontrol_gui
             string distroName = ((Distro)DistroList.SelectedItem).Name;
             if (Path.GetExtension(exportFile) == ".tar")
             {
-                wsli.ExportDistro(distroName, exportFile, DistType.tar);
+                wsli.ExportDistro(distroName, exportFile, DistType.tar);//long operation
             }
             else if (Path.GetExtension(exportFile) == ".vhdx")
             {
-                wsli.ExportDistro(distroName, exportFile, DistType.vhdx);
+                wsli.ExportDistro(distroName, exportFile, DistType.vhdx);//long operation
             }
         }
+        
+       
 
         //private void ThisDistroSettings_Click(object sender, RoutedEventArgs e)
         //{
@@ -246,15 +248,5 @@ namespace wslcontrol_gui
         //    inputwindow.ShowDialog();
         //}
     }
-    class ThemeResolver
-    {
-        [DllImport("UXTheme.dll", SetLastError = true, EntryPoint = "#138")]
-        public static extern bool ShouldSystemUseDarkMode();
-        public static void SetTheme()
-        {
-            bool bRet = ShouldSystemUseDarkMode();
-            if (bRet)REghZyFramework.Themes.ThemesController.SetTheme(REghZyFramework.Themes.ThemesController.ThemeTypes.Dark);
-            else REghZyFramework.Themes.ThemesController.SetTheme(REghZyFramework.Themes.ThemesController.ThemeTypes.Light);
-        }
-    }
+    
 }

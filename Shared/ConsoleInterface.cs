@@ -46,9 +46,38 @@ namespace wslcontrol_gui
         }
         public static List<OnlineDistro> ParseOnlineDistroList(string text)
         {
-            //TODO: write another unreadable parser
-            throw new NotImplementedException();
-
+            List<OnlineDistro> dl = new();
+            string[] lines = text.Replace("\r", "").Split('\n');
+            int lineNumber = 1;
+            int skip = 4;
+            foreach (string line in lines)
+            {
+                if (skip>0)
+                {
+                    skip--;
+                    continue;
+                }
+                int PNumber = lineNumber++;
+                if (line.Length == 0) continue;
+                if (line.Equals(lines[0])) continue;
+                string[] fields = line.Split(' ');
+                string[] fields2 = new string[2];
+                fields2[0] = fields[0];
+                fields[0] = "";
+                bool foundFirstWord=false;
+                fields2[1] = "";
+                foreach (string field in fields)
+                {
+                    if ((field.Length == 0) && !foundFirstWord) continue;
+                    if (foundFirstWord) fields2[1] += "\u0020";
+                    fields2[1] += field;
+                    foundFirstWord = true;
+                }
+                string PName = fields2[0];
+                string PFriendlyName = fields2[1];
+                dl.Add(new OnlineDistro() { Name = PName, FriendlyName = PFriendlyName, Number = PNumber });
+            }
+            return dl;
         }
 
     }
@@ -162,7 +191,7 @@ namespace wslcontrol_gui
         }
         public void InstallOnlineDistro(string distroName)
         {
-            PassToWSL("--install "+distroName+" -n");
+            PassToWSL("--install "+distroName);
         }
         public void InitializeWSLFirstStart()
         {
@@ -202,13 +231,15 @@ namespace wslcontrol_gui
         {
             this.Number = 0;
             this.Name = "noname";
-            this.State = "nostate";
+            this.State = "unneeded";
             this.Version = 0;
             this.Default = false;
+            this.FriendlyName = "No Name";
         }
+        public string FriendlyName { get; set; }
         public override string ToString() //override text output
         {
-            return base.ToString();
+            return this.Number.ToString() + ". " + this.FriendlyName + " (" + this.Name + ")";
         }
     }
 }
