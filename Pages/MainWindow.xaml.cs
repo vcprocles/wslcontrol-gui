@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,7 +26,9 @@ namespace wslcontrol_gui
                 MessageBox.Show(ex.Message);
                 Close();
             }
+            ThemeResolver.SetTheme();
         }
+        
         private void SetInitialStatuses()
         {
             DeactivateAllButtons();
@@ -226,5 +229,15 @@ namespace wslcontrol_gui
         //    inputwindow.ShowDialog();
         //}
     }
-
+    class ThemeResolver
+    {
+        [DllImport("UXTheme.dll", SetLastError = true, EntryPoint = "#138")]
+        public static extern bool ShouldSystemUseDarkMode();
+        public static void SetTheme()
+        {
+            bool bRet = ShouldSystemUseDarkMode();
+            if (bRet)REghZyFramework.Themes.ThemesController.SetTheme(REghZyFramework.Themes.ThemesController.ThemeTypes.Dark);
+            else REghZyFramework.Themes.ThemesController.SetTheme(REghZyFramework.Themes.ThemesController.ThemeTypes.Light);
+        }
+    }
 }

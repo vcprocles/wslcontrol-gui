@@ -44,5 +44,8 @@
     <None Include="Pages\PerDistroPrefs.xaml" />
     <None Include="Pages\PerDistroPrefs.xaml.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\Thirdparty\" />
+  </ItemGroup>
 
 </Project>
