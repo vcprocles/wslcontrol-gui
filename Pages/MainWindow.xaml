@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wslcontrol_gui"
         mc:Ignorable="d"
+        Style="{DynamicResource CustomWindowStyle}"
         Title="WSLControl-gui" Height="600" MinHeight="560" Width="700" MinWidth="575" ResizeMode="CanResize">
 
     <Grid>
@@ -18,7 +19,7 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <ListView Grid.Column="0" Name="DistroList" SelectionChanged="DistroList_SelectionChanged" Margin="5,5,0,5" SelectionMode="Single"/>
+            <ListBox Grid.Column="0" Name="DistroList" SelectionChanged="DistroList_SelectionChanged" Margin="5,5,0,5" SelectionMode="Single"/>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
