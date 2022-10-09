@@ -138,10 +138,8 @@ namespace wslcontrol_gui
         {
             PassToWSL("-s " + distro);
         }
-        public void ImportDistro(string distroName, string importFilePath, DistType type, int WSLVersion)
+        public void ImportDistro(string distroName, string importFilePath, string distroInstallPath, DistType type, int WSLVersion)
         {
-            throw new NotImplementedException();
-            string distroInstallPath = "none at the moment";//TODO
             if (type == DistType.vhdx)
             {
                 PassToWSL("--import "+distroName+" "+distroInstallPath+" "+importFilePath+" --version "+WSLVersion.ToString()+" "+"--vhd");

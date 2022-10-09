@@ -5,7 +5,11 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using wslcontrol_gui.Pages;
+using MessageBox = System.Windows.MessageBox;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
+using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
 namespace wslcontrol_gui
 {
@@ -179,12 +183,15 @@ namespace wslcontrol_gui
 
         private void ImportTar_Click(object sender, RoutedEventArgs e)
         {
+            #region import file selection
             OpenFileDialog openFile = new OpenFileDialog();
             openFile.Filter = "WSL .tar(*.tar)|*.tar|VM Images (*.vhdx)|*.vhdx";
             openFile.Multiselect = false;
             openFile.Title = "Select file to import...";
             openFile.ShowDialog(this);
             string importFile=openFile.FileName;
+            #endregion
+            #region distro name and wsl version selection
             ImportVersionAlert importDialog = new()
             {
                 Owner = this
@@ -193,14 +200,24 @@ namespace wslcontrol_gui
             if (importDialog.WSLVersion==0) return;
             string distroName = importDialog.DistroName;
             int wslVersion = importDialog.WSLVersion;
+            #endregion
+            #region install location selection
+            FolderBrowserDialog installLocationSelector = new();
+            installLocationSelector.Description = "Select installation location";
+            installLocationSelector.ShowNewFolderButton = true;
+            installLocationSelector.ShowDialog();
+            string installLocation = installLocationSelector.SelectedPath;
+            #endregion
+            #region pass to backend
             if (Path.GetExtension(importFile) == ".tar")
             {
-                wsli.ImportDistro(distroName, importFile, DistType.tar, wslVersion);
+                wsli.ImportDistro(distroName, importFile, installLocation, DistType.tar, wslVersion);
             }
             else if (Path.GetExtension(importFile) == ".vhdx")
             {
-                wsli.ImportDistro(distroName, importFile, DistType.vhdx, wslVersion);
+                wsli.ImportDistro(distroName, importFile, installLocation, DistType.vhdx, wslVersion);
             }
+            #endregion
         }
 
         private void ExportTar_Click(object sender, RoutedEventArgs e)
