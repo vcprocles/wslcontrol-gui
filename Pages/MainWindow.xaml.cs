@@ -40,6 +40,7 @@ namespace wslcontrol_gui
             SetDefaultButton.IsEnabled = false;
             OpenInExplorerButton.IsEnabled = false;
             //ThisDistroSettingsButton.IsEnabled=false;
+            ExportTar.IsEnabled = false;
         }
         private void RefreshDistros()
         {
@@ -65,6 +66,7 @@ namespace wslcontrol_gui
                 if (selectedDistro.Version == 2) WSL2WarningLabel.Visibility = Visibility.Visible;
                 if (selectedDistro.Version == 1) WSL2WarningLabel.Visibility = Visibility.Collapsed;
                 OpenInExplorerButton.IsEnabled = true;
+                ExportTar.IsEnabled = true;
                 if (selectedDistro.State == "Running") { TerminateButton.IsEnabled = true; }
                 if (selectedDistro.State == "Stopped") { TerminateButton.IsEnabled = false; }
                 if (os.build < 19041) { GlobalSettingsButton.IsEnabled = false; }
@@ -187,11 +189,11 @@ namespace wslcontrol_gui
             importDialog.ShowDialog();
             string distroName = importDialog.DistroName;
             int wslVersion = importDialog.WSLVersion;
-            if (Path.GetExtension(importFile) == "tar")
+            if (Path.GetExtension(importFile) == ".tar")
             {
                 wsli.ImportDistro(distroName, importFile, DistType.tar, wslVersion);
             }
-            else if (Path.GetExtension(importFile) == "vhdx")
+            else if (Path.GetExtension(importFile) == ".vhdx")
             {
                 wsli.ImportDistro(distroName, importFile, DistType.vhdx, wslVersion);
             }
@@ -205,12 +207,12 @@ namespace wslcontrol_gui
             saveFile.AddExtension = true;
             saveFile.ShowDialog(this);
             string exportFile = saveFile.FileName;
-            string distroName = "";//TODO
-            if (Path.GetExtension(exportFile) == "tar")
+            string distroName = ((Distro)DistroList.SelectedItem).Name;
+            if (Path.GetExtension(exportFile) == ".tar")
             {
                 wsli.ExportDistro(distroName, exportFile, DistType.tar);
             }
-            else if (Path.GetExtension(exportFile) == "vhdx")
+            else if (Path.GetExtension(exportFile) == ".vhdx")
             {
                 wsli.ExportDistro(distroName, exportFile, DistType.vhdx);
             }

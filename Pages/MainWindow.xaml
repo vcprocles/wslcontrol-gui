@@ -18,7 +18,7 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <ListView Grid.Column="0" Name="DistroList" SelectionChanged="DistroList_SelectionChanged" Margin="5,5,5,0" SelectionMode="Single"/>
+            <ListView Grid.Column="0" Name="DistroList" SelectionChanged="DistroList_SelectionChanged" Margin="5,5,0,5" SelectionMode="Single"/>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -38,7 +38,7 @@
                     <RowDefinition Height="auto" Name="globpref"/>
                     <RowDefinition Height="auto" Name="refreshlist"/>
                 </Grid.RowDefinitions>
-                <Button Content="Online install" Grid.Row="0" Height="30" Margin="5,2,5,2" Name="OnlineInstall" Click="OnlineInstall_Click"/>
+                <Button Content="Online install" Grid.Row="0" Height="30" Margin="5,5,5,2" Name="OnlineInstall" Click="OnlineInstall_Click"/>
                 <Button Content="Import distro .tar" Grid.Row="1" Height="30" Margin="5,2,5,2" Name="ImportTar" Click="ImportTar_Click"/>
                 <Button Content="Export distro .tar" Grid.Row="7" Height="30" Margin="5,2,5,2" Name="ExportTar" Click="ExportTar_Click"/>
                 <Label Grid.Row="2">Options for selected distro:</Label>

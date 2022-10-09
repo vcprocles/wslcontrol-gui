@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wslcontrol_gui.Pages"
         mc:Ignorable="d"
-        Title="ImportVersionAlert" Height="266" Width="343">
+        Title="ImportVersionAlert" Height="300" Width="400">
     <Grid>
-        <Label Height="30" Margin="10,109,10,45">What WSL version you want to use for this distro?</Label>
-        <Button Height="20" Width="40" Margin="17,144,243,20" Name="WSL1Button" Click="WSL1Button_Click">WSL1</Button>
-        <Button Height="20" Width="40" Margin="81,144,179,20" Name="WSL2Button" Click="WSL2Button_Click">WSL2</Button>
+        <Label Height="30" Margin="10,64,10,156">What WSL version you want to use for this distro?</Label>
+        <Button Height="20" Width="40" Margin="10,94,293,136" Name="WSL1Button" Click="WSL1Button_Click">WSL1</Button>
+        <Button Height="20" Width="40" Margin="69,94,234,136" Name="WSL2Button" Click="WSL2Button_Click">WSL2</Button>
         <Label Content="Specify the name for the new distro" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Margin="10,41,0,0" TextWrapping="Wrap" Text="ImportedDistro" VerticalAlignment="Top" Width="120" Name="DistroNameBox"/>
+        <Label Content="You will be asked to specify location where to install" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
