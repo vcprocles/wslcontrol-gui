@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wslcontrol_gui"
         mc:Ignorable="d"
+        Style="{DynamicResource CustomWindowStyle}"
         Title="OnlineInstall" Height="450" Width="800">
     <Grid>
         <ListBox Height="300" Width="300" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,10,490,124"/>

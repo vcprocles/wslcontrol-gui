@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wslcontrol_gui.Pages"
         mc:Ignorable="d"
+        Style="{DynamicResource CustomWindowStyle}"
         Title="ImportVersionAlert" Height="300" Width="400">
     <Grid>
         <Label Height="30" Margin="10,64,10,156">What WSL version you want to use for this distro?</Label>
