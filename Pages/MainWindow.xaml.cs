@@ -187,6 +187,7 @@ namespace wslcontrol_gui
                 Owner = this
             };
             importDialog.ShowDialog();
+            if (importDialog.WSLVersion==0) return;
             string distroName = importDialog.DistroName;
             int wslVersion = importDialog.WSLVersion;
             if (Path.GetExtension(importFile) == ".tar")

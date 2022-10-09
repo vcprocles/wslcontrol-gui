@@ -23,6 +23,7 @@ namespace wslcontrol_gui.Pages
         {
             InitializeComponent();
             DistroName=DistroNameBox.Text;
+            WSLVersion = 0;
         }
         public string DistroName { get; set; }
         public int WSLVersion { get; set; }
