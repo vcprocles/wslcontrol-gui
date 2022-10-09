@@ -62,7 +62,7 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Padding="5,5,5,5" TextWrapping="Wrap" Name="WSL2WarningLabel" Visibility="Collapsed" FontStyle="Italic">WARNING: Terminating WSL2 instance doesn't always release system resources, use Shutdown instead</TextBlock>
+            <TextBlock Grid.Row="0"  TextWrapping="Wrap" Name="WSL2WarningLabel" Visibility="Collapsed" FontStyle="Italic" Padding="5,0,5,5">WARNING: Terminating WSL2 instance doesn't always release system resources, use Shutdown instead</TextBlock>
             <!--<TextBlock Grid.Row="1" Padding="5,5,5,5" TextWrapping="Wrap" Name="AdminRightsLabel" Visibility="Collapsed" FontStyle="Italic">Changing distro-specific settings requires to run this app as an administrator</TextBlock>-->
         </Grid>
     </Grid>
