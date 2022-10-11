@@ -11,6 +11,9 @@ using MessageBox = System.Windows.MessageBox;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
+
+
+
 namespace wslcontrol_gui
 {
 
@@ -46,7 +49,7 @@ namespace wslcontrol_gui
             TerminateButton.IsEnabled = false;
             SetDefaultButton.IsEnabled = false;
             OpenInExplorerButton.IsEnabled = false;
-            //ThisDistroSettingsButton.IsEnabled=false;
+            ThisDistroSettingsButton.IsEnabled=false;
             ExportTar.IsEnabled = false;
         }
         private void RefreshDistros()
@@ -81,6 +84,7 @@ namespace wslcontrol_gui
                 LaunchButton.IsEnabled = true;
                 InstallUninstallButton.IsEnabled = true;
                 SetDefaultButton.IsEnabled = true;
+                ThisDistroSettingsButton.IsEnabled = true;
                 if (selectedDistro.State == "Installing")
                 {
                     TerminateButton.IsEnabled = false;
@@ -88,6 +92,7 @@ namespace wslcontrol_gui
                     LaunchButton.IsEnabled = false;
                     InstallUninstallButton.IsEnabled = false;
                     SetDefaultButton.IsEnabled = false;
+                    ThisDistroSettingsButton.IsEnabled = false;
                 }
             }
         }
@@ -241,12 +246,12 @@ namespace wslcontrol_gui
         
        
 
-        //private void ThisDistroSettings_Click(object sender, RoutedEventArgs e)
-        //{
-        //    PerDistroPrefs inputwindow = new PerDistroPrefs((Distro)DistroList.SelectedItem, wsli);
-        //    inputwindow.Owner = this;
-        //    inputwindow.ShowDialog();
-        //}
+        private void ThisDistroSettings_Click(object sender, RoutedEventArgs e)
+        {
+            PerDistroPrefs inputwindow = new PerDistroPrefs((Distro)DistroList.SelectedItem, wsli);
+            inputwindow.Owner = this;
+            inputwindow.ShowDialog();
+        }
     }
     
 }

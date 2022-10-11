@@ -30,7 +30,7 @@ namespace wslcontrol_gui
         public void WriteOut()
         {
             //RemovePrivateUnusedParameters();
-            parser.Persist(path);
+            if (path.Length!=0)parser.Persist(path);
         }
         public string ReadParameterString(string section, string key, out bool err)
         {
@@ -95,30 +95,31 @@ namespace wslcontrol_gui
             }
         }
     }
-    //class IniParseWrapSpecific : IniParseWrap //might need to move this to the different executable, because elevation is needed
-    //                                          //made using this require elevation for the whole program, as that would not require to have multiple executables
-    //{
-    //    OsInfo os = new();
-    //    //private bool manuallyStartWSL = false;
-    //    //^probably would need that for W10, TODO
-    //    public IniParseWrapSpecific(Distro distro)
-    //    {
-    //        string distroName = distro.Name;
-    //        string initial;
-    //        if (os.build < 22000)
-    //        {
-    //            initial = "\\\\wsl$\\";
-    //            //manuallyStartWSL=true;
-    //        }
-    //        else initial = "\\\\wsl.localhost\\";
-    //        string fullPath=initial+distroName+"\\etc\\wsl.conf";
-    //        parser = new INIFile(fullPath);
-    //    }
-    //    public void SetParameterMountOptions(string key, string value)
-    //    {
-    //        const string section = "automount";
-    //        value = "\"" + value + "\"";
-    //        SetParameter(section, key, value);
-    //    }
-    //}
+    class IniParseWrapSpecific : IniParseWrap //might need to move this to the different executable, because elevation is needed
+                                              //made using this require elevation for the whole program, as that would not require to have multiple executables
+    {
+        OsInfo os = new();
+        //private bool manuallyStartWSL = false;
+        //^probably would need that for W10, TODO
+        public IniParseWrapSpecific(Distro distro)
+        {
+            string distroName = distro.Name;
+            string initial;
+            if (os.build < 22000)
+            {
+                initial = "\\\\wsl$\\";
+                //manuallyStartWSL=true;
+            }
+            else initial = "\\\\wsl.localhost\\";
+            string fullPath=initial+distroName+"\\etc\\wsl.conf";
+            //parser = new INIFile(fullPath);
+            parser = new INIFile("a.conf");
+        }
+        public void SetParameterMountOptions(string key, string value)
+        {
+            const string section = "automount";
+            value = "\"" + value + "\"";
+            SetParameter(section, key, value);
+        }
+    }
 }

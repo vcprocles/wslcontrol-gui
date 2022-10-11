@@ -46,47 +46,47 @@ namespace wslcontrol_gui
             #region automount
             section = "automount";
             //enable automount
-            bool automount = ini.bReadParameter(section,"enabled",out err);
+            bool automount = ini.ReadParameterBoolean(section,"enabled",out err);
             if (err) automount = true;
             //process fstab
-            bool processFstab = ini.bReadParameter(section,"mountFsTab",out err);
+            bool processFstab = ini.ReadParameterBoolean(section,"mountFsTab",out err);
             if (err) processFstab = true;
             //windows fs path
-            string windowsPath = ini.sReadParameter(section,"root",out err);
+            string windowsPath = ini.ReadParameterString(section,"root",out err);
             if (err) windowsPath = "/mnt/";
-            string mountOptions = ini.sReadParameter(section, "options", out err);//swap this for more complex configurator
+            string mountOptions = ini.ReadParameterString(section, "options", out err);//swap this for more complex configurator
             if (err) mountOptions = "";
 
             #endregion
             #region network
             //generate hosts
             section = "network";
-            bool hostsGen = ini.bReadParameter(section, "generateHosts",out err);
+            bool hostsGen = ini.ReadParameterBoolean(section, "generateHosts",out err);
             if (err) hostsGen = true;
             //generate resolv
-            bool resolvGen = ini.bReadParameter(section, "generateResolvConf", out err);
+            bool resolvGen = ini.ReadParameterBoolean(section, "generateResolvConf", out err);
             if (err) resolvGen = true;
             //hostname
-            string hostname = ini.sReadParameter(section, "hostname", out err);
+            string hostname = ini.ReadParameterString(section, "hostname", out err);
             if (err) hostname = "";//should use Windows hostname if empty
             #endregion
             #region interop
             section = "interop";
             //windows processes
-            bool winProcessesStart = ini.bReadParameter(section, "enabled", out err);
+            bool winProcessesStart = ini.ReadParameterBoolean(section, "enabled", out err);
             if (err) winProcessesStart = true;
             //append path
-            bool appendPath = ini.bReadParameter(section, "appendWindowsPath", out err);
+            bool appendPath = ini.ReadParameterBoolean(section, "appendWindowsPath", out err);
             if (err) appendPath = true;
             #endregion
             #region defaultuser
             section = "user";
-            string defaultUser = ini.sReadParameter(section, "default",out err);
+            string defaultUser = ini.ReadParameterString(section, "default",out err);
             if (err) defaultUser = "";
             #endregion
             #region commandonboot
             section = "boot";
-            string commandOnBoot = ini.sReadParameter(section, "command", out err);
+            string commandOnBoot = ini.ReadParameterString(section, "command", out err);
             if (err) commandOnBoot = "";
             #endregion
             #region setting gathered stuff

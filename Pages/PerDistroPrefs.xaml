@@ -16,7 +16,7 @@
         <Button Name="ResetToDefaultsButton" Content="Reset to defaults" Width="150" Height="20" Margin="480,356,170,28" IsEnabled="False"/>
         <Rectangle HorizontalAlignment="Left" Height="319" Margin="10,32,0,0" Stroke="Black" VerticalAlignment="Top" Width="362"/>
         <CheckBox Name="EnableAutomountCheckMark" Content="Enable" HorizontalAlignment="Left" Margin="23,59,0,0" VerticalAlignment="Top" IsChecked="True" Height="15" Width="55" Checked="EnableAutomountCheckMark_Checked"/>
-        <Label Content="Automount" HorizontalAlignment="Left" Margin="23,32,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="75"/>
+        <Label Content="Automount" HorizontalAlignment="Left" Margin="23,32,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="121"/>
         <CheckBox Name="ProcessFstabCheckmark" Content="Process fstab" HorizontalAlignment="Left" Margin="23,94,0,0" VerticalAlignment="Top" IsChecked="True" Height="15" Width="89" Checked="ProcessFstabCheckmark_Checked"/>
         <Button IsEnabled="False" Content="Edit fstab" HorizontalAlignment="Left" Margin="117,92,0,0" VerticalAlignment="Top" Height="20" Width="53"/>
         <TextBox Name="WinFsPathBox" HorizontalAlignment="Left" Margin="130,116,0,0" TextWrapping="Wrap" Text="/mnt/" VerticalAlignment="Top" Width="120" Height="18" TextChanged="WinFsPathBox_TextChanged"/>
@@ -53,7 +53,7 @@
         <CheckBox Name="WindowsProcessesCreation" Content="Allow launching Windows processes" HorizontalAlignment="Left" Margin="397,168,0,0" VerticalAlignment="Top" Height="15" Width="211" IsChecked="True" Checked="WindowsProcessesCreation_Checked"/>
         <CheckBox Name="AppendPath" Content="Append Windows' %PATH% to $PATH" HorizontalAlignment="Left" Margin="397,196,0,0" VerticalAlignment="Top" Height="15" Width="219" IsChecked="True" Checked="AppendPath_Checked"/>
         <Rectangle HorizontalAlignment="Left" Height="59" Margin="383,225,0,0" Stroke="Black" VerticalAlignment="Top" Width="247"/>
-        <Label Content="Default username" HorizontalAlignment="Left" Margin="383,225,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="110"/>
+        <Label Content="Default username" HorizontalAlignment="Left" Margin="383,225,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="139"/>
         <TextBox Name="DefaultUsername" HorizontalAlignment="Left" Margin="390,251,0,0" TextWrapping="Wrap" ToolTip="By default: name from first start" VerticalAlignment="Top" Width="120" Height="18" TextChanged="DefaultUsername_TextChanged"/>
         <Rectangle HorizontalAlignment="Left" Height="59" Margin="383,292,0,0" Stroke="Black" VerticalAlignment="Top" Width="247"/>
         <Label Content="Command to run on boot" HorizontalAlignment="Left" Margin="386,294,0,0" VerticalAlignment="Top" Height="26" Width="165" FontWeight="Bold"/>

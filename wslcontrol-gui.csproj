@@ -27,23 +27,11 @@
     <None Remove="publish\**" />
     <Page Remove="publish\**" />
   </ItemGroup>
-	
-  <ItemGroup>
-    <Compile Remove="Pages\PerDistroPrefs.xaml.cs" />
-  </ItemGroup>
-	
-  <ItemGroup>
-    <Page Remove="Pages\PerDistroPrefs.xaml" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="PeanutButter.INI" Version="3.0.58" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\wslcguiicon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Pages\PerDistroPrefs.xaml" />
-    <None Include="Pages\PerDistroPrefs.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Thirdparty\" />
