@@ -11,15 +11,7 @@ namespace wslcontrol_gui
         {
             parser.SetValue(section, key, value);
         }
-        //private void RemovePrivateUnusedParameters()//TODO figure out how to clean out the unused keys
-        //                                            //not critical,though
-        //{
-        //    foreach (var a in parser["wsl2"].Keys)
-        //    {
-        //        if (a is "") parser["wsl2"].Remove(a);
-        //    }
-        //}
-        private string? ReadParameter(string section, string key) //TODO: hide it the f away and use Hungarian-notated stuff below
+        private string? ReadParameter(string section, string key)
         {
             if (parser.HasSection(section) && parser.HasSetting(section, key))
             {
@@ -29,7 +21,6 @@ namespace wslcontrol_gui
         }
         public void WriteOut()
         {
-            //RemovePrivateUnusedParameters();
             if (path.Length!=0)parser.Persist(path);
         }
         public string ReadParameterString(string section, string key, out bool err)
@@ -40,20 +31,7 @@ namespace wslcontrol_gui
             err = true;
             return "Something has gone wrong";
         }
-        //public int ReadParameterInteger(string section, string key, out bool err)
-        //{
-        //    int a;
-        //    err = false;
-        //    if (int.TryParse(sReadParameter(section, key, out err), out a))
-        //    {
-        //        return a;
-        //    }
-        //    else
-        //    {
-        //        err = true;
-        //        return 0xDEAD;
-        //    }
-        //}
+        
         public bool ReadParameterBoolean(string section, string key, out bool err)
         {
             if (bool.TryParse(ReadParameterString(section, key, out _), out bool a))//in case of an error in ReadParameterString it's going to output "Something has gone wrong", which can't be parsed
@@ -68,10 +46,10 @@ namespace wslcontrol_gui
             }
         }
     }
-    class IniParseWrapGlobal : IniParseWrap //holy, it's finally somewhat done
+    class IniParseWrapGlobal : IniParseWrap
     {
         const string section = "wsl2";
-        public IniParseWrapGlobal()//constructor
+        public IniParseWrapGlobal()
         {
             string homeFolder = Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile);
             string pathToWSLConfig = homeFolder + "\\.wslconfig";
@@ -95,15 +73,13 @@ namespace wslcontrol_gui
             }
         }
     }
-    class IniParseWrapSpecific : IniParseWrap //might need to move this to the different executable, because elevation is needed
-                                              //made using this require elevation for the whole program, as that would not require to have multiple executables
+    class IniParseWrapSpecific : IniParseWrap 
     {
         OsInfo os = new();
-        //private bool manuallyStartWSL = false;
-        //^probably would need that for W10, TODO
+        private string distroName;
         public IniParseWrapSpecific(Distro distro)
         {
-            string distroName = distro.Name;
+            distroName = distro.Name;
             string initial;
             if (os.build < 22000)
             {
@@ -120,6 +96,11 @@ namespace wslcontrol_gui
             const string section = "automount";
             value = "\"" + value + "\"";
             SetParameter(section, key, value);
+        }
+        public void GetConfig() => WSLInterface.PassCommand(distroName, "-- perl .companion.pl");
+        public void SetConfig()
+        {
+            WSLInterface.PassCommand(distroName, "-- sudo perl .companion.pl -i");
         }
     }
 }

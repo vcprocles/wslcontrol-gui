@@ -11,7 +11,7 @@ if ($ARGV[0] eq "-i")
         print "this mode needs to be run as root\n";
         exit(1);
     }
-    print "moving wsl.conf to /etc";
+    print "moving wsl.conf to /etc\n";
     move("wsl.conf","/etc/wsl.conf");
 }
 else

@@ -113,6 +113,20 @@ namespace wslcontrol_gui
             };
             Process.Start(processInfo);
         }
+        protected static void RunCommandInWindowAndWait(string command, string parameters)
+        {
+            ProcessStartInfo processInfo;
+            Process process;
+            processInfo = new ProcessStartInfo(command)
+            {
+                CreateNoWindow = false,
+                UseShellExecute = true,
+                Arguments = parameters,
+            };
+            process = Process.Start(processInfo)!;
+            if (process == null) throw new ArgumentNullException();
+            process.WaitForExit();
+        }
     }
     public class WSLInterface : ConsoleInterface
     {
@@ -125,6 +139,8 @@ namespace wslcontrol_gui
             return RunCommand("wsl.exe", parameters);
         }
         private static void RunWSLInWindow(string parameters) => RunCommandInWindow("C:\\Windows\\System32\\wsl.exe", parameters);
+        private static void RunWSLInWindowAndWait(string parameters) => RunCommandInWindowAndWait("C:\\Windows\\System32\\wsl.exe", parameters);
+
         public int GetCurrentDefaultWSLVersion()
         {
             char ver = RespondParser.GetLastLineSymbol(PassToWSL("--status"), 1);
@@ -158,6 +174,10 @@ namespace wslcontrol_gui
         public static void RunCustomCommand(string distro, string command)
         {
             RunWSLInWindow("-d " + distro + " -- bash -l -c \"" + command + "\" && bash");
+        }
+        public static void PassCommand(string distro, string command)
+        {
+            RunWSLInWindowAndWait("-d " + distro + " -- " + command);
         }
         public static void OpenDistro(string distro)
         {

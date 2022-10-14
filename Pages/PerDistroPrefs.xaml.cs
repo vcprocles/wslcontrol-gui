@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Transactions;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,6 +23,7 @@ namespace wslcontrol_gui
             InitializeComponent();
             DisableUnsupported();
             InitializeSetOrDefault();
+            ini.GetConfig();
         }
         private void DisableUnsupported()
         {
@@ -193,7 +195,9 @@ namespace wslcontrol_gui
         }
         private void Window_Closed(object sender, EventArgs e)
         {
-            ini.WriteOut();//get access error
+            ini.WriteOut();
+            Thread.Sleep(100);
+            ini.SetConfig();
         }
     }
 }
