@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace wslcontrol_gui.Pages
 {
@@ -22,7 +10,7 @@ namespace wslcontrol_gui.Pages
         public ImportVersionAlert()
         {
             InitializeComponent();
-            DistroName=DistroNameBox.Text;
+            DistroName = DistroNameBox.Text;
             WSLVersion = 0;
         }
         public string DistroName { get; set; }
@@ -30,8 +18,8 @@ namespace wslcontrol_gui.Pages
 
         private void WSL1Button_Click(object sender, RoutedEventArgs e)
         {
-            WSLVersion = 1; 
-            DistroName=DistroNameBox.Text;
+            WSLVersion = 1;
+            DistroName = DistroNameBox.Text;
             this.Close();
         }
 

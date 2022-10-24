@@ -21,7 +21,7 @@ namespace wslcontrol_gui
         }
         public void WriteOut()
         {
-            if (path.Length!=0)parser.Persist(path);
+            if (path.Length != 0) parser.Persist(path);
         }
         public string ReadParameterString(string section, string key, out bool err)
         {
@@ -31,7 +31,7 @@ namespace wslcontrol_gui
             err = true;
             return "Something has gone wrong";
         }
-        
+
         public bool ReadParameterBoolean(string section, string key, out bool err)
         {
             if (bool.TryParse(ReadParameterString(section, key, out _), out bool a))//in case of an error in ReadParameterString it's going to output "Something has gone wrong", which can't be parsed
@@ -73,7 +73,7 @@ namespace wslcontrol_gui
             }
         }
     }
-    class IniParseWrapSpecific : IniParseWrap 
+    class IniParseWrapSpecific : IniParseWrap
     {
         OsInfo os = new();
         private string distroName;
@@ -87,7 +87,7 @@ namespace wslcontrol_gui
                 //manuallyStartWSL=true;
             }
             else initial = "\\\\wsl.localhost\\";
-            string fullPath=initial+distroName+"\\etc\\wsl.conf";
+            string fullPath = initial + distroName + "\\etc\\wsl.conf";
             //parser = new INIFile(fullPath);
             parser = new INIFile("a.conf");
         }

@@ -1,7 +1,5 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,7 +33,7 @@ namespace wslcontrol_gui
             }
             ThemeResolver.SetTheme();
         }
-        
+
         private void SetInitialStatuses()
         {
             DeactivateAllButtons();
@@ -49,7 +47,7 @@ namespace wslcontrol_gui
             TerminateButton.IsEnabled = false;
             SetDefaultButton.IsEnabled = false;
             OpenInExplorerButton.IsEnabled = false;
-            ThisDistroSettingsButton.IsEnabled=false;
+            ThisDistroSettingsButton.IsEnabled = false;
             ExportTar.IsEnabled = false;
         }
         private void RefreshDistros()
@@ -194,7 +192,7 @@ namespace wslcontrol_gui
             openFile.Multiselect = false;
             openFile.Title = "Select file to import...";
             openFile.ShowDialog(this);
-            string importFile=openFile.FileName;
+            string importFile = openFile.FileName;
             #endregion
             #region distro name and wsl version selection
             ImportVersionAlert importDialog = new()
@@ -202,7 +200,7 @@ namespace wslcontrol_gui
                 Owner = this
             };
             importDialog.ShowDialog();
-            if (importDialog.WSLVersion==0) return;
+            if (importDialog.WSLVersion == 0) return;
             string distroName = importDialog.DistroName;
             int wslVersion = importDialog.WSLVersion;
             #endregion
@@ -243,8 +241,8 @@ namespace wslcontrol_gui
                 wsli.ExportDistro(distroName, exportFile, DistType.vhdx);//long operation
             }
         }
-        
-       
+
+
 
         private void ThisDistroSettings_Click(object sender, RoutedEventArgs e)
         {
@@ -253,5 +251,5 @@ namespace wslcontrol_gui
             inputwindow.ShowDialog();
         }
     }
-    
+
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using System.Transactions;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -13,7 +12,7 @@ namespace wslcontrol_gui
         enum SwitchStates
         {
             Enable,
-            Disable   
+            Disable
         }
         private static Distro distro;
         public PerDistroPrefs(Distro selectedDistro, WSLInterface wsli)
@@ -48,13 +47,13 @@ namespace wslcontrol_gui
             #region automount
             section = "automount";
             //enable automount
-            bool automount = ini.ReadParameterBoolean(section,"enabled",out err);
+            bool automount = ini.ReadParameterBoolean(section, "enabled", out err);
             if (err) automount = true;
             //process fstab
-            bool processFstab = ini.ReadParameterBoolean(section,"mountFsTab",out err);
+            bool processFstab = ini.ReadParameterBoolean(section, "mountFsTab", out err);
             if (err) processFstab = true;
             //windows fs path
-            string windowsPath = ini.ReadParameterString(section,"root",out err);
+            string windowsPath = ini.ReadParameterString(section, "root", out err);
             if (err) windowsPath = "/mnt/";
             string mountOptions = ini.ReadParameterString(section, "options", out err);//swap this for more complex configurator
             if (err) mountOptions = "";
@@ -63,7 +62,7 @@ namespace wslcontrol_gui
             #region network
             //generate hosts
             section = "network";
-            bool hostsGen = ini.ReadParameterBoolean(section, "generateHosts",out err);
+            bool hostsGen = ini.ReadParameterBoolean(section, "generateHosts", out err);
             if (err) hostsGen = true;
             //generate resolv
             bool resolvGen = ini.ReadParameterBoolean(section, "generateResolvConf", out err);
@@ -83,7 +82,7 @@ namespace wslcontrol_gui
             #endregion
             #region defaultuser
             section = "user";
-            string defaultUser = ini.ReadParameterString(section, "default",out err);
+            string defaultUser = ini.ReadParameterString(section, "default", out err);
             if (err) defaultUser = "";
             #endregion
             #region commandonboot
@@ -97,13 +96,13 @@ namespace wslcontrol_gui
             ProcessFstabCheckmark.IsChecked = processFstab;
             WinFsPathBox.Text = windowsPath;
             MountOptionsTextBox.Text = mountOptions;
-            HostsTick.IsChecked=hostsGen;
-            ResolvTick.IsChecked=resolvGen;
-            CustomHostnameBox.Text=hostname;
-            WindowsProcessesCreation.IsChecked=winProcessesStart;
-            AppendPath.IsChecked=appendPath;
+            HostsTick.IsChecked = hostsGen;
+            ResolvTick.IsChecked = resolvGen;
+            CustomHostnameBox.Text = hostname;
+            WindowsProcessesCreation.IsChecked = winProcessesStart;
+            AppendPath.IsChecked = appendPath;
             DefaultUsername.Text = defaultUser;
-            CommandOnBoot.Text=commandOnBoot;
+            CommandOnBoot.Text = commandOnBoot;
             #endregion
         }
 
@@ -132,7 +131,7 @@ namespace wslcontrol_gui
         private void EnableAutomountCheckMark_Checked(object sender, RoutedEventArgs e)
         {
             CheckBox a = sender as CheckBox;
-            if (a.IsChecked.Value==true)
+            if (a.IsChecked.Value == true)
             {
                 AutomountSwitch(SwitchStates.Enable);
                 ini.SetParameter("automount", "enable", a.IsChecked.ToString());
