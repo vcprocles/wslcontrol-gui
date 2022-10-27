@@ -6,14 +6,15 @@
         xmlns:local="clr-namespace:wslcontrol_gui"
         mc:Ignorable="d"
         Style="{DynamicResource CustomWindowStyle}"
-        Title="SelectedSettings" Height="420
-        " Width="653" ResizeMode="NoResize"  Closed="Window_Closed" WindowStartupLocation="CenterOwner">
+        Title="SelectedSettings" Height="460
+        " Width="653"  ResizeMode="NoResize" Closed="Window_Closed" WindowStartupLocation="CenterOwner">
     <Grid HorizontalAlignment="Left" Width="800">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="ConsoleWindowWarning" Margin="0,0,149,0">Console window may be opened in the background, ignore and don't close it</Label>
-        <Button Name="ResetToDefaultsButton" Content="Reset to defaults" Width="150" Height="20" Margin="480,356,170,28" IsEnabled="False"/>
+        <Label x:Name="ConsoleWindowWarning" Margin="0,0,149,0" FontSize="11">Console window may be opened in the background, ignore and close it only after you're done. You will be asked for root password.</Label>
+        <CheckBox Name="SystemdEnableCheckBox" Content="Enable Systemd sypport" Height="26" Margin="10,356,642,40" Checked="SystemdEnableCheckBox_Checked"/>
+        <Button Name="ResetToDefaultsButton" Content="Reset to defaults" Width="150" Height="20" Margin="480,359,170,43" IsEnabled="False"/>
         <Rectangle HorizontalAlignment="Left" Height="319" Margin="10,32,0,0" Stroke="Black" VerticalAlignment="Top" Width="362"/>
         <CheckBox Name="EnableAutomountCheckMark" Content="Enable" HorizontalAlignment="Left" Margin="23,59,0,0" VerticalAlignment="Top" IsChecked="True" Height="15" Width="55" Checked="EnableAutomountCheckMark_Checked"/>
         <Label Content="Automount" HorizontalAlignment="Left" Margin="23,32,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="121"/>

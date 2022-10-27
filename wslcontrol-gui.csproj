@@ -36,5 +36,10 @@
   <ItemGroup>
     <Folder Include="Assets\Thirdparty\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="linux_companion\companion.pl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
 </Project>

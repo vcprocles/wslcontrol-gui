@@ -17,12 +17,13 @@ namespace wslcontrol_gui
         private static Distro distro;
         public PerDistroPrefs(Distro selectedDistro, WSLInterface wsli)
         {
+            IniParseWrapSpecific.GetConfig(selectedDistro.Name);
+            Thread.Sleep(500);
             distro = selectedDistro;
             ini = new(distro);
             InitializeComponent();
             DisableUnsupported();
             InitializeSetOrDefault();
-            ini.GetConfig();
         }
         private void DisableUnsupported()
         {
@@ -89,6 +90,8 @@ namespace wslcontrol_gui
             section = "boot";
             string commandOnBoot = ini.ReadParameterString(section, "command", out err);
             if (err) commandOnBoot = "";
+            bool enableSystemd = ini.ReadParameterBoolean(section, "systemd", out err);
+            if (err) enableSystemd = false;
             #endregion
             #region setting gathered stuff
             EnableAutomountCheckMark.IsChecked = automount;
@@ -103,6 +106,7 @@ namespace wslcontrol_gui
             AppendPath.IsChecked = appendPath;
             DefaultUsername.Text = defaultUser;
             CommandOnBoot.Text = commandOnBoot;
+            SystemdEnableCheckBox.IsChecked = enableSystemd;
             #endregion
         }
 
@@ -131,72 +135,94 @@ namespace wslcontrol_gui
         private void EnableAutomountCheckMark_Checked(object sender, RoutedEventArgs e)
         {
             CheckBox a = sender as CheckBox;
+            if (sender is CheckBox && a.IsChecked == null) return;
             if (a.IsChecked.Value == true)
             {
                 AutomountSwitch(SwitchStates.Enable);
-                ini.SetParameter("automount", "enable", a.IsChecked.ToString());
+                ini.SetParameter("automount", "enabled", a.IsChecked.Value);
             }
             else
             {
                 AutomountSwitch(SwitchStates.Disable);
-                ini.SetParameter("automount", "enable", a.IsChecked.ToString());
+                ini.SetParameter("automount", "enabled", a.IsChecked.Value);
             }
         }
 
         private void ProcessFstabCheckmark_Checked(object sender, RoutedEventArgs e)
         {
-
+            if (sender is CheckBox a && a.IsChecked != null)
+                ini.SetParameter("automount","mountFsTab", a.IsChecked.Value);
         }
 
         private void WinFsPathBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            var a = sender as TextBox;
+            if (a != null)
+                ini.SetParameter("automount", "root", a.Text);
         }
 
         private void MountOptionsTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            var a = sender as TextBox;
+            if (a!= null)
+            ini.SetParameter("automount", "options", a.Text);
         }
 
         private void HostsTick_Checked(object sender, RoutedEventArgs e)
         {
-
+            if (sender is CheckBox a && a.IsChecked != null)
+                ini.SetParameter("network", "generateHosts", a.IsChecked.Value);
         }
 
         private void ResolvTick_Checked(object sender, RoutedEventArgs e)
         {
-
+            if (sender is CheckBox a && a.IsChecked != null)
+                ini.SetParameter("network", "generateResolvConf", a.IsChecked.Value);
         }
 
         private void CustomHostnameBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            var a = sender as TextBox;
+            if (a != null)
+                ini.SetParameter("network", "hostname", a.Text);
         }
 
         private void WindowsProcessesCreation_Checked(object sender, RoutedEventArgs e)
         {
-
+            if (sender is CheckBox a && a.IsChecked != null)
+                ini.SetParameter("interop", "enabled", a.IsChecked.Value);
         }
 
         private void AppendPath_Checked(object sender, RoutedEventArgs e)
         {
-
+            if (sender is CheckBox a && a.IsChecked != null)
+                ini.SetParameter("interop", "appendWindowsPath", a.IsChecked.Value);
         }
 
         private void DefaultUsername_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            var a = sender as TextBox;
+            if (a != null)
+                ini.SetParameter("user", "default", a.Text);
         }
 
         private void CommandOnBoot_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            var a = sender as TextBox;
+            if (a != null)
+                ini.SetParameter("boot", "command", a.Text);
         }
         private void Window_Closed(object sender, EventArgs e)
         {
             ini.WriteOut();
             Thread.Sleep(100);
             ini.SetConfig();
+        }
+
+        private void SystemdEnableCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (sender is CheckBox a && a.IsChecked != null)
+                ini.SetParameter("boot", "systemd", a.IsChecked.Value);
         }
     }
 }

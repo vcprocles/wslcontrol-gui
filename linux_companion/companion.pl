@@ -17,6 +17,12 @@ if ($ARGV[0] eq "-i")
 else
 {
     print "read mode\n";
+    print "checking for existing copy of wsl.conf in ~\n";
+    if (-e "wsl.conf")
+    {
+        print "local wsl.conf exists, removing\n";
+        unlink "wsl.conf";
+    }
     if (-e "/etc/wsl.conf")
     {
         print "wsl.conf exists\n";

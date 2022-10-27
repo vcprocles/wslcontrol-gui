@@ -1,5 +1,6 @@
 ﻿using PeanutButter.INI;
 using System;
+using System.Threading;
 
 namespace wslcontrol_gui
 {
@@ -45,6 +46,17 @@ namespace wslcontrol_gui
                 return false;
             }
         }
+        public void SetParameter(string section,string key, bool value)
+        {
+            if (value)
+            {
+                SetParameter(section, key, "true");
+            }
+            else
+            {
+                SetParameter(section, key, "false");
+            }
+        }
     }
     class IniParseWrapGlobal : IniParseWrap
     {
@@ -61,35 +73,33 @@ namespace wslcontrol_gui
         {
             SetParameter(section, key, value);
         }
-        public void SetParameter(string key, bool value)
-        {
-            if (value)
-            {
-                SetParameter(section, key, "true");
-            }
-            else
-            {
-                SetParameter(section, key, "false");
-            }
-        }
+        public void SetParameter(string key, bool value) => base.SetParameter(section, key, value);
     }
     class IniParseWrapSpecific : IniParseWrap
     {
         OsInfo os = new();
         private string distroName;
+        WSLInterface wsli = new();
+        string username = "root";
         public IniParseWrapSpecific(Distro distro)
         {
+            //GetConfig();
             distroName = distro.Name;
+            username=wsli.GetDefaultUser(distroName);
+            username = username.Replace("\n", "");
             string initial;
             if (os.build < 22000)
             {
                 initial = "\\\\wsl$\\";
-                //manuallyStartWSL=true;
+                //WSLInterface.OpenDistro(distroName);
+                //Thread.Sleep(250);
             }
             else initial = "\\\\wsl.localhost\\";
-            string fullPath = initial + distroName + "\\etc\\wsl.conf";
-            //parser = new INIFile(fullPath);
-            parser = new INIFile("a.conf");
+            string fullPath = initial + distroName + "\\home\\"+username+"\\wsl.conf";
+            path=fullPath;
+            parser.WrapValueInQuotes = false;
+            parser = new INIFile(fullPath);
+            //parser = new INIFile("a.conf");
         }
         public void SetParameterMountOptions(string key, string value)
         {
@@ -97,10 +107,10 @@ namespace wslcontrol_gui
             value = "\"" + value + "\"";
             SetParameter(section, key, value);
         }
-        public void GetConfig() => WSLInterface.PassCommand(distroName, "-- perl .companion.pl");
+        public static void GetConfig(string dNameStatic) => WSLInterface.RunCustomCommand(dNameStatic, "cd ~;perl ~/.companion.pl");
         public void SetConfig()
         {
-            WSLInterface.PassCommand(distroName, "-- sudo perl .companion.pl -i");
+            WSLInterface.RunCustomCommand(distroName, "cd ~;mv wsl.conf doswsl.conf;tr -d '\\015' <doswsl.conf > wsl.conf;sudo perl ~/.companion.pl -i");
         }
     }
 }

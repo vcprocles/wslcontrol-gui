@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+//using System.Threading;
+
 namespace wslcontrol_gui
 {
     public class ConsoleInterface
@@ -23,6 +25,24 @@ namespace wslcontrol_gui
             string outputString = process.StandardOutput.ReadToEnd();
             return outputString;
         }
+        protected virtual string RunCommandAndWait(string command, string parameters)
+        {
+            ProcessStartInfo processInfo;
+            Process process;
+            processInfo = new ProcessStartInfo(command)
+            {
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                Arguments = parameters,
+                RedirectStandardOutput = true,
+                //StandardOutputEncoding = System.Text.Encoding.Unicode//important
+            };
+            process = Process.Start(processInfo)!;
+            if (process == null) return "0";
+            //Thread.Sleep(400);//long operation
+            string outputString = process.StandardOutput.ReadToEnd();
+            return outputString;
+        }
         protected static void RunCommandInWindow(string command, string parameters)
         {
             ProcessStartInfo processInfo;
@@ -35,6 +55,7 @@ namespace wslcontrol_gui
             };
             Process.Start(processInfo);
         }
+
         protected static void RunCommandInWindowAndWait(string command, string parameters)
         {
             ProcessStartInfo processInfo;
@@ -52,13 +73,13 @@ namespace wslcontrol_gui
     }
     public class WSLInterface : ConsoleInterface
     {
-        protected override string RunCommand(string command, string parameters)
-        {
-            return base.RunCommand("C:\\Windows\\System32\\" + command, parameters);
-        }
         private string PassToWSL(string parameters)
         {
-            return RunCommand("wsl.exe", parameters);
+            return RunCommand("C:\\Windows\\System32\\wsl.exe", parameters);
+        }
+        private string PassToWSLAndWait(string parameters)
+        {
+            return RunCommandAndWait("C:\\Windows\\System32\\wsl.exe", parameters);
         }
         private static void RunWSLInWindow(string parameters) => RunCommandInWindow("C:\\Windows\\System32\\wsl.exe", parameters);
         private static void RunWSLInWindowAndWait(string parameters) => RunCommandInWindowAndWait("C:\\Windows\\System32\\wsl.exe", parameters);
@@ -138,6 +159,10 @@ namespace wslcontrol_gui
         public void InitializeWSLFirstStart()
         {
             PassToWSL("--install");
+        }
+        public string GetDefaultUser(string distroName)
+        {
+            return PassToWSLAndWait("-d " + distroName + " -- whoami");
         }
     }
     public enum DistType
