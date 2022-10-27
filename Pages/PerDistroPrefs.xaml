@@ -47,7 +47,7 @@
         <Label Content="Network" HorizontalAlignment="Left" Margin="397,32,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="59"/>
         <CheckBox x:Name="HostsTick" Content="Generate /etc/hosts" HorizontalAlignment="Left" Margin="397,59,0,0" VerticalAlignment="Top" Height="15" Width="125" IsChecked="True" Checked="HostsTick_Checked"/>
         <CheckBox x:Name="ResolvTick" Content="Generate /etc/resolv.conf" HorizontalAlignment="Left" Margin="397,82,0,0" VerticalAlignment="Top" Height="15" Width="154" IsChecked="True" Checked="ResolvTick_Checked"/>
-        <Label Content="Linux hostname" HorizontalAlignment="Left" Margin="397,102,0,0" VerticalAlignment="Top" Height="26" Width="93"/>
+        <Label Content="Linux hostname" HorizontalAlignment="Left" Margin="397,102,0,0" VerticalAlignment="Top" Height="26" Width="105"/>
         <TextBox x:Name="CustomHostnameBox" HorizontalAlignment="Left" Margin="495,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" TextChanged="CustomHostnameBox_TextChanged"/>
         <Rectangle HorizontalAlignment="Left" Height="84" Margin="383,135,0,0" Stroke="Black" VerticalAlignment="Top" Width="247"/>
         <Label Content="Interop" HorizontalAlignment="Left" Margin="397,135,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="52"/>
