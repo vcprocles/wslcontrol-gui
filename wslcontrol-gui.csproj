@@ -2,13 +2,12 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows7.0</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <RootNamespace>wslcontrol_gui</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-	<UseWindowsForms>true</UseWindowsForms>
-	<Version>1.4.0.0</Version>
-    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+	<UseWindowsForms>True</UseWindowsForms>
+	<Version>1.4.0.1</Version>
     <StartupObject></StartupObject>
     <Platforms>AnyCPU</Platforms>
     <DebugType>embedded</DebugType>
@@ -28,7 +27,7 @@
     <Page Remove="publish\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="PeanutButter.INI" Version="3.0.67" />
+    <PackageReference Include="PeanutButter.INI" Version="3.0.79" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\wslcguiicon.ico" />

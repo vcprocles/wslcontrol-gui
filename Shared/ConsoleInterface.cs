@@ -55,20 +55,17 @@ namespace wslcontrol_gui
             };
             Process.Start(processInfo);
         }
-
-        protected static void RunCommandInWindowAndWait(string command, string parameters)
+        protected static void RunCommandNoWindow(string command, string parameters)
         {
             ProcessStartInfo processInfo;
-            Process process;
             processInfo = new ProcessStartInfo(command)
             {
-                CreateNoWindow = false,
+                CreateNoWindow = true,
                 UseShellExecute = true,
-                Arguments = parameters,
+                //WorkingDirectory = "C:\\",
+                Arguments = parameters
             };
-            process = Process.Start(processInfo)!;
-            if (process == null) throw new ArgumentNullException();
-            process.WaitForExit();
+            Process.Start(processInfo);
         }
     }
     public class WSLInterface : ConsoleInterface
@@ -77,54 +74,47 @@ namespace wslcontrol_gui
         {
             return RunCommand("C:\\Windows\\System32\\wsl.exe", parameters);
         }
-        private string PassToWSLAndWait(string parameters)
-        {
-            return RunCommandAndWait("C:\\Windows\\System32\\wsl.exe", parameters);
-        }
-        private static void RunWSLInWindow(string parameters) => RunCommandInWindow("C:\\Windows\\System32\\wsl.exe", parameters);
-        private static void RunWSLInWindowAndWait(string parameters) => RunCommandInWindowAndWait("C:\\Windows\\System32\\wsl.exe", parameters);
-
         public int GetCurrentDefaultWSLVersion()
         {
             char ver = RespondParser.GetLastLineSymbol(PassToWSL("--status"), 1);
             int iver = int.Parse(ver.ToString());
             return iver;
         }
-        public void ShutdownWSL()
+        public void ShutdownWSL()//Shuts down the subsystem
         {
             PassToWSL("--shutdown");
         }
-        public void TerminateDistro(string distro)
+        public void TerminateDistro(string distro)//Stops the specific distro
         {
             PassToWSL("--terminate " + distro);
         }
-        public void SetDefaultVersion(int ver)
+        public void SetDefaultVersion(int ver)//Sets the default WSL version
         {
             PassToWSL("--set-default-version " + ver);
         }
-        public List<Distro> GetDistros()
+        public List<Distro> GetDistros()//parses distribution list for main menu
         {
             return RespondParser.ParseDistroList(PassToWSL("-l -v"));
         }
-        public List<OnlineDistro> GetOnlineDistros()
+        public List<OnlineDistro> GetOnlineDistros()//parses available distribution list for online install window
         {
             return RespondParser.ParseOnlineDistroList(PassToWSL("-l -o"));
         }
-        public void UnregisterDistro(string distro)
+        public void UnregisterDistro(string distro)//remove distro
         {
             PassToWSL("--unregister " + distro);
         }
-        public static void RunCustomCommand(string distro, string command)
+        public static void RunCustomCommand(string distro, string command)//run custom command in a separate window
         {
-            RunWSLInWindow("-d " + distro + " -- bash -l -c \"" + command + "\" && bash");
+            RunCommandInWindow("C:\\Windows\\System32\\wsl.exe", "-d " + distro + " -- bash -l -c \"" + command + "\" && bash");
         }
-        public static void PassCommand(string distro, string command)
+        public static void RunCustomCommandNoWindow(string distro, string command)//run custom command without a separate window. Used internally.
         {
-            RunWSLInWindowAndWait("-d " + distro + " -- " + command);
+            RunCommandNoWindow("C:\\Windows\\System32\\wsl.exe", "-d " + distro + " -- bash -l -c \"" + command + "\"");
         }
-        public static void OpenDistro(string distro)
+        public static void OpenDistro(string distro)//Opens the selected distro
         {
-            RunWSLInWindow("-d " + distro);
+            RunCommandInWindow("C:\\Windows\\System32\\wsl.exe", "-d " + distro);
         }
         public void SetDefaultDistro(string distro)
         {
@@ -156,13 +146,13 @@ namespace wslcontrol_gui
         {
             PassToWSL("--install " + distroName);
         }
-        public void InitializeWSLFirstStart()
+        public void InitializeWSLFirstStart()//for later
         {
             PassToWSL("--install");
         }
         public string GetDefaultUser(string distroName)
         {
-            return PassToWSLAndWait("-d " + distroName + " -- whoami");
+            return PassToWSL("-d " + distroName + " -- whoami");
         }
     }
     public enum DistType
