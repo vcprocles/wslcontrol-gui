@@ -1,10 +1,10 @@
 ﻿using System.Runtime.InteropServices;
 namespace wslcontrol_gui
 {
-    class ThemeResolver
+    static class ThemeResolver
     {
         [DllImport("UXTheme.dll", SetLastError = true, EntryPoint = "#138")]
-        public static extern bool ShouldSystemUseDarkMode();
+        private static extern bool ShouldSystemUseDarkMode();
         public static void SetTheme()
         {
             bool bRet = ShouldSystemUseDarkMode();
