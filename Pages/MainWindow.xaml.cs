@@ -19,12 +19,30 @@ namespace wslcontrol_gui
     {
         readonly WSLInterface wsli = new();
         readonly OsInfo os = new();
+        //private bool RunInstaller=false;
         public MainWindow()
         {
             InitializeComponent();
             try
             {
                 SetInitialStatuses();
+            }
+            catch (System.IndexOutOfRangeException)
+            {
+                MessageBox.Show(
+                    "Parsing error. WSL seems to not be installed or no distros are installed. " +
+                    "\nWill now try running distro installer. If this fails, run \"wsl --install\" in the terminal and try again");
+                try //basically the code from online install onclick function
+                {
+                    OnlineInstall installwindow = new(wsli);
+                    installwindow.ShowDialog();
+                    Close();
+                }
+                catch (Exception ex)//if even this fails
+                {
+                    MessageBox.Show(ex.Message);
+                    Close();
+                }
             }
             catch (Exception ex)
             {
@@ -140,12 +158,21 @@ namespace wslcontrol_gui
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            RefreshDistros();
+            try
+            {
+                RefreshDistros();
+            }
+            catch { Close(); };
+
         }
         private void OpenThisInExplorer_Click(object sender, RoutedEventArgs e)
         {
             int selectedDistroNumber = ((Distro)DistroList.SelectedItem).Number;
-            RefreshDistros();
+            try
+            {
+                RefreshDistros();
+            }
+            catch { Close(); }
             DistroList.SelectedIndex = selectedDistroNumber - 1;
             Distro selectedDistro = (Distro)DistroList.SelectedItem;
             if ((selectedDistro != null) && (selectedDistro.State == "Running"))

@@ -46,5 +46,6 @@ else
         copy("/etc/wsl.conf","wsl.conf");
     }
 }
+#consider adding " removal from booleans
 print "done.\n";
 exit(0);
