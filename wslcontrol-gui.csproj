@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
 	<UseWindowsForms>True</UseWindowsForms>
-	<Version>1.4.1</Version>
+	<Version>1.4.1.1</Version>
     <StartupObject></StartupObject>
     <Platforms>AnyCPU</Platforms>
     <DebugType>embedded</DebugType>
@@ -28,7 +28,7 @@
     <Page Remove="publish\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="PeanutButter.INI" Version="3.0.90" />
+    <PackageReference Include="PeanutButter.INI" Version="3.0.95" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\wslcguiicon.ico" />
