@@ -49,7 +49,7 @@
                 <Button Grid.Row="6" Name="TerminateButton" Content="Terminate" Width="auto" Height="30" Margin="5,2,5,2" Click="TerminateButton_Click"/>
                 <Button Grid.Row="8"  Name="InstallUninstallButton" Content="Uninstall" Width="auto" Height="30" Margin="5,2,5,2" Click="InstallUninstallButton_Click"/>
                 <Button Grid.Row="9" Name="OpenInExplorerButton" Content="Open in Explorer" Width="auto" Height="30" Margin="5,2,5,2" Click="OpenThisInExplorer_Click"/>
-                <Button Grid.Row="10" Name="ThisDistroSettingsButton" Content="Settings (unstable)" Width="auto" Height="30" Margin="5,2,5,2" Click="ThisDistroSettings_Click"/>
+                <Button Grid.Row="10" Name="ThisDistroSettingsButton" Content="Settings" Width="auto" Height="30" Margin="5,2,5,2" Click="ThisDistroSettings_Click"/>
                 <Label Grid.Row="11">Options for all distros:</Label>
                 <Button Grid.Row="12" Height="30" Name="ShutdownButton" Margin="5,2,5,2" ToolTip="Terminates all distros and releases system resources from WSL2 virtual machine" Click="ShutdownButton_Click">Shutdown Windows Subsystem for Linux</Button>
                 <Button Grid.Row="13" Height="30" Name="OpenAllInExplorer" Content="Open WSL root" Margin="5,2,5,2" Click="OpenAllInExplorer_Click"/>
@@ -63,7 +63,6 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0"  TextWrapping="Wrap" Name="WSL2WarningLabel" Visibility="Collapsed" FontStyle="Italic" Padding="5,0,5,5">WARNING: Terminating WSL2 instance doesn't always release system resources, use Shutdown instead</TextBlock>
-            <!--<TextBlock Grid.Row="1" Padding="5,5,5,5" TextWrapping="Wrap" Name="AdminRightsLabel" Visibility="Collapsed" FontStyle="Italic">Changing distro-specific settings requires to run this app as an administrator</TextBlock>-->
         </Grid>
     </Grid>
 </Window>

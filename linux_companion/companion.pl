@@ -1,4 +1,5 @@
 #!/usr/bin/env perl
+use strict;
 use warnings;
 use Data::Dumper qw(Dumper);
 use File::Copy;
@@ -6,7 +7,20 @@ use File::Copy;
 if ($ARGV[0] eq "-i")
 {
     print "install mode\n";
-    if ($ENV{"USER"} ne "root") 
+    #cleaning the file
+    open(FILE, "<wsl.conf") || die "where's my wsl.conf?";
+    my @lines = <FILE>;
+    close(FILE);
+    foreach(@lines) {
+        $_ =~ s/\015\012/\012/g;
+        $_ =~ s/"true"/true/g;
+        $_ =~ s/"false"/false/g;
+    }
+    open(FILE,">wsl.conf") || die "where's my wsl.conf? i read from it just now";
+    print FILE @lines;
+    close (FILE);
+    #installing the file
+    if ($ENV{"USER"} ne "root")
     {
         print "this mode needs to be run as root\n";
         exit(1);
@@ -16,6 +30,7 @@ if ($ARGV[0] eq "-i")
 }
 else
 {
+    our $wslconfig_exists=0;
     print "read mode\n";
     print "checking for existing copy of wsl.conf in ~\n";
     if (-e "wsl.conf")
@@ -46,6 +61,5 @@ else
         copy("/etc/wsl.conf","wsl.conf");
     }
 }
-#consider adding " removal from booleans
 print "done.\n";
 exit(0);

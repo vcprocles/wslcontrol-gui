@@ -25,7 +25,7 @@ namespace wslcontrol_gui
             string outputString = process.StandardOutput.ReadToEnd();
             return outputString;
         }
-        protected virtual string RunCommandAndWait(string command, string parameters)
+        protected virtual string RunCommandNoUnicode(string command, string parameters)
         {
             ProcessStartInfo processInfo;
             Process process;
@@ -35,11 +35,11 @@ namespace wslcontrol_gui
                 UseShellExecute = false,
                 Arguments = parameters,
                 RedirectStandardOutput = true,
-                //StandardOutputEncoding = System.Text.Encoding.Unicode//important
+                //StandardOutputEncoding = System.Text.Encoding.Unicode//not important here, apparently
             };
             process = Process.Start(processInfo)!;
             if (process == null) return "0";
-            //Thread.Sleep(400);//long operation
+            process.WaitForExit();
             string outputString = process.StandardOutput.ReadToEnd();
             return outputString;
         }
@@ -73,6 +73,10 @@ namespace wslcontrol_gui
         private string PassToWSL(string parameters)
         {
             return RunCommand("C:\\Windows\\System32\\wsl.exe", parameters);
+        }
+        private string PassToWSLNoUnicode(string parameters)
+        {
+            return RunCommandNoUnicode("C:\\Windows\\System32\\wsl.exe", parameters);
         }
         public int GetCurrentDefaultWSLVersion()
         {
@@ -152,7 +156,7 @@ namespace wslcontrol_gui
         }
         public string GetDefaultUser(string distroName)
         {
-            return PassToWSL("-d " + distroName + " -- whoami");
+            return PassToWSLNoUnicode("-d " + distroName + " -- whoami");
         }
     }
     public enum DistType

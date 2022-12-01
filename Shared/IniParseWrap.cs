@@ -99,7 +99,6 @@ namespace wslcontrol_gui
             path=fullPath;
             parser.WrapValueInQuotes = false;
             parser = new INIFile(fullPath);
-            //parser = new INIFile("a.conf");
         }
         public void SetParameterMountOptions(string key, string value)
         {
@@ -107,10 +106,13 @@ namespace wslcontrol_gui
             value = "\"" + value + "\"";
             SetParameter(section, key, value);
         }
-        public static void GetConfig(string dNameStatic) => WSLInterface.RunCustomCommandNoWindow(dNameStatic, "cd ~;perl ~/.companion.pl");
+        public static void GetConfig(string dNameStatic)
+        {
+            WSLInterface.RunCustomCommandNoWindow(dNameStatic, "cd ~;perl ~/.companion.pl");
+        }
         public void SetConfig()
         {
-            WSLInterface.RunCustomCommand(distroName, "cd ~;mv wsl.conf doswsl.conf;tr -d '\\015' <doswsl.conf > wsl.conf;sudo perl ~/.companion.pl -i");
+            WSLInterface.RunCustomCommand(distroName, "cd ~;sudo perl ~/.companion.pl -i");
         }
     }
 }
