@@ -257,10 +257,12 @@ namespace wslcontrol_gui
         private void ImportTar_Click(object sender, RoutedEventArgs e)
         {
             #region import file selection
-            OpenFileDialog openFile = new OpenFileDialog();
-            openFile.Filter = "WSL .tar(*.tar)|*.tar|VM Images (*.vhdx)|*.vhdx";
-            openFile.Multiselect = false;
-            openFile.Title = "Select file to import...";
+            OpenFileDialog openFile = new()
+            {
+                Filter = "WSL .tar(*.tar)|*.tar|VM Images (*.vhdx)|*.vhdx",
+                Multiselect = false,
+                Title = "Select file to import..."
+            };
             openFile.ShowDialog(this);
             string importFile = openFile.FileName;
             #endregion
@@ -275,9 +277,11 @@ namespace wslcontrol_gui
             int wslVersion = importDialog.WSLVersion;
             #endregion
             #region install location selection
-            FolderBrowserDialog installLocationSelector = new();
-            installLocationSelector.Description = "Select installation location";
-            installLocationSelector.ShowNewFolderButton = true;
+            FolderBrowserDialog installLocationSelector = new()
+            {
+                Description = "Select installation location",
+                ShowNewFolderButton = true
+            };
             installLocationSelector.ShowDialog();
             string installLocation = installLocationSelector.SelectedPath;
             #endregion
@@ -295,10 +299,12 @@ namespace wslcontrol_gui
 
         private void ExportTar_Click(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog saveFile = new SaveFileDialog();
-            saveFile.Filter = "WSL .tar(*.tar)|*.tar|VM Images (*.vhdx)|*.vhdx";
-            saveFile.Title = "Select path and filename to export...";
-            saveFile.AddExtension = true;
+            SaveFileDialog saveFile = new()
+            {
+                Filter = "WSL .tar(*.tar)|*.tar|VM Images (*.vhdx)|*.vhdx",
+                Title = "Select path and filename to export...",
+                AddExtension = true
+            };
             saveFile.ShowDialog(this);
             string exportFile = saveFile.FileName;
             string distroName = ((Distro)DistroList.SelectedItem).Name;
@@ -316,8 +322,10 @@ namespace wslcontrol_gui
 
         private void ThisDistroSettings_Click(object sender, RoutedEventArgs e)
         {
-            PerDistroPrefs inputwindow = new PerDistroPrefs((Distro)DistroList.SelectedItem, wsli);
-            inputwindow.Owner = this;
+            PerDistroPrefs inputwindow = new((Distro)DistroList.SelectedItem, wsli)
+            {
+                Owner = this
+            };
             inputwindow.ShowDialog();
         }
     }
