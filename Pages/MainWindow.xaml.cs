@@ -51,11 +51,53 @@ namespace wslcontrol_gui
             }
             ThemeResolver.SetTheme();
         }
-
+        WindowLayoutChangeSaveData layoutSaveData;
         private void SetInitialStatuses()
         {
             DeactivateAllButtons();
             RefreshDistros();
+        }
+        private void CollapseWindow()
+        {
+
+            layoutSaveData.distroList = DistroList.Visibility;
+            layoutSaveData.mainWinMinWidth = MinWidth;
+            layoutSaveData.mainWinWidth = Width;
+            layoutSaveData.mainWinResizeMode = ResizeMode;
+            layoutSaveData.mainWinMaxWidth = MaxWidth;
+            layoutSaveData.mainWinHeight = Height;
+            layoutSaveData.mainWinMinHeight = MinHeight;
+            layoutSaveData.distroListSelectedIndex = DistroList.SelectedIndex;
+            layoutSaveData.selDistroLabelVisibility = SelectedDistroLabel.Visibility;
+            layoutSaveData.allDistroLabelVisibility = AllDistroLabel.Visibility;
+
+            if (DistroList.Items.Count == 1)
+            {
+                DistroList.Visibility = Visibility.Collapsed;
+                MinWidth = 231;
+                Width = 231;
+                ResizeMode = ResizeMode.NoResize;
+                MaxWidth = 231;
+                Height = 516;
+                MinHeight = 516;
+                DistroList.SelectedIndex = 0;
+                SelectedDistroLabel.Visibility = Visibility.Collapsed;
+                AllDistroLabel.Visibility = Visibility.Collapsed;
+                WSL2WarningLabel.Visibility = Visibility.Collapsed; //bc it will break the layout
+            }
+            else
+            {
+                DistroList.Visibility = layoutSaveData.distroList;
+                MinWidth = layoutSaveData.mainWinMinWidth;
+                Width = layoutSaveData.mainWinWidth;
+                ResizeMode = layoutSaveData.mainWinResizeMode;
+                MaxWidth = layoutSaveData.mainWinMaxWidth;
+                Height = layoutSaveData.mainWinHeight;
+                MinHeight = layoutSaveData.mainWinMinHeight;
+                DistroList.SelectedIndex = layoutSaveData.distroListSelectedIndex;
+                SelectedDistroLabel.Visibility = layoutSaveData.selDistroLabelVisibility;
+                AllDistroLabel.Visibility = layoutSaveData.allDistroLabelVisibility;
+            }
         }
         private void DeactivateAllButtons()
         {
@@ -73,6 +115,7 @@ namespace wslcontrol_gui
             DistroList.ItemsSource = wsli.GetDistros();
             DistroList.SelectedItem = null;
             WSL2WarningLabel.Visibility = Visibility.Collapsed;
+            CollapseWindow();
         }
         private void ShutdownButton_Click(object sender, RoutedEventArgs e)
         {
@@ -278,5 +321,17 @@ namespace wslcontrol_gui
             inputwindow.ShowDialog();
         }
     }
-
+    struct WindowLayoutChangeSaveData
+    {
+        public Visibility distroList;
+        public double mainWinMinWidth;
+        public double mainWinWidth;
+        public ResizeMode mainWinResizeMode;
+        public double mainWinMaxWidth;
+        public double mainWinHeight;
+        public double mainWinMinHeight;
+        public int distroListSelectedIndex;
+        public Visibility selDistroLabelVisibility;
+        public Visibility allDistroLabelVisibility;
+    }
 }
