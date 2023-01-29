@@ -7,7 +7,7 @@ namespace wslcontrol_gui
     class IniParseWrap
     {
         protected PeanutButter.INI.INIFile parser = new("");
-        protected string path = "";
+        public string path = "";
         public void SetParameter(string section, string key, string value)
         {
             parser.SetValue(section, key, value);
@@ -77,7 +77,6 @@ namespace wslcontrol_gui
     }
     class IniParseWrapSpecific : IniParseWrap
     {
-        OsInfo os = new();
         private string distroName;
         WSLInterface wsli = new();
         string username = "root";
@@ -88,13 +87,7 @@ namespace wslcontrol_gui
             username=wsli.GetDefaultUser(distroName);
             username = username.Replace("\n", "");
             string initial;
-            if (os.build < 22000)
-            {
-                initial = "\\\\wsl$\\";
-                //WSLInterface.OpenDistro(distroName);
-                //Thread.Sleep(250);
-            }
-            else initial = "\\\\wsl.localhost\\";
+            initial = "\\\\wsl.localhost\\";
             string fullPath = initial + distroName + "\\home\\"+username+"\\wsl.conf";
             path=fullPath;
             parser.WrapValueInQuotes = false;
@@ -112,7 +105,11 @@ namespace wslcontrol_gui
         }
         public void SetConfig()
         {
-            WSLInterface.RunCustomCommand(distroName, "cd ~;sudo perl ~/.companion.pl -i");
+            WSLInterface.RunCustomCommand(distroName, "cd ~;sudo perl ~/.companion.pl -i;exit");
+        }
+        public void ResetConfig()
+        {
+            WSLInterface.RunCustomCommand(distroName, "cd ~;sudo perl ~/.companion.pl -r;exit");
         }
     }
 }

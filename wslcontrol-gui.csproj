@@ -2,19 +2,18 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows7.0</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <RootNamespace>wslcontrol_gui</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
 	<UseWindowsForms>True</UseWindowsForms>
-	<Version>1.4.2</Version>
+	<Version>1.4.3</Version>
     <StartupObject></StartupObject>
     <Platforms>AnyCPU</Platforms>
     <DebugType>embedded</DebugType>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
     <ApplicationIcon>Assets\wslcguiicon.ico</ApplicationIcon>
     <Company>vcprocles</Company>
-    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 	
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -28,7 +27,7 @@
     <Page Remove="publish\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="PeanutButter.INI" Version="3.0.96" />
+    <PackageReference Include="PeanutButter.INI" Version="3.0.97" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\wslcguiicon.ico" />

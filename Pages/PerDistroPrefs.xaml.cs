@@ -7,8 +7,9 @@ namespace wslcontrol_gui
 {
     public partial class PerDistroPrefs : Window
     {
-        OsInfo os = new();
-        IniParseWrapSpecific ini;
+        readonly OsInfo os = new();
+        readonly IniParseWrapSpecific ini;
+        private bool removeConfig = false;
         enum SwitchStates
         {
             Enable,
@@ -25,18 +26,20 @@ namespace wslcontrol_gui
             DisableUnsupported();
             InitializeSetOrDefault();
         }
-        private void DisableUnsupported()
+        private void DisableUnsupported() 
         {
-            if (os.build < 20348) //WS2022, W11, for boot settings
+            bool buildNotOk = true;
+            if (os.build > 19041) buildNotOk = false;
+            if (buildNotOk) //WS2022, W11, for boot settings
             { CommandOnBoot.IsEnabled = false; }
-            if (os.build < 18980) //for user settings
+            if (buildNotOk) //for user settings
             { DefaultUsername.IsEnabled = false; }
-            if (os.build < 17713) //for interop settings
+            if (buildNotOk) //for interop settings
             {
                 WindowsProcessesCreation.IsEnabled = false;
                 AppendPath.IsEnabled = false;
             }
-            if (os.build >= 22000) //for console window warning
+            if (buildNotOk) //for console window warning
             {
                 ConsoleWindowWarning.Visibility = Visibility.Collapsed;
             }
@@ -216,13 +219,26 @@ namespace wslcontrol_gui
         {
             ini.WriteOut();
             Thread.Sleep(100);
-            ini.SetConfig();
+            if (removeConfig)
+            {
+                ini.ResetConfig();
+            }
+            else 
+            {
+                ini.SetConfig();
+            }
         }
 
         private void SystemdEnableCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             if (sender is CheckBox a && a.IsChecked != null)
                 ini.SetParameter("boot", "systemd", a.IsChecked.Value);
+        }
+
+        private void ResetToDefaultsButton_Click(object sender, RoutedEventArgs e)
+        {
+            removeConfig = true;
+            this.Close();
         }
     }
 }

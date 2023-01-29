@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:wslcontrol_gui"
         mc:Ignorable="d"
         Style="{DynamicResource CustomWindowStyle}"
-        Title="WSLControl" Height="600" MinHeight="570" Width="700" MinWidth="575" ResizeMode="CanResize">
+        Title="WSLControl" Height="600" MinHeight="622" Width="700" MinWidth="575" ResizeMode="CanResize">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -32,6 +32,7 @@
                     <RowDefinition Height="auto" Name="termin"/>
                     <RowDefinition Height="auto" Name="unins"/>
                     <RowDefinition Height="auto" Name="explr"/>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto" Name="prefthis"/>
                     <RowDefinition Height="auto" Name="alldist"/>
                     <RowDefinition Height="auto" Name="shutdwn"/>
@@ -49,12 +50,13 @@
                 <Button Grid.Row="6" Name="TerminateButton" Content="Terminate" Width="auto" Height="30" Margin="5,2,5,2" Click="TerminateButton_Click"/>
                 <Button Grid.Row="8"  Name="InstallUninstallButton" Content="Uninstall" Width="auto" Height="30" Margin="5,2,5,2" Click="InstallUninstallButton_Click"/>
                 <Button Grid.Row="9" Name="OpenInExplorerButton" Content="Open in Explorer" Width="auto" Height="30" Margin="5,2,5,2" Click="OpenThisInExplorer_Click"/>
-                <Button Grid.Row="10" Name="ThisDistroSettingsButton" Content="Settings" Width="auto" Height="30" Margin="5,2,5,2" Click="ThisDistroSettings_Click"/>
-                <Label x:Name="AllDistroLabel" Grid.Row="11">Options for all distros:</Label>
-                <Button Grid.Row="12" Height="30" Name="ShutdownButton" Margin="5,2,5,2" ToolTip="Terminates all distros and releases system resources from WSL2 virtual machine" Click="ShutdownButton_Click">Shutdown Windows Subsystem for Linux</Button>
-                <Button Grid.Row="13" Height="30" Name="OpenAllInExplorer" Content="Open WSL root" Margin="5,2,5,2" Click="OpenAllInExplorer_Click"/>
-                <Button Grid.Row="14" Name="GlobalSettingsButton" Content="Global Settings" Width="auto" Height="30" Margin="5,2,5,2" Click="GlobalSettingsButton_Click"/>
-                <Button Grid.Row="15" Height="30" Name="RefreshButton" Content="Refresh list" Margin="5,2,5,2" Click="RefreshButton_Click"/>
+                <Button Grid.Row="10" Name="MountDriveButton" Content="Mount a drive..." Width="auto" Height="30" Margin="5,2,5,2" Click="MountDriveButton_Click" IsEnabled="False"/>
+                <Button Grid.Row="11" Name="ThisDistroSettingsButton" Content="Settings" Width="auto" Height="30" Margin="5,2,5,2" Click="ThisDistroSettings_Click"/>
+                <Label x:Name="AllDistroLabel" Grid.Row="12">Options for all distros:</Label>
+                <Button Grid.Row="13" Height="30" Name="ShutdownButton" Margin="5,2,5,2" ToolTip="Terminates all distros and releases system resources from WSL2 virtual machine" Click="ShutdownButton_Click">Shutdown Windows Subsystem for Linux</Button>
+                <Button Grid.Row="14" Height="30" Name="OpenAllInExplorer" Content="Open WSL root in Explorer" Margin="5,2,5,2" Click="OpenAllInExplorer_Click"/>
+                <Button Grid.Row="15" Name="GlobalSettingsButton" Content="Global Settings" Width="auto" Height="30" Margin="5,2,5,2" Click="GlobalSettingsButton_Click"/>
+                <Button Grid.Row="16" Height="30" Name="RefreshButton" Content="Refresh list" Margin="5,2,5,2" Click="RefreshButton_Click"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="1">

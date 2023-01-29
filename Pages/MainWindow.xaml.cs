@@ -153,6 +153,14 @@ namespace wslcontrol_gui
                     SetDefaultButton.IsEnabled = false;
                     ThisDistroSettingsButton.IsEnabled = false;
                 }
+                if ((selectedDistro.Name == "docker-desktop") || (selectedDistro.Name == "docker-desktop-data"))
+                //disable some options for docker
+                {
+                    ThisDistroSettingsButton.IsEnabled = false;
+                    LaunchButton.IsEnabled = false;
+                    RunCommandButton.IsEnabled = false;
+                    SetDefaultButton.IsEnabled = false;
+                }
             }
         }
         private void DistroList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -327,6 +335,11 @@ namespace wslcontrol_gui
                 Owner = this
             };
             inputwindow.ShowDialog();
+        }
+
+        private void MountDriveButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
     struct WindowLayoutChangeSaveData

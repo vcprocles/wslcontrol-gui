@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -20,7 +21,9 @@ namespace wslcontrol_gui
         private void DisableUnsupported()
         {
             OsInfo os = new();
-            if (os.build < 22000)
+            bool buildOk = false;
+            if (os.build > 19041) buildOk = true;
+            if (!buildOk)
             {
                 WSLgCheckBox.IsEnabled = false;
                 DebugConsoleCheckBox.IsEnabled = false;
@@ -174,8 +177,12 @@ namespace wslcontrol_gui
 
         private void ResetButton_Click(object sender, RoutedEventArgs e)
         {
-            noWriteout = true;
-
+            noWriteout = true;//tell to not save anything when window closes
+            if (File.Exists(ini.path))
+            {
+                File.Delete(ini.path); //delete file
+            }
+            this.Close();
         }
     }
 }

@@ -4,6 +4,27 @@ use warnings;
 use Data::Dumper qw(Dumper);
 use File::Copy;
 
+if ($ARGV[0] eq "-r")
+{
+    print "reset mode\n";
+    if (-e "wsl.conf"){
+        print "config file in home directory found.\n";
+        unlink "wsl.conf";
+        print "done.\n";
+    }
+    if (-e "/etc/wsl.conf"){
+        print "installed config file found.";
+        if ($ENV{"USER"} ne "root")
+        {
+            print "this options requires the script to be run as root\n";
+            exit(1);
+        }
+        unlink "/etc/wsl.conf";
+        print "done.\n";
+    }
+    exit(0);
+}
+
 if ($ARGV[0] eq "-i")
 {
     print "install mode\n";
