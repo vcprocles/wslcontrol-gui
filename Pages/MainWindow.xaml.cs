@@ -78,8 +78,8 @@ namespace wslcontrol_gui
                 Width = 231;
                 ResizeMode = ResizeMode.NoResize;
                 MaxWidth = 231;
-                Height = 516;
-                MinHeight = 516;
+                Height = 560;
+                MinHeight = 560;
                 DistroList.SelectedIndex = 0;
                 SelectedDistroLabel.Visibility = Visibility.Collapsed;
                 AllDistroLabel.Visibility = Visibility.Collapsed;
