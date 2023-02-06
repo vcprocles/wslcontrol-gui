@@ -7,13 +7,16 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
 	<UseWindowsForms>True</UseWindowsForms>
-	<Version>1.4.3</Version>
+	<Version>1.4.3.1</Version>
     <StartupObject></StartupObject>
     <Platforms>AnyCPU</Platforms>
     <DebugType>embedded</DebugType>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
     <ApplicationIcon>Assets\wslcguiicon.ico</ApplicationIcon>
     <Company>vcprocles</Company>
+    <Copyright>© vcprocles</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
   </PropertyGroup>
 	
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
