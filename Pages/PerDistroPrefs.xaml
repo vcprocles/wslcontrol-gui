@@ -12,7 +12,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="ConsoleWindowWarning" Margin="0,0,149,0" FontSize="11">Console window may be opened in the background, ignore and close it only after you're done. You will be asked for root password.</Label>
+        <Label x:Name="ConsoleWindowWarning" Margin="0,0,149,0" FontSize="11">A terminal window will be opened and will ask you for your root password. You can close it later.</Label>
         <CheckBox Name="SystemdEnableCheckBox" Content="Enable Systemd sypport" Height="26" Margin="10,356,642,40" Click="SystemdEnableCheckBox_Checked"/>
         <Button Name="ResetToDefaultsButton" Content="Reset to defaults" Width="150" Height="20" Margin="480,359,170,43" Click="ResetToDefaultsButton_Click"/>
         <Rectangle HorizontalAlignment="Left" Height="319" Margin="10,32,0,0" Stroke="Black" VerticalAlignment="Top" Width="362"/>
