@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wslcontrol_gui"
         mc:Ignorable="d"
-        Style="{DynamicResource CustomWindowStyle}"
         Title="Input command..." Height="110" Width="619" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     <Grid>
         <TextBox HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="NoWrap"  VerticalAlignment="Top" Width="550" Height="50" FontFamily="Consolas" FontSize="18" Name="CommandBox" HorizontalScrollBarVisibility="Auto"/>

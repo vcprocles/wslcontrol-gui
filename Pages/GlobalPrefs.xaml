@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wslcontrol_gui"
         mc:Ignorable="d"
-        Style="{DynamicResource CustomWindowStyle}"
         Title="Global Settings" Height="480" Width="450" Closed="Window_Closed" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     <Grid>
         <!--TODO: margins-->

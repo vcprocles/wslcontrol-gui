@@ -8,8 +8,9 @@ namespace wslcontrol_gui
         public static void SetTheme()
         {
             bool bRet = ShouldSystemUseDarkMode();
-            if (bRet) REghZyFramework.Themes.ThemesController.SetTheme(REghZyFramework.Themes.ThemesController.ThemeTypes.Dark);
-            else REghZyFramework.Themes.ThemesController.SetTheme(REghZyFramework.Themes.ThemesController.ThemeTypes.Light);
+            //TODO: cut this down altogether if not needed
+            //if (bRet) REghZyFramework.Themes.ThemesController.SetTheme(REghZyFramework.Themes.ThemesController.ThemeTypes.Dark);
+            //else REghZyFramework.Themes.ThemesController.SetTheme(REghZyFramework.Themes.ThemesController.ThemeTypes.Light);
         }
     }
 }

@@ -4,10 +4,6 @@
              xmlns:local="clr-namespace:wslcontrol_gui"
              StartupUri="Pages\MainWindow.xaml" ShutdownMode="OnMainWindowClose">
     <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Assets/Thirdparty/DarkTheme.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        
     </Application.Resources>
 </Application>

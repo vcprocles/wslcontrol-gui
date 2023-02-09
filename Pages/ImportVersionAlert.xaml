@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wslcontrol_gui.Pages"
         mc:Ignorable="d"
-        Style="{DynamicResource CustomWindowStyle}"
         Title="Import Parameters" Height="170" Width="320" WindowStartupLocation="CenterOwner" ScrollViewer.VerticalScrollBarVisibility="Disabled" ResizeMode="NoResize" ShowInTaskbar="False" Topmost="True">
     <Grid>
         <Grid.RowDefinitions>
