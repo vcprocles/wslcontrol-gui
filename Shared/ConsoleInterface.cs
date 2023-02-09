@@ -148,9 +148,9 @@ namespace wslcontrol_gui
         }
         public void InstallOnlineDistro(string distroName)
         {
-            PassToWSL("--install " + distroName);
+            PassToWSL("--install -d " + distroName);
         }
-        public void InitializeWSLFirstStart()//for later
+        public void InitializeWSLFirstStart()//TODO: use it for smth
         {
             PassToWSL("--install");
         }
