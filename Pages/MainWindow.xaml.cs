@@ -1,13 +1,17 @@
-﻿using System;
+﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Navigation;
+using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Threading;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Forms;
-using wslcontrol_gui.Pages;
-using MessageBox = System.Windows.MessageBox;
-using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
-using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
 
 
 
@@ -15,7 +19,7 @@ using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 namespace wslcontrol_gui
 {
 
-    public partial class MainWindow : Window
+    public sealed partial class MainWindow : Window
     {
         readonly WSLInterface wsli = new();
         readonly OsInfo os = new();
@@ -274,7 +278,7 @@ namespace wslcontrol_gui
             openFile.ShowDialog(this);
             string importFile = openFile.FileName;
             #endregion
-            #region distro name and wsl version selection
+            #region distro x:Name and wsl version selection
             ImportVersionAlert importDialog = new()
             {
                 Owner = this

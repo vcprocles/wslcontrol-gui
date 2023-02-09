@@ -6,9 +6,9 @@
     <RootNamespace>wslcontrol_gui</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <Platforms>x86;x64;ARM64</Platforms>
-	<Version>2.0-dev</Version>
+	<Version>2.0-dev1</Version>
 	<VersionPrefix>2.0</VersionPrefix>
-	<VersionSuffix>dev</VersionSuffix>
+	<VersionSuffix>dev1</VersionSuffix>
     <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
 	<Nullable>enable</Nullable>
 	<ApplicationIcon>Assets\wslcguiicon.ico</ApplicationIcon>
@@ -17,11 +17,32 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
     <UseWinUI>true</UseWinUI>
-	<UseWPF>true</UseWPF>
-	  <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
-	  <UseWindowsForms>true</UseWindowsForms>
-	  <WindowsPackageType>None</WindowsPackageType>
+	<!--<UseWPF>true</UseWPF>-->
+	<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+	<!--<UseWindowsForms>true</UseWindowsForms>-->
+	<WindowsPackageType>None</WindowsPackageType>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="AssemblyInfo.cs" />
+    <Compile Remove="Pages\AboutWindow.xaml.cs" />
+    <Compile Remove="Pages\CommandInput.xaml.cs" />
+    <Compile Remove="Pages\GlobalPrefs.xaml.cs" />
+    <Compile Remove="Pages\ImportVersionAlert.xaml.cs" />
+    <Compile Remove="Pages\MainWindow.xaml.cs" />
+    <Compile Remove="Pages\OnlineInstall.xaml.cs" />
+    <Compile Remove="Pages\PerDistroPrefs.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Pages\MainWindow.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Remove="Pages\AboutWindow.xaml" />
+    <Page Remove="Pages\CommandInput.xaml" />
+    <Page Remove="Pages\GlobalPrefs.xaml" />
+    <Page Remove="Pages\ImportVersionAlert.xaml" />
+    <Page Remove="Pages\OnlineInstall.xaml" />
+    <Page Remove="Pages\PerDistroPrefs.xaml" />
+  </ItemGroup>
 
   <ItemGroup>
      <Content Include="Assets\wslcguiicon.ico" />
@@ -30,6 +51,9 @@
     <None Update="linux_companion\companion.pl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Pages\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.221109.1" />
@@ -44,7 +68,23 @@
     package has not yet been restored.
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
-    <ProjectCapability Include="Msix"/>
+    <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AssemblyInfo.cs" />
+    <None Include="Pages\AboutWindow.xaml" />
+    <None Include="Pages\AboutWindow.xaml.cs" />
+    <None Include="Pages\CommandInput.xaml" />
+    <None Include="Pages\CommandInput.xaml.cs" />
+    <None Include="Pages\GlobalPrefs.xaml" />
+    <None Include="Pages\GlobalPrefs.xaml.cs" />
+    <None Include="Pages\ImportVersionAlert.xaml" />
+    <None Include="Pages\ImportVersionAlert.xaml.cs" />
+    <None Include="Pages\MainWindow.xaml.cs" />
+    <None Include="Pages\OnlineInstall.xaml" />
+    <None Include="Pages\OnlineInstall.xaml.cs" />
+    <None Include="Pages\PerDistroPrefs.xaml" />
+    <None Include="Pages\PerDistroPrefs.xaml.cs" />
   </ItemGroup>
 
   <!-- 

@@ -15,11 +15,11 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Content="Specify the name for the new distro"/>
-        <TextBox Margin="5,5,5,5" Grid.Row="1" Text="ImportedDistro" VerticalAlignment="Top" Name="DistroNameBox" MinWidth="100" HorizontalAlignment="Left" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" MaxLines="1" MinHeight="1"/>
+        <TextBox Margin="5,5,5,5" Grid.Row="1" Text="ImportedDistro" VerticalAlignment="Top" x:Name="DistroNameBox" MinWidth="100" HorizontalAlignment="Left" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" MaxLines="1" MinHeight="1"/>
         <Label Grid.Row="2">What WSL version you want to use for this distro?</Label>
         <Grid Grid.Row="3">
-            <Button Margin="5,5,5,5" HorizontalAlignment="Left" Height="20" Width="40" Name="WSL1Button" Click="WSL1Button_Click">WSL1</Button>
-            <Button HorizontalAlignment="Left" Height="20" Width="40" Name="WSL2Button" Click="WSL2Button_Click" Margin="50,5,5,5">WSL2</Button>
+            <Button Margin="5,5,5,5" HorizontalAlignment="Left" Height="20" Width="40" x:Name="WSL1Button" Click="WSL1Button_Click">WSL1</Button>
+            <Button HorizontalAlignment="Left" Height="20" Width="40" x:Name="WSL2Button" Click="WSL2Button_Click" Margin="50,5,5,5">WSL2</Button>
         </Grid>
         <Label Grid.Row="4" Content="You will be asked to specify installation location" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
     </Grid>

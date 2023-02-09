@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Input command..." Height="110" Width="619" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     <Grid>
-        <TextBox HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="NoWrap"  VerticalAlignment="Top" Width="550" Height="50" FontFamily="Consolas" FontSize="18" Name="CommandBox" HorizontalScrollBarVisibility="Auto"/>
-        <Button Name="RunButton"  Content="Run" HorizontalAlignment="Left" Margin="565,10,0,0" VerticalAlignment="Top" Height="50" Width="35" Click="RunButton_Click"/>
+        <TextBox HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="NoWrap"  VerticalAlignment="Top" Width="550" Height="50" FontFamily="Consolas" FontSize="18" x:Name="CommandBox" HorizontalScrollBarVisibility="Auto"/>
+        <Button x:Name="RunButton"  Content="Run" HorizontalAlignment="Left" Margin="565,10,0,0" VerticalAlignment="Top" Height="50" Width="35" Click="RunButton_Click"/>
     </Grid>
 </Window>
