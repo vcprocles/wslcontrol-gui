@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 //using System.Threading;
 
 namespace wslcontrol_gui
@@ -11,6 +12,7 @@ namespace wslcontrol_gui
         {
             ProcessStartInfo processInfo;
             Process process;
+            command=command.Replace("System32", "Sysnative");//dirty hack to run shit from 32-bit environment
             processInfo = new ProcessStartInfo(command)
             {
                 CreateNoWindow = true,
@@ -29,6 +31,7 @@ namespace wslcontrol_gui
         {
             ProcessStartInfo processInfo;
             Process process;
+            command = command.Replace("System32", "Sysnative");//dirty hack to run shit from 32-bit environment
             processInfo = new ProcessStartInfo(command)
             {
                 CreateNoWindow = true,
@@ -46,6 +49,7 @@ namespace wslcontrol_gui
         protected static void RunCommandInWindow(string command, string parameters)
         {
             ProcessStartInfo processInfo;
+            command = command.Replace("System32", "Sysnative");//dirty hack to run shit from 32-bit environment
             processInfo = new ProcessStartInfo(command)
             {
                 CreateNoWindow = false,
@@ -58,6 +62,7 @@ namespace wslcontrol_gui
         protected static void RunCommandNoWindow(string command, string parameters)
         {
             ProcessStartInfo processInfo;
+            command = command.Replace("System32", "Sysnative");//dirty hack to run shit from 32-bit environment
             processInfo = new ProcessStartInfo(command)
             {
                 CreateNoWindow = true,

@@ -1,46 +1,57 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <RootNamespace>wslcontrol_gui</RootNamespace>
-    <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
-	<UseWindowsForms>True</UseWindowsForms>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Platforms>x86;x64;ARM64</Platforms>
 	<Version>2.0-dev</Version>
 	<VersionPrefix>2.0</VersionPrefix>
 	<VersionSuffix>dev</VersionSuffix>
-    <StartupObject></StartupObject>
-    <Platforms>AnyCPU</Platforms>
-    <DebugType>embedded</DebugType>
-    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
-    <ApplicationIcon>Assets\wslcguiicon.ico</ApplicationIcon>
+    <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
+	<Nullable>enable</Nullable>
+	<ApplicationIcon>Assets\wslcguiicon.ico</ApplicationIcon>
     <Company>vcprocles</Company>
     <Copyright>© vcprocles</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+    <UseWinUI>true</UseWinUI>
+	<UseWPF>true</UseWPF>
+	  <UseWindowsForms>true</UseWindowsForms>
+	  <WindowsPackageType>None</WindowsPackageType>
   </PropertyGroup>
-	
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DebugType>none</DebugType>
-  </PropertyGroup>
-	
+
   <ItemGroup>
-    <Compile Remove="publish\**" />
-    <EmbeddedResource Remove="publish\**" />
-    <None Remove="publish\**" />
-    <Page Remove="publish\**" />
+     <Content Include="Assets\wslcguiicon.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="PeanutButter.INI" Version="3.0.97" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Assets\wslcguiicon.ico" />
-  </ItemGroup>
-  <ItemGroup>
+<ItemGroup>
     <None Update="linux_companion\companion.pl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.221109.1" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" />
+	<PackageReference Include="PeanutButter.INI" Version="3.0.97" />
+    <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
 
+  <!-- 
+    Defining the "Msix" ProjectCapability here allows the Single-project MSIX Packaging
+    Tools extension to be activated for this project even if the Windows App SDK Nuget
+    package has not yet been restored.
+  -->
+  <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+    <ProjectCapability Include="Msix"/>
+  </ItemGroup>
+
+  <!-- 
+    Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution 
+    Explorer "Package and Publish" context menu entry to be enabled for this project even if 
+    the Windows App SDK Nuget package has not yet been restored.
+  -->
+  <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+    <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
+  </PropertyGroup>
 </Project>
