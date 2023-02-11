@@ -26,7 +26,7 @@ namespace wslcontrol_gui
         //private bool RunInstaller=false;
         public MainWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             try
             {
                 SetInitialStatuses();
