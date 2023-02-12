@@ -6,41 +6,42 @@
         xmlns:local="clr-namespace:wslcontrol_gui"
         mc:Ignorable="d"
         Style="{DynamicResource CustomWindowStyle}"
-        Title="SelectedSettings" Height="460
+        Title="Per-Distro Settings" Height="460
         " Width="653"  ResizeMode="NoResize" Closed="Window_Closed" WindowStartupLocation="CenterOwner">
     <Grid HorizontalAlignment="Left" Width="800">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="59*"/>
+            <ColumnDefinition Width="741*"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="ConsoleWindowWarning" Margin="0,0,149,0" FontSize="11">A terminal window will be opened and will ask you for your root password.</Label>
-        <CheckBox Name="SystemdEnableCheckBox" Content="Enable Systemd sypport" Height="26" Margin="10,356,642,40" Click="SystemdEnableCheckBox_Checked"/>
-        <Button Name="ResetToDefaultsButton" Content="Reset to defaults" Width="150" Height="20" Margin="480,359,170,43" Click="ResetToDefaultsButton_Click"/>
-        <Rectangle HorizontalAlignment="Left" Height="319" Margin="10,32,0,0" Stroke="Black" VerticalAlignment="Top" Width="362"/>
-        <CheckBox Name="EnableAutomountCheckMark" Content="Enable" HorizontalAlignment="Left" Margin="23,59,0,0" VerticalAlignment="Top" IsChecked="True" Height="15" Click="EnableAutomountCheckMark_Checked"/>
-        <Label Content="Automount" HorizontalAlignment="Left" Margin="23,32,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26"/>
-        <CheckBox Name="ProcessFstabCheckmark" Content="Process fstab" HorizontalAlignment="Left" Margin="23,94,0,0" VerticalAlignment="Top" IsChecked="True" Height="15" Click="ProcessFstabCheckmark_Checked"/>
-        <Button Visibility="Hidden" Content="Edit fstab" HorizontalAlignment="Left" Margin="117,92,0,0" VerticalAlignment="Top" Height="20" Width="73"/>
-        <TextBox Name="WinFsPathBox" HorizontalAlignment="Left" Margin="160,116,0,0" TextWrapping="Wrap" Text="/mnt/" VerticalAlignment="Top" Width="200" Height="18" TextChanged="WinFsPathBox_TextChanged"/>
-        <Label Name="WinFsPathLabel" Content="Windows FS path" HorizontalAlignment="Left" Margin="23,112,0,0" VerticalAlignment="Top" Height="26"/>
-        <Label Name="MountOptionsLabel" Content="Windows FS mount options" HorizontalAlignment="Left" Margin="23,138,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.51,-0.129" FontStyle="Italic" Height="26"/>
+        <Label x:Name="ConsoleWindowWarning" Margin="0,0,149,0" FontSize="11" Grid.ColumnSpan="2">A terminal window will be opened and will ask you for your root password.</Label>
+        <CheckBox Name="SystemdEnableCheckBox" Content="Enable Systemd sypport" Height="26" Margin="10,366,642,50" Click="SystemdEnableCheckBox_Checked" Grid.ColumnSpan="2"/>
+        <Button Name="ResetToDefaultsButton" Content="Reset to defaults" Width="150" Height="20" Margin="421,369,170,53" Click="ResetToDefaultsButton_Click" Grid.Column="1"/>
+        <Rectangle HorizontalAlignment="Left" Height="319" Margin="10,32,0,0" Stroke="Black" VerticalAlignment="Top" Width="362" Grid.ColumnSpan="2"/>
+        <CheckBox Name="EnableAutomountCheckMark" Content="Enable" HorizontalAlignment="Left" Margin="23,59,0,0" VerticalAlignment="Top" IsChecked="True" Height="15" Click="EnableAutomountCheckMark_Checked" Grid.ColumnSpan="2"/>
+        <Label Content="Automount" HorizontalAlignment="Left" Margin="23,32,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Grid.ColumnSpan="2"/>
+        <CheckBox Name="ProcessFstabCheckmark" Content="Process fstab" HorizontalAlignment="Left" Margin="23,94,0,0" VerticalAlignment="Top" IsChecked="True" Height="15" Click="ProcessFstabCheckmark_Checked" Grid.ColumnSpan="2"/>
+        <Button Visibility="Hidden" Content="Edit fstab" HorizontalAlignment="Left" Margin="58,92,0,0" VerticalAlignment="Top" Height="20" Width="73" Grid.Column="1"/>
+        <TextBox Name="WinFsPathBox" HorizontalAlignment="Left" Margin="101,116,0,0" TextWrapping="Wrap" Text="/mnt/" VerticalAlignment="Top" Width="200" Height="18" TextChanged="WinFsPathBox_TextChanged" Grid.Column="1"/>
+        <Label Name="WinFsPathLabel" Content="Windows FS path" HorizontalAlignment="Left" Margin="23,112,0,0" VerticalAlignment="Top" Height="26" Grid.ColumnSpan="2"/>
+        <Label Name="MountOptionsLabel" Content="Windows FS mount options" HorizontalAlignment="Left" Margin="23,138,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.51,-0.129" FontStyle="Italic" Height="26" Grid.ColumnSpan="2"/>
         <!--TODO: ADD SIMPLIFIED MOUNT OPTIONS-->
-        <Rectangle HorizontalAlignment="Left" Height="96" Margin="383,32,0,0" Stroke="Black" VerticalAlignment="Top" Width="247"/>
-        <Label Content="Network" HorizontalAlignment="Left" Margin="397,32,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26"/>
-        <CheckBox x:Name="HostsTick" Content="Generate /etc/hosts" HorizontalAlignment="Left" Margin="397,59,0,0" VerticalAlignment="Top" Height="15" IsChecked="True" Click="HostsTick_Checked"/>
-        <CheckBox x:Name="ResolvTick" Content="Generate /etc/resolv.conf" HorizontalAlignment="Left" Margin="397,82,0,0" VerticalAlignment="Top" Height="15" IsChecked="True" Click="ResolvTick_Checked"/>
-        <Label Content="Linux hostname" HorizontalAlignment="Left" Margin="397,102,0,0" VerticalAlignment="Top" Height="26"/>
-        <TextBox x:Name="CustomHostnameBox" HorizontalAlignment="Left" Margin="495,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" TextChanged="CustomHostnameBox_TextChanged"/>
-        <Rectangle HorizontalAlignment="Left" Height="84" Margin="383,135,0,0" Stroke="Black" VerticalAlignment="Top" Width="247"/>
-        <Label Content="Interop" HorizontalAlignment="Left" Margin="397,135,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26"/>
-        <CheckBox Name="WindowsProcessesCreation" Content="Allow starting Windows processes" HorizontalAlignment="Left" Margin="397,168,0,0" VerticalAlignment="Top" Height="15" IsChecked="True" Click="WindowsProcessesCreation_Checked"/>
-        <CheckBox Name="AppendPath" Content="Merge $PATH variables" HorizontalAlignment="Left" Margin="397,196,0,0" VerticalAlignment="Top" Height="15" IsChecked="True" Click="AppendPath_Checked"/>
-        <Rectangle HorizontalAlignment="Left" Height="59" Margin="383,225,0,0" Stroke="Black" VerticalAlignment="Top" Width="247"/>
-        <Label Content="Default username" HorizontalAlignment="Left" Margin="383,225,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26"/>
-        <TextBox Name="DefaultUsername" HorizontalAlignment="Left" Margin="390,251,0,0" TextWrapping="Wrap" ToolTip="By default: name from first start" VerticalAlignment="Top" Width="120" Height="18" TextChanged="DefaultUsername_TextChanged"/>
-        <Rectangle HorizontalAlignment="Left" Height="59" Margin="383,292,0,0" Stroke="Black" VerticalAlignment="Top" Width="247"/>
-        <Label Content="Command to run on boot" HorizontalAlignment="Left" Margin="386,294,0,0" VerticalAlignment="Top" Height="26" FontWeight="Bold"/>
-        <TextBox Name="CommandOnBoot" HorizontalAlignment="Left" Margin="390,322,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="226" Height="18" TextChanged="CommandOnBoot_TextChanged"/>
-        <TextBox x:Name="MountOptionsTextBox" HorizontalAlignment="Left" Margin="31,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="324" Height="163" TextChanged="MountOptionsTextBox_TextChanged"/>
+        <Rectangle HorizontalAlignment="Left" Height="96" Margin="324,32,0,0" Stroke="Black" VerticalAlignment="Top" Width="247" Grid.Column="1"/>
+        <Label Content="Network" HorizontalAlignment="Left" Margin="338,32,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Grid.Column="1"/>
+        <CheckBox x:Name="HostsTick" Content="Generate /etc/hosts" HorizontalAlignment="Left" Margin="338,59,0,0" VerticalAlignment="Top" Height="15" IsChecked="True" Click="HostsTick_Checked" Grid.Column="1"/>
+        <CheckBox x:Name="ResolvTick" Content="Generate /etc/resolv.conf" HorizontalAlignment="Left" Margin="338,82,0,0" VerticalAlignment="Top" Height="15" IsChecked="True" Click="ResolvTick_Checked" Grid.Column="1"/>
+        <Label Content="Linux hostname" HorizontalAlignment="Left" Margin="338,102,0,0" VerticalAlignment="Top" Height="26" Grid.Column="1"/>
+        <TextBox x:Name="CustomHostnameBox" HorizontalAlignment="Left" Margin="436,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" TextChanged="CustomHostnameBox_TextChanged" Grid.Column="1"/>
+        <Rectangle HorizontalAlignment="Left" Height="84" Margin="324,135,0,0" Stroke="Black" VerticalAlignment="Top" Width="247" Grid.Column="1"/>
+        <Label Content="Interop" HorizontalAlignment="Left" Margin="338,135,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Grid.Column="1"/>
+        <CheckBox Name="WindowsProcessesCreation" Content="Allow starting Windows processes" HorizontalAlignment="Left" Margin="338,168,0,0" VerticalAlignment="Top" Height="15" IsChecked="True" Click="WindowsProcessesCreation_Checked" Grid.Column="1"/>
+        <CheckBox Name="AppendPath" Content="Merge $PATH variables" HorizontalAlignment="Left" Margin="338,196,0,0" VerticalAlignment="Top" Height="15" IsChecked="True" Click="AppendPath_Checked" Grid.Column="1"/>
+        <Rectangle HorizontalAlignment="Left" Height="59" Margin="324,225,0,0" Stroke="Black" VerticalAlignment="Top" Width="247" Grid.Column="1"/>
+        <Label Content="Default username" HorizontalAlignment="Left" Margin="324,225,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Grid.Column="1"/>
+        <TextBox Name="DefaultUsername" HorizontalAlignment="Left" Margin="331,251,0,0" TextWrapping="Wrap" ToolTip="By default: name from first start" VerticalAlignment="Top" Width="120" Height="18" TextChanged="DefaultUsername_TextChanged" Grid.Column="1"/>
+        <Rectangle HorizontalAlignment="Left" Height="59" Margin="324,292,0,0" Stroke="Black" VerticalAlignment="Top" Width="247" Grid.Column="1"/>
+        <Label Content="Command to run on boot" HorizontalAlignment="Left" Margin="327,294,0,0" VerticalAlignment="Top" Height="26" FontWeight="Bold" Grid.Column="1"/>
+        <TextBox Name="CommandOnBoot" HorizontalAlignment="Left" Margin="331,322,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="226" Height="18" TextChanged="CommandOnBoot_TextChanged" Grid.Column="1"/>
+        <TextBox x:Name="MountOptionsTextBox" HorizontalAlignment="Left" Margin="31,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="324" Height="163" TextChanged="MountOptionsTextBox_TextChanged" Grid.ColumnSpan="2"/>
 
     </Grid>
 </Window>
