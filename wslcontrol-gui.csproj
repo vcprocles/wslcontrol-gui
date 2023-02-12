@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
 	<UseWindowsForms>True</UseWindowsForms>
-	<Version>1.4.3.2</Version>
+	<Version>1.4.4</Version>
     <StartupObject></StartupObject>
     <Platforms>AnyCPU</Platforms>
     <DebugType>embedded</DebugType>
@@ -29,19 +29,23 @@
     <None Remove="publish\**" />
     <Page Remove="publish\**" />
   </ItemGroup>
+	
   <ItemGroup>
-    <PackageReference Include="PeanutButter.INI" Version="3.0.97" />
+    <None Remove="linux_companion\companion.pl" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="PeanutButter.INI" Version="3.0.99" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\wslcguiicon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\Thirdparty\" />
+    <EmbeddedResource Include="linux_companion\companion.pl">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Update="linux_companion\companion.pl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <Folder Include="Assets\Thirdparty\" />
   </ItemGroup>
 
 </Project>

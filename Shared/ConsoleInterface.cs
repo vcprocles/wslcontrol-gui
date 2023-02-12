@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-//using System.Threading;
 
 namespace wslcontrol_gui
 {
     public class ConsoleInterface
     {
-        protected virtual string RunCommand(string command, string parameters)
+        protected static string RunCommand(string command, string parameters)
         {
             ProcessStartInfo processInfo;
             Process process;
@@ -25,7 +24,7 @@ namespace wslcontrol_gui
             string outputString = process.StandardOutput.ReadToEnd();
             return outputString;
         }
-        protected virtual string RunCommandNoUnicode(string command, string parameters)
+        protected static string RunCommandNoUnicode(string command, string parameters)
         {
             ProcessStartInfo processInfo;
             Process process;
@@ -35,7 +34,7 @@ namespace wslcontrol_gui
                 UseShellExecute = false,
                 Arguments = parameters,
                 RedirectStandardOutput = true,
-                //StandardOutputEncoding = System.Text.Encoding.Unicode//not important here, apparently
+                //IIRC this is used in username fetching, and using Unicode breaks this for some unknown reason
             };
             process = Process.Start(processInfo)!;
             if (process == null) return "0";
@@ -51,18 +50,6 @@ namespace wslcontrol_gui
                 CreateNoWindow = false,
                 UseShellExecute = true,
                 WorkingDirectory = "C:\\",
-                Arguments = parameters
-            };
-            Process.Start(processInfo);
-        }
-        protected static void RunCommandNoWindow(string command, string parameters)
-        {
-            ProcessStartInfo processInfo;
-            processInfo = new ProcessStartInfo(command)
-            {
-                CreateNoWindow = true,
-                UseShellExecute = true,
-                //WorkingDirectory = "C:\\",
                 Arguments = parameters
             };
             Process.Start(processInfo);
@@ -114,7 +101,11 @@ namespace wslcontrol_gui
         }
         public static void RunCustomCommandNoWindow(string distro, string command)//run custom command without a separate window. Used internally.
         {
-            RunCommandNoWindow("C:\\Windows\\System32\\wsl.exe", "-d " + distro + " -- bash -l -c \"" + command + "\"");
+            RunCommand("C:\\Windows\\System32\\wsl.exe", "-d " + distro + " -- bash -l -c \"" + command + "\"");
+        }
+        public static string RunCustomCommandNoWindowNoUnicode(string distro, string command)
+        {
+            return RunCommandNoUnicode("C:\\Windows\\System32\\wsl.exe", "-d " + distro + " -- bash -l -c \"" + command + "\"");
         }
         public static void OpenDistro(string distro)//Opens the selected distro
         {
@@ -149,10 +140,6 @@ namespace wslcontrol_gui
         public void InstallOnlineDistro(string distroName)
         {
             PassToWSL("--install -d " + distroName);
-        }
-        public void InitializeWSLFirstStart()//TODO: use it for smth
-        {
-            PassToWSL("--install");
         }
         public string GetDefaultUser(string distroName)
         {

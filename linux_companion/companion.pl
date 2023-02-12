@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use Data::Dumper qw(Dumper);
 use File::Copy;
+our @VERSION=1;
 
 if ($ARGV[0] eq "-r")
 {
@@ -22,6 +23,11 @@ if ($ARGV[0] eq "-r")
         unlink "/etc/wsl.conf";
         print "done.\n";
     }
+    exit(0);
+}
+
+if ($ARGV[0] eq "-v"){
+    print @VERSION;
     exit(0);
 }
 

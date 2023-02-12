@@ -86,8 +86,7 @@ namespace wslcontrol_gui
             distroName = distro.Name;
             username=wsli.GetDefaultUser(distroName);
             username = username.Replace("\n", "");
-            string initial;
-            initial = "\\\\wsl.localhost\\";
+            string initial= "\\\\wsl.localhost\\";
             string fullPath = initial + distroName + "\\home\\"+username+"\\wsl.conf";
             path=fullPath;
             parser.WrapValueInQuotes = false;

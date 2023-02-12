@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using wslcontrol_gui.Shared;
 
 namespace wslcontrol_gui
 {
@@ -15,16 +16,26 @@ namespace wslcontrol_gui
             Enable,
             Disable
         }
+#pragma warning disable CS8618 // Oh my god piss off I am checking for it to not be null
         private static Distro distro;
-        public PerDistroPrefs(Distro selectedDistro, WSLInterface wsli)
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        public PerDistroPrefs(Distro selectedDistro, WSLInterface _)
         {
+            distro = selectedDistro ?? throw new ArgumentNullException(nameof(selectedDistro));
+            if (CompanionInstaller.CheckCompanionInstallation(selectedDistro.Name))
+            {
+                if (CompanionInstaller.CheckCompanionVersion(selectedDistro.Name) < CompanionInstaller.LastCompanionVersion)
+                {
+                    CompanionInstaller.InstallCompanion(selectedDistro.Name);
+                }
+            }
+            else CompanionInstaller.InstallCompanion(selectedDistro.Name);
             IniParseWrapSpecific.GetConfig(selectedDistro.Name);
-            Thread.Sleep(500);
-            distro = selectedDistro;
             ini = new(distro);
             InitializeComponent();
             DisableUnsupported();
             InitializeSetOrDefault();
+            if (!CompanionInstaller.CheckCompanionInstallation(selectedDistro.Name)) Close();
         }
         private void DisableUnsupported() 
         {
@@ -137,8 +148,10 @@ namespace wslcontrol_gui
 
         private void EnableAutomountCheckMark_Checked(object sender, RoutedEventArgs e)
         {
-            CheckBox a = sender as CheckBox;
+            if (sender == null) throw new ArgumentNullException(nameof(sender));
+            CheckBox a = (CheckBox)sender;
             if (sender is CheckBox && a.IsChecked == null) return;
+            if (a.IsChecked==null) throw new NullReferenceException();
             if (a.IsChecked.Value == true)
             {
                 AutomountSwitch(SwitchStates.Enable);
@@ -159,16 +172,14 @@ namespace wslcontrol_gui
 
         private void WinFsPathBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var a = sender as TextBox;
-            if (a != null)
+            if (sender is TextBox a)
                 ini.SetParameter("automount", "root", a.Text);
         }
 
         private void MountOptionsTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var a = sender as TextBox;
-            if (a!= null)
-            ini.SetParameter("automount", "options", a.Text);
+            if (sender is TextBox a)
+                ini.SetParameter("automount", "options", a.Text);
         }
 
         private void HostsTick_Checked(object sender, RoutedEventArgs e)
@@ -185,8 +196,7 @@ namespace wslcontrol_gui
 
         private void CustomHostnameBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var a = sender as TextBox;
-            if (a != null)
+            if (sender is TextBox a)
                 ini.SetParameter("network", "hostname", a.Text);
         }
 
@@ -204,15 +214,13 @@ namespace wslcontrol_gui
 
         private void DefaultUsername_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var a = sender as TextBox;
-            if (a != null)
+            if (sender is TextBox a)
                 ini.SetParameter("user", "default", a.Text);
         }
 
         private void CommandOnBoot_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var a = sender as TextBox;
-            if (a != null)
+            if (sender is TextBox a)
                 ini.SetParameter("boot", "command", a.Text);
         }
         private void Window_Closed(object sender, EventArgs e)
