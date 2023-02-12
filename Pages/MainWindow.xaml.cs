@@ -340,10 +340,7 @@ namespace wslcontrol_gui
 
         private void MountDriveButton_Click(object sender, RoutedEventArgs e)
         {
-            //throw new NotImplementedException();
-            var a=CompanionInstaller.CheckCompanionInstallation(((Distro)DistroList.SelectedItem).Name);
-            var b = CompanionInstaller.CheckCompanionVersion(((Distro)DistroList.SelectedItem).Name);
-            CompanionInstaller.InstallCompanion(((Distro)DistroList.SelectedItem).Name);
+            throw new NotImplementedException();
         }
     }
     struct WindowLayoutChangeSaveData
