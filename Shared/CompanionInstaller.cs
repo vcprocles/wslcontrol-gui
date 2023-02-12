@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace wslcontrol_gui.Shared
 {
@@ -13,7 +7,7 @@ namespace wslcontrol_gui.Shared
     {
         public static bool CheckCompanionInstallation(string distro)
         {
-            //here i can run perl oneliner to check file existance
+            //here i can run oneliner to check file existence
             if (WSLInterface.RunCustomCommandNoWindowNoUnicode(distro, "test -f ~/.companion.pl && echo \"true\"")=="") return false; //hacky but should work
             else
                 return true;
