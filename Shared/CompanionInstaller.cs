@@ -24,7 +24,7 @@ namespace wslcontrol_gui.Shared
         {
             var assembly = Assembly.GetExecutingAssembly();
             string script;
-            const string resourceName = "wslcontrol_gui.linux_companion.companion.pl";
+            const string resourceName = "Assets.linux_companion.companion.pl";
             using (Stream stream =assembly.GetManifestResourceStream(resourceName))
             using (StreamReader reader = new StreamReader(stream))
             {

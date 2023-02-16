@@ -29,10 +29,6 @@
     <None Remove="publish\**" />
     <Page Remove="publish\**" />
   </ItemGroup>
-	
-  <ItemGroup>
-    <None Remove="linux_companion\companion.pl" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="PeanutButter.INI" Version="3.0.99" />
   </ItemGroup>
@@ -40,7 +36,7 @@
     <Content Include="Assets\wslcguiicon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="linux_companion\companion.pl">
+    <EmbeddedResource Include="Assets\companion.pl">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
