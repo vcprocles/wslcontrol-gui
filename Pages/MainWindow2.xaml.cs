@@ -5,22 +5,22 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using wslcontrol_gui.Pages;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
-using Window = System.Windows.Window;
+
+
+
 
 namespace wslcontrol_gui
 {
 
-    public partial class MainWindow : Window
+    public partial class MainWindow2 : Window
     {
         readonly WSLInterface wsli = new();
         readonly OsInfo os = new();
         //private bool RunInstaller=false;
-        public MainWindow()
+        public MainWindow2()
         {
             InitializeComponent();
             try
@@ -51,53 +51,10 @@ namespace wslcontrol_gui
             }
             ThemeResolver.SetTheme();
         }
-        WindowLayoutChangeSaveData layoutSaveData;
         private void SetInitialStatuses()
         {
             DeactivateAllButtons();
             RefreshDistros();
-        }
-        private void CollapseWindow()
-        {
-
-            layoutSaveData.distroList = DistroList.Visibility;
-            layoutSaveData.mainWinMinWidth = MinWidth;
-            layoutSaveData.mainWinWidth = Width;
-            layoutSaveData.mainWinResizeMode = ResizeMode;
-            layoutSaveData.mainWinMaxWidth = MaxWidth;
-            layoutSaveData.mainWinHeight = Height;
-            layoutSaveData.mainWinMinHeight = MinHeight;
-            layoutSaveData.distroListSelectedIndex = DistroList.SelectedIndex;
-            layoutSaveData.selDistroLabelVisibility = SelectedDistroLabel.Visibility;
-            layoutSaveData.allDistroLabelVisibility = AllDistroLabel.Visibility;
-
-            if (DistroList.Items.Count == 1)
-            {
-                DistroList.Visibility = Visibility.Collapsed;
-                MinWidth = 231;
-                Width = 231;
-                ResizeMode = ResizeMode.NoResize;
-                MaxWidth = 231;
-                Height = 560;
-                MinHeight = 560;
-                DistroList.SelectedIndex = 0;
-                SelectedDistroLabel.Visibility = Visibility.Collapsed;
-                AllDistroLabel.Visibility = Visibility.Collapsed;
-                WSL2WarningLabel.Visibility = Visibility.Collapsed; //bc it will break the layout
-            }
-            else
-            {
-                DistroList.Visibility = layoutSaveData.distroList;
-                MinWidth = layoutSaveData.mainWinMinWidth;
-                Width = layoutSaveData.mainWinWidth;
-                ResizeMode = layoutSaveData.mainWinResizeMode;
-                MaxWidth = layoutSaveData.mainWinMaxWidth;
-                Height = layoutSaveData.mainWinHeight;
-                MinHeight = layoutSaveData.mainWinMinHeight;
-                DistroList.SelectedIndex = layoutSaveData.distroListSelectedIndex;
-                SelectedDistroLabel.Visibility = layoutSaveData.selDistroLabelVisibility;
-                AllDistroLabel.Visibility = layoutSaveData.allDistroLabelVisibility;
-            }
         }
         private void DeactivateAllButtons()
         {
@@ -109,13 +66,13 @@ namespace wslcontrol_gui
             OpenInExplorerButton.IsEnabled = false;
             ThisDistroSettingsButton.IsEnabled = false;
             ExportTar.IsEnabled = false;
+            SelectedSection.IsEnabled = false;
         }
         private void RefreshDistros()
         {
             DistroList.ItemsSource = wsli.GetDistros();
             DistroList.SelectedItem = null;
-            WSL2WarningLabel.Visibility = Visibility.Collapsed;
-            CollapseWindow();
+            //WSL2WarningLabel.Visibility = Visibility.Collapsed;
         }
         private void ShutdownButton_Click(object sender, RoutedEventArgs e)
         {
@@ -132,10 +89,11 @@ namespace wslcontrol_gui
             }
             else
             {
-                if (selectedDistro.Version == 2) WSL2WarningLabel.Visibility = Visibility.Visible;
-                if (selectedDistro.Version == 1) WSL2WarningLabel.Visibility = Visibility.Collapsed;
+                //if (selectedDistro.Version == 2) WSL2WarningLabel.Visibility = Visibility.Visible;
+                //if (selectedDistro.Version == 1) WSL2WarningLabel.Visibility = Visibility.Collapsed;
                 OpenInExplorerButton.IsEnabled = true;
                 ExportTar.IsEnabled = true;
+                SelectedSection.IsEnabled = true;
                 if (selectedDistro.State == "Running") { TerminateButton.IsEnabled = true; }
                 if (selectedDistro.State == "Stopped") { TerminateButton.IsEnabled = false; }
                 if (os.build < 19041) { GlobalSettingsButton.IsEnabled = false; }
@@ -337,24 +295,14 @@ namespace wslcontrol_gui
             inputwindow.ShowDialog();
         }
 
-        private void NewUIButton_Click(object sender, RoutedEventArgs e)
+        private void MountDriveButton_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow = new MainWindow2();
-            Application.Current.MainWindow.Show();
-            this.Close();
+            throw new NotImplementedException();
         }
-    }
-    struct WindowLayoutChangeSaveData
-    {
-        public Visibility distroList;
-        public double mainWinMinWidth;
-        public double mainWinWidth;
-        public ResizeMode mainWinResizeMode;
-        public double mainWinMaxWidth;
-        public double mainWinHeight;
-        public double mainWinMinHeight;
-        public int distroListSelectedIndex;
-        public Visibility selDistroLabelVisibility;
-        public Visibility allDistroLabelVisibility;
+
+        private void QuitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

@@ -1,0 +1,66 @@
+﻿<Window x:Class="wslcontrol_gui.MainWindow2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wslcontrol_gui"
+        mc:Ignorable="d"
+        Style="{DynamicResource CustomWindowStyle}"
+        Title="WSLControl" Height="600" MinHeight="622" Width="700" MinWidth="575" ResizeMode="CanResize">
+    <!--<Window.CommandBindings>
+        <CommandBinding Command="QuitApp" Executed="QuitApp_Executed"/>
+    </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Key="Q" Modifiers="Control" Command="QuitApp"/>
+    </Window.InputBindings>-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Menu>
+                <MenuItem Header="File">
+                    <MenuItem Header="Install distribution..." Name="OnlineInstall" Click="OnlineInstall_Click"/>
+                    <MenuItem Header="Import distribution..." Name="ImportTar" Click="ImportTar_Click"/>
+                    <Separator/>
+                    <MenuItem Header="Quit" Name="QuitButton" Click="QuitButton_Click" InputGestureText="Ctrl+Q"/>
+                </MenuItem>
+                <MenuItem Header="Selected" Name="SelectedSection">
+                    <MenuItem Header="Export distribution..." Name="ExportTar" Click="ExportTar_Click"/>
+                    <MenuItem Header="Launch in terminal" Name="LaunchButton" Click="LaunchButton_Click"/>
+                    <MenuItem Header="Run a command..." Name="RunCommandButton" Click="RunCommandButton_Click"/>
+                    <MenuItem Header="Set as default" Name="SetDefaultButton" Click="SetDefaultButton_Click"/>
+                    <MenuItem Header="Terminate" Name="TerminateButton" Click="TerminateButton_Click"/>
+                    <MenuItem Header="Uninstall" Name="InstallUninstallButton" Click="InstallUninstallButton_Click"/>
+                    <MenuItem Header="Open in Explorer" Name="OpenInExplorerButton" Click="OpenThisInExplorer_Click"/>
+                    <MenuItem Header="Mount a partition" Name="MountDriveButton" Click="MountDriveButton_Click" IsEnabled="False"/>
+                    <MenuItem Header="Configure" Name="ThisDistroSettingsButton" Click="ThisDistroSettings_Click"/>
+                </MenuItem>
+                <MenuItem Header="Global">
+                    <MenuItem Header="Global configuration" Name="GlobalSettingsButton" Click="GlobalSettingsButton_Click"/>
+                    <MenuItem Header="Shutdown WSL" Name="ShutdownButton" Click="ShutdownButton_Click"/>
+                    <MenuItem Header="Open WSL root" Name="OpenAllInExplorer" Click="OpenAllInExplorer_Click"/>
+                    <Separator/>
+                    <MenuItem Header="Configure toolbar" IsEnabled="False"/>
+                </MenuItem>
+                <MenuItem Header="Help">
+                    <MenuItem Header="Third-Party information"/>
+                    <MenuItem Header="About WSLControl"/>
+                </MenuItem>
+            </Menu>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Button Width="50" Height="30" Click="RefreshButton_Click" Name="RefreshButton" HorizontalAlignment="Left">Refresh</Button>
+        </Grid>
+        <ListBox Grid.Row="2" Name="DistroList" SelectionChanged="DistroList_SelectionChanged" Margin="5,5,0,5" SelectionMode="Single"/>
+        <!--<Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0"  TextWrapping="Wrap" Name="WSL2WarningLabel" Visibility="Collapsed" FontStyle="Italic" Padding="5,0,5,5">WARNING: Terminating WSL2 instance doesn't always release system resources, use Shutdown instead</TextBlock>
+        </Grid>-->
+    </Grid>
+</Window>
