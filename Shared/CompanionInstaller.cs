@@ -18,13 +18,14 @@ namespace wslcontrol_gui.Shared
             if (firstLine == "read mode")
                 return 0;
             else
-                return int.Parse(firstLine);
+                try { return int.Parse(firstLine); }
+                catch { return 0; }     
         }
         public static async void InstallCompanion(string distro)
         {
             var assembly = Assembly.GetExecutingAssembly();
             string script;
-            const string resourceName = "Assets.Companion.companion.pl";
+            const string resourceName = "wslcontrol_gui.Assets.Companion.companion.pl";
             using (Stream stream =assembly.GetManifestResourceStream(resourceName))
             using (StreamReader reader = new StreamReader(stream))
             {
