@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:wslcontrol_gui"
         mc:Ignorable="d"
         Style="{DynamicResource CustomWindowStyle}"
-        Title="Per-Distro Settings" Height="460
+        Title="Per-Distro Settings" Height="500
         " Width="653"  ResizeMode="NoResize" Closed="Window_Closed" WindowStartupLocation="CenterOwner">
     <Grid HorizontalAlignment="Left" Width="800">
         <Grid.ColumnDefinitions>
