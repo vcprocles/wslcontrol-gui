@@ -67,7 +67,7 @@ namespace wslcontrol_gui
         }
         public int GetCurrentDefaultWSLVersion()
         {
-            char ver = RespondParser.GetLastLineSymbol(PassToWSL("--status"), 1);
+            char ver = RespondParser.GetLastLineSymbol(PassToWSL("--status"), 0);
             int iver = int.Parse(ver.ToString());
             return iver;
         }
