@@ -30,13 +30,13 @@
     <Page Remove="publish\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="PeanutButter.INI" Version="3.0.106" />
+    <PackageReference Include="PeanutButter.INI" Version="3.0.110" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\wslcguiicon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Assets\companion.pl">
+    <EmbeddedResource Include="Assets\Companion\companion.pl">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
