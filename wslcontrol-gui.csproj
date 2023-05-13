@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <RootNamespace>wslcontrol_gui</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
@@ -30,7 +30,7 @@
     <Page Remove="publish\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="PeanutButter.INI" Version="3.0.110" />
+    <PackageReference Include="PeanutButter.INI" Version="3.0.126" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\wslcguiicon.ico" />

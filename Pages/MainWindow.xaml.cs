@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using wslcontrol_gui.Pages;
+using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
@@ -23,12 +24,19 @@ namespace wslcontrol_gui
         public MainWindow()
         {
             InitializeComponent();
+            if (!wsli.CheckResponseIfInstalled() )
+            {
+                wslcontrol_gui.Pages.InitialSetup firstsetupguide = new(wsli);
+                firstsetupguide.ShowDialog();//is my job done in this class? idk
+                Environment.Exit( 0 );//here exit after finishing
+            }
             try
             {
                 SetInitialStatuses();
             }
             catch (System.IndexOutOfRangeException)
             {
+                //The code below is old routines for handling moments when WSL is not set up or some other error is encountered
                 MessageBox.Show(
                     "Parsing error. WSL seems to not be installed or no distros are installed. " +
                     "\nWill now try running distro installer. If this fails, run \"wsl --install\" in the terminal and try again");

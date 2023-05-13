@@ -51,12 +51,15 @@ namespace wslcontrol_gui
             List<OnlineDistro> dl = new();
             string[] lines = text.Replace("\r", "").Split('\n');
             int lineNumber = 1;
-            int skip = 4;
+            //int skip = 4; was needed before
+            bool skipForNow = true;
             foreach (string line in lines)
             {
-                if (skip > 0)
+                if (skipForNow)
                 {
-                    skip--;
+                    //does this work across locales?
+                    if (line.Equals("  NAME                                   FRIENDLY NAME"))
+                        skipForNow = false;
                     continue;
                 }
                 int PNumber = lineNumber++;
@@ -64,16 +67,17 @@ namespace wslcontrol_gui
                 if (line.Equals(lines[0])) continue;
                 string[] fields = line.Split(' ');
                 string[] fields2 = new string[2];
-                fields2[0] = fields[0];
-                fields[0] = "";
-                bool foundFirstWord = false;
-                fields2[1] = "";
+                fields2[0] = fields[1];
+                fields[1] = "";
+                fields[0] = "";//remove the * for default one
+                //bool foundFirstWord = false;
                 foreach (string field in fields)
                 {
-                    if ((field.Length == 0) && !foundFirstWord) continue;
-                    if (foundFirstWord) fields2[1] += "\u0020";
+                    if ((field.Length == 0)/* && !foundFirstWord*/) continue;
+                    if (field == fields2[0]) continue; 
+                    //if (foundFirstWord) fields2[1] += "\u0020";//why?
                     fields2[1] += field;
-                    foundFirstWord = true;
+                    //foundFirstWord = true;
                 }
                 string PName = fields2[0];
                 string PFriendlyName = fields2[1];

@@ -145,6 +145,14 @@ namespace wslcontrol_gui
         {
             return PassToWSLNoUnicode("-d " + distroName + " -- whoami");
         }
+        public bool CheckResponseIfInstalled() //returns false if response is empty, e.g when WSL is not set up
+        {
+            string response = PassToWSL("--status");
+            if (response.Length == 0)
+                return false;
+            else
+                return true;
+        }
     }
     public enum DistType
     {
