@@ -6,14 +6,34 @@
         xmlns:local="clr-namespace:wslcontrol_gui.Pages"
         mc:Ignorable="d"
         Style="{DynamicResource CustomWindowStyle}"
-        Title="InitialSetup" Height="450" Width="800">
+        Title="Initial setup" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Install source:" Grid.Row="0" Grid.Column="0"/>
+            <ComboBox Width="120" Height="30" Text="Select option..." Grid.Row="0" Grid.Column="1">
+                <ComboBoxItem Content="Microsoft Store"/>
+                <ComboBoxItem Content="Inbuilt feature"/>
+                <ComboBoxItem Content="Website"/>
+            </ComboBox>
+            <CheckBox Content="Enable WSL1 support" Grid.Row="1" Grid.Column="1"/>
+            <CheckBox Content="Select a specific distro" Grid.Row="1" Grid.Column="0"/>
+            <Button Content="Install" Grid.Column="0" Grid.Row="2"/>
+            <Button Content="Exit" Grid.Column="1" Grid.Row="2"/>
+
+
         </Grid>
         <ListView x:Name="OnlineDistroList" Grid.Row="1">
             <ListView.View>
