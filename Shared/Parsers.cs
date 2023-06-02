@@ -51,7 +51,6 @@ namespace wslcontrol_gui
             List<OnlineDistro> dl = new();
             string[] lines = text.Replace("\r", "").Split('\n');
             int lineNumber = 1;
-            //int skip = 4; was needed before
             bool skipForNow = true;
             foreach (string line in lines)
             {
@@ -62,26 +61,31 @@ namespace wslcontrol_gui
                         skipForNow = false;
                     continue;
                 }
+                bool PDefault = false;
                 int PNumber = lineNumber++;
                 if (line.Length == 0) continue;
-                if (line.Equals(lines[0])) continue;
                 string[] fields = line.Split(' ');
-                string[] fields2 = new string[2];
-                fields2[0] = fields[1];
-                fields[1] = "";
-                fields[0] = "";//remove the * for default one
-                //bool foundFirstWord = false;
+                string[] fieldsClean = new string[2];
+                string PName = "";
+                if (fields[0] == "*") //clean up default star
+                {
+                    PDefault = true;
+                    fields[0] = "";
+                    PName= fields[1];//internal name
+                    fields[1] = "";
+                }
+                else
+                {
+                    PName= fields[2];//2?
+                    fields[2] = "";
+                }
+                string PFriendlyName = "";
                 foreach (string field in fields)
                 {
-                    if ((field.Length == 0)/* && !foundFirstWord*/) continue;
-                    if (field == fields2[0]) continue; 
-                    //if (foundFirstWord) fields2[1] += "\u0020";//why?
-                    fields2[1] += field;
-                    //foundFirstWord = true;
+                    if ((field.Length == 0)) continue;
+                    PFriendlyName += field+" ";
                 }
-                string PName = fields2[0];
-                string PFriendlyName = fields2[1];
-                dl.Add(new OnlineDistro() { Name = PName, FriendlyName = PFriendlyName, Number = PNumber });
+                dl.Add(new OnlineDistro() { Name = PName, FriendlyName = PFriendlyName, Number = PNumber, Default = PDefault });
             }
             return dl;
         }

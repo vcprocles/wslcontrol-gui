@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
+//TODO: clean this crap up
+
 namespace wslcontrol_gui
 {
     public class ConsoleInterface
@@ -99,6 +101,10 @@ namespace wslcontrol_gui
         {
             RunCommandInWindow("C:\\Windows\\System32\\wsl.exe", "-d " + distro + " -- bash -l -c \"" + command + "\" && bash");
         }
+        public static void PassToWSLWithWindow(string commandParameters)
+        {
+            RunCommandInWindow("C:\\Windows\\System32\\wsl.exe ", commandParameters);
+        }
         public static void RunCustomCommandNoWindow(string distro, string command)//run custom command without a separate window. Used internally.
         {
             RunCommand("C:\\Windows\\System32\\wsl.exe", "-d " + distro + " -- bash -l -c \"" + command + "\"");
@@ -195,7 +201,9 @@ namespace wslcontrol_gui
         public string FriendlyName { get; set; }
         public override string ToString() //override text output
         {
-            return this.Number.ToString() + ". " + this.FriendlyName + " (" + this.Name + ")";
+            String extra = " (Default)";
+            if (this.Default == false) extra = "";
+            return this.Number.ToString() + ". " + this.FriendlyName + " (" + this.Name + ")"+extra;
         }
     }
 }

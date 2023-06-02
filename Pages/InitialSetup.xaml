@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:wslcontrol_gui.Pages"
         mc:Ignorable="d"
         Style="{DynamicResource CustomWindowStyle}"
-        Title="Initial setup" Height="450" Width="800">
+        Title="Initial setup" Height="540" Width="470">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -23,15 +23,15 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <Label Content="Install source:" Grid.Row="0" Grid.Column="0"/>
-            <ComboBox Width="120" Height="30" Text="Select option..." Grid.Row="0" Grid.Column="1">
+            <ComboBox Width="120" Height="30" Text="Select option..." Grid.Row="0" Grid.Column="1" Name="SourceSelect" SelectionChanged="SourceSelect_SelectionChanged">
                 <ComboBoxItem Content="Microsoft Store"/>
                 <ComboBoxItem Content="Inbuilt feature"/>
                 <ComboBoxItem Content="Website"/>
             </ComboBox>
-            <CheckBox Content="Enable WSL1 support" Grid.Row="1" Grid.Column="1"/>
-            <CheckBox Content="Select a specific distro" Grid.Row="1" Grid.Column="0"/>
-            <Button Content="Install" Grid.Column="0" Grid.Row="2"/>
-            <Button Content="Exit" Grid.Column="1" Grid.Row="2"/>
+            <CheckBox Content="Enable WSL1 support" Grid.Row="1" Grid.Column="1" Name="WSL1SupportCheckBox"/>
+            <CheckBox Content="Select a specific distro" Grid.Row="1" Grid.Column="0" Name="SpecificDistroCheckBox" Checked="SpecificDistroCheckBox_Checked"/>
+            <Button Content="Install" Grid.Column="0" Grid.Row="2" Name="InstallButton" Grid.ColumnSpan="2" Height="20" Margin="0,0,132,0" VerticalAlignment="Top" Click="InstallButton_Click"/>
+            <Button Content="Exit" Grid.Column="1" Grid.Row="2" Name="ExitButton" Click="ExitButton_Click"/>
 
 
         </Grid>
