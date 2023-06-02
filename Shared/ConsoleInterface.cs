@@ -69,8 +69,18 @@ namespace wslcontrol_gui
         }
         public int GetCurrentDefaultWSLVersion()
         {
-            char ver = RespondParser.GetLastLineSymbol(PassToWSL("--status"), 0);
-            int iver = int.Parse(ver.ToString());
+            char ver;
+            int iver;
+            try
+            {
+                ver = RespondParser.GetLastLineSymbol(PassToWSL("--status"), 0);
+                iver = int.Parse(ver.ToString());
+            } 
+            catch
+            {
+                ver = RespondParser.GetLastLineSymbol(PassToWSL("--status"), 1);
+                iver = int.Parse(ver.ToString());
+            }
             return iver;
         }
         public void ShutdownWSL()//Shuts down the subsystem
@@ -91,7 +101,7 @@ namespace wslcontrol_gui
         }
         public List<OnlineDistro> GetOnlineDistros()//parses available distribution list for online install window
         {
-            return RespondParser.ParseOnlineDistroList(PassToWSL("-l -o"));
+            return RespondParser.ParseOnlineDistroList2(PassToWSL("-l -o"));
         }
         public void UnregisterDistro(string distro)//remove distro
         {

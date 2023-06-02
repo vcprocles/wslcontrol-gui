@@ -39,18 +39,20 @@ namespace wslcontrol_gui
                 //The code below is old routines for handling moments when WSL is not set up or some other error is encountered
                 MessageBox.Show(
                     "Parsing error. WSL seems to not be installed or no distros are installed. " +
-                    "\nWill now try running distro installer. If this fails, run \"wsl --install\" in the terminal and try again");
-                try //basically the code from online install onclick function
-                {
-                    OnlineInstall installwindow = new(wsli);
-                    installwindow.ShowDialog();
-                    Close();
-                }
-                catch (Exception ex)//if even this fails
-                {
-                    MessageBox.Show(ex.Message);
-                    Close();
-                }
+                    "\nIf you just ran the initial setup wizard or install the WSL yourself, \n" +
+                    "You should try rebooting the system 2 times, run your first installed distribution, and try again.");
+                //try //basically the code from online install onclick function
+                //{
+                //    OnlineInstall installwindow = new(wsli);
+                //    installwindow.ShowDialog();
+                //    Close();
+                //}
+                //catch (Exception ex)//if even this fails
+                //{
+                //    MessageBox.Show(ex.Message);
+                //    Close();
+                //}
+                Environment.Exit(0);
             }
             catch (Exception ex)
             {

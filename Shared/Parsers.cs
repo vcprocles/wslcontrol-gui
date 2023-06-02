@@ -46,7 +46,7 @@ namespace wslcontrol_gui
             return dl;
         }
         public static List<OnlineDistro> ParseOnlineDistroList(string text)
-        //availible distributions for online install list parser
+        //availible distributions for initial setup list parser
         {
             List<OnlineDistro> dl = new();
             string[] lines = text.Replace("\r", "").Split('\n');
@@ -54,18 +54,17 @@ namespace wslcontrol_gui
             bool skipForNow = true;
             foreach (string line in lines)
             {
+                string[] fields = line.Split(' ');
                 if (skipForNow)
                 {
                     //does this work across locales?
-                    if (line.Equals("  NAME                                   FRIENDLY NAME"))
+                    if (fields[0]=="NAME")
                         skipForNow = false;
                     continue;
                 }
                 bool PDefault = false;
                 int PNumber = lineNumber++;
                 if (line.Length == 0) continue;
-                string[] fields = line.Split(' ');
-                string[] fieldsClean = new string[2];
                 string PName = "";
                 if (fields[0] == "*") //clean up default star
                 {
@@ -86,6 +85,37 @@ namespace wslcontrol_gui
                     PFriendlyName += field+" ";
                 }
                 dl.Add(new OnlineDistro() { Name = PName, FriendlyName = PFriendlyName, Number = PNumber, Default = PDefault });
+            }
+            return dl;
+        }
+        public static List<OnlineDistro> ParseOnlineDistroList2(string text)
+        //availible distributions for online install list parser
+        {
+            List<OnlineDistro> dl = new();
+            string[] lines = text.Replace("\r", "").Split('\n');
+            int lineNumber = 1;
+            bool skipForNow = true;
+            foreach (string line in lines)
+            {
+                string[] fields = line.Split(' ');
+                if (skipForNow)
+                {
+                    //does this work across locales?
+                    if (fields[0] == "NAME")
+                        skipForNow = false;
+                    continue;
+                }
+                int PNumber = lineNumber++;
+                if (line.Length == 0) continue;
+                string PName = fields[0];
+                fields[0] = "";
+                string PFriendlyName = "";
+                foreach (string field in fields)
+                {
+                    if ((field.Length == 0)) continue;
+                    PFriendlyName += field + " ";
+                }
+                dl.Add(new OnlineDistro() { Name = PName, FriendlyName = PFriendlyName, Number = PNumber});
             }
             return dl;
         }
