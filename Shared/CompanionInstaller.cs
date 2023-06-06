@@ -8,7 +8,7 @@ namespace wslcontrol_gui.Shared
         public static bool CheckCompanionInstallation(string distro)
         {
             //here i can run oneliner to check file existence
-            if (WSLInterface.RunCustomCommandNoWindowNoUnicode(distro, "test -f ~/.companion.pl && echo \"true\"")=="") return false; //hacky but should work
+            if (WSLInterface.RunCustomCommandNoWindowNoUnicode(distro, "test -f ~/.companion.pl && echo \"true\"") == "") return false; //hacky but should work
             else
                 return true;
         }
@@ -19,14 +19,14 @@ namespace wslcontrol_gui.Shared
                 return 0;
             else
                 try { return int.Parse(firstLine); }
-                catch { return 0; }     
+                catch { return 0; }
         }
         public static async void InstallCompanion(string distro)
         {
             var assembly = Assembly.GetExecutingAssembly();
             string script;
             const string resourceName = "wslcontrol_gui.Assets.companion.pl";
-            using (Stream stream =assembly.GetManifestResourceStream(resourceName))
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
             using (StreamReader reader = new StreamReader(stream))
             {
                 script = reader.ReadToEnd();

@@ -1,20 +1,40 @@
 ﻿using Microsoft.Win32;
-//using System.Security.Principal;
+using System.Security.Principal;
 
 namespace wslcontrol_gui
 {
-    class OsInfo
+    static class OsInfo
     {
-        public OsInfo()
+        public enum UACStatus
+        {
+            Elevated,
+            Limited
+        }
+        public static int GetOsBuild()
         {
             RegistryKey registryKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion")!;
             string buildstr = registryKey.GetValue("CurrentBuild")!.ToString()!;
-            build = int.Parse(buildstr);
-            //build = 30000;//basically disable all version checks
-            //elevated = (new WindowsPrincipal(WindowsIdentity.GetCurrent()))//unused
-            //     .IsInRole(WindowsBuiltInRole.Administrator);
+            return int.Parse(buildstr);
         }
-        public int build;
-        //public bool elevated;
+        public static bool IsAdmin()
+        {
+            UACStatus status = GetUACStatus();
+            switch (status)
+            {
+                case UACStatus.Elevated:
+                    return true;
+                case UACStatus.Limited:
+                    return false;
+                default:
+                    return false;
+            }
+        }
+        public static UACStatus GetUACStatus()
+        {
+            bool isAdmin = (new WindowsPrincipal(WindowsIdentity.GetCurrent()))
+                 .IsInRole(WindowsBuiltInRole.Administrator);
+            if (isAdmin) { return UACStatus.Elevated; }
+            else { return UACStatus.Limited; }
+        }
     }
 }

@@ -20,9 +20,8 @@ namespace wslcontrol_gui
         }
         private void DisableUnsupported()
         {
-            OsInfo os = new();
             bool buildOk = false;
-            if (os.build > 19041) buildOk = true;
+            if (OsInfo.GetOsBuild() > 19041) buildOk = true;
             if (!buildOk)
             {
                 WSLgCheckBox.IsEnabled = false;

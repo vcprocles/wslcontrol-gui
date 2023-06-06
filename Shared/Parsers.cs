@@ -58,7 +58,7 @@ namespace wslcontrol_gui
                 if (skipForNow)
                 {
                     //does this work across locales?
-                    if (fields[0]=="NAME")
+                    if (fields[0] == "NAME")
                         skipForNow = false;
                     continue;
                 }
@@ -70,19 +70,19 @@ namespace wslcontrol_gui
                 {
                     PDefault = true;
                     fields[0] = "";
-                    PName= fields[1];//internal name
+                    PName = fields[1];//internal name
                     fields[1] = "";
                 }
                 else
                 {
-                    PName= fields[2];//2?
+                    PName = fields[2];//2?
                     fields[2] = "";
                 }
                 string PFriendlyName = "";
                 foreach (string field in fields)
                 {
                     if ((field.Length == 0)) continue;
-                    PFriendlyName += field+" ";
+                    PFriendlyName += field + " ";
                 }
                 dl.Add(new OnlineDistro() { Name = PName, FriendlyName = PFriendlyName, Number = PNumber, Default = PDefault });
             }
@@ -115,7 +115,7 @@ namespace wslcontrol_gui
                     if ((field.Length == 0)) continue;
                     PFriendlyName += field + " ";
                 }
-                dl.Add(new OnlineDistro() { Name = PName, FriendlyName = PFriendlyName, Number = PNumber});
+                dl.Add(new OnlineDistro() { Name = PName, FriendlyName = PFriendlyName, Number = PNumber });
             }
             return dl;
         }

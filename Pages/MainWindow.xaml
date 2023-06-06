@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:wslcontrol_gui"
         mc:Ignorable="d"
         Style="{DynamicResource CustomWindowStyle}"
-        Title="WSLControl" Height="600" MinHeight="622" Width="700" MinWidth="575" ResizeMode="CanResize">
+        Title="WSLControl" Height="610" MinHeight="610" Width="575" MinWidth="575" ResizeMode="CanResize">
 
     <Grid>
         <Grid.RowDefinitions>

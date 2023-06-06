@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace wslcontrol_gui
 {
-    public class ConsoleInterface
+    public class WSLInterface
     {
         protected static string RunCommand(string command, string parameters)
         {
@@ -56,9 +56,6 @@ namespace wslcontrol_gui
             };
             Process.Start(processInfo);
         }
-    }
-    public class WSLInterface : ConsoleInterface
-    {
         private string PassToWSL(string parameters)
         {
             return RunCommand("C:\\Windows\\System32\\wsl.exe", parameters);
@@ -75,7 +72,7 @@ namespace wslcontrol_gui
             {
                 ver = RespondParser.GetLastLineSymbol(PassToWSL("--status"), 0);
                 iver = int.Parse(ver.ToString());
-            } 
+            }
             catch
             {
                 ver = RespondParser.GetLastLineSymbol(PassToWSL("--status"), 1);
@@ -193,7 +190,8 @@ namespace wslcontrol_gui
         public bool Default { get; set; }
         public override string ToString()//override text output
         {
-            if (this.Default) return this.Number.ToString() + ". " + this.Name + ", WSL" + this.Version + ", " + this.State + ", Set as default";
+            if (this.Default) return this.Number.ToString() + ". " + this.Name + ", WSL" + this.Version + ", "
+                    + this.State + ", Set as default";
             return this.Number.ToString() + ". " + this.Name + ", WSL" + this.Version + ", " + this.State;
         }
     }
@@ -211,9 +209,9 @@ namespace wslcontrol_gui
         public string FriendlyName { get; set; }
         public override string ToString() //override text output
         {
-            String extra = " (Default)";
-            if (this.Default == false) extra = "";
-            return this.Number.ToString() + ". " + this.FriendlyName + " (" + this.Name + ")"+extra;
+            String defaultLabel = " (Default)";
+            if (this.Default == false) defaultLabel = "";
+            return this.Number.ToString() + ". " + this.FriendlyName + " (" + this.Name + ")" + defaultLabel;
         }
     }
 }

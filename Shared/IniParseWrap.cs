@@ -1,6 +1,5 @@
 ﻿using PeanutButter.INI;
 using System;
-using System.Threading;
 
 namespace wslcontrol_gui
 {
@@ -46,7 +45,7 @@ namespace wslcontrol_gui
                 return false;
             }
         }
-        public void SetParameter(string section,string key, bool value)
+        public void SetParameter(string section, string key, bool value)
         {
             if (value)
             {
@@ -82,13 +81,12 @@ namespace wslcontrol_gui
         string username = "root";
         public IniParseWrapSpecific(Distro distro)
         {
-            //GetConfig();
             distroName = distro.Name;
-            username=wsli.GetDefaultUser(distroName);
+            username = wsli.GetDefaultUser(distroName);
             username = username.Replace("\n", "");
-            string initial= "\\\\wsl.localhost\\";
-            string fullPath = initial + distroName + "\\home\\"+username+"\\wsl.conf";
-            path=fullPath;
+            string initial = "\\\\wsl.localhost\\";
+            string fullPath = initial + distroName + "\\home\\" + username + "\\wsl.conf";
+            path = fullPath;
             parser.WrapValueInQuotes = false;
             parser = new INIFile(fullPath);
         }

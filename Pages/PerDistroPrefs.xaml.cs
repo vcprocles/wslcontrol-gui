@@ -8,7 +8,6 @@ namespace wslcontrol_gui
 {
     public partial class PerDistroPrefs : Window
     {
-        readonly OsInfo os = new();
         readonly IniParseWrapSpecific ini;
         private bool removeConfig = false;
         enum SwitchStates
@@ -37,10 +36,10 @@ namespace wslcontrol_gui
             InitializeSetOrDefault();
             if (!CompanionInstaller.CheckCompanionInstallation(selectedDistro.Name)) Close();
         }
-        private void DisableUnsupported() 
+        private void DisableUnsupported()
         {
             bool buildNotOk = true;
-            if (os.build > 19041) buildNotOk = false;
+            if (OsInfo.GetOsBuild() > 19041) buildNotOk = false;
             if (buildNotOk) //WS2022, W11, for boot settings
             { CommandOnBoot.IsEnabled = false; }
             if (buildNotOk) //for user settings
@@ -151,7 +150,7 @@ namespace wslcontrol_gui
             if (sender == null) throw new ArgumentNullException(nameof(sender));
             CheckBox a = (CheckBox)sender;
             if (sender is CheckBox && a.IsChecked == null) return;
-            if (a.IsChecked==null) throw new NullReferenceException();
+            if (a.IsChecked == null) throw new NullReferenceException();
             if (a.IsChecked.Value == true)
             {
                 AutomountSwitch(SwitchStates.Enable);
@@ -167,7 +166,7 @@ namespace wslcontrol_gui
         private void ProcessFstabCheckmark_Checked(object sender, RoutedEventArgs e)
         {
             if (sender is CheckBox a && a.IsChecked != null)
-                ini.SetParameter("automount","mountFsTab", a.IsChecked.Value);
+                ini.SetParameter("automount", "mountFsTab", a.IsChecked.Value);
         }
 
         private void WinFsPathBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -231,7 +230,7 @@ namespace wslcontrol_gui
             {
                 ini.ResetConfig();
             }
-            else 
+            else
             {
                 ini.SetConfig();
             }

@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using wslcontrol_gui.Pages;
-using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
@@ -19,16 +18,14 @@ namespace wslcontrol_gui
     public partial class MainWindow : Window
     {
         readonly WSLInterface wsli = new();
-        readonly OsInfo os = new();
-        //private bool RunInstaller=false;
         public MainWindow()
         {
             InitializeComponent();
-            if (!wsli.CheckResponseIfInstalled() )
+            if (!wsli.CheckResponseIfInstalled())
             {
                 wslcontrol_gui.Pages.InitialSetup firstsetupguide = new(wsli);
                 firstsetupguide.ShowDialog();//is my job done in this class? idk
-                Environment.Exit( 0 );//here exit after finishing
+                Environment.Exit(0);//here exit after finishing
             }
             try
             {
@@ -104,7 +101,7 @@ namespace wslcontrol_gui
                 ExportTar.IsEnabled = true;
                 if (selectedDistro.State == "Running") { TerminateButton.IsEnabled = true; }
                 if (selectedDistro.State == "Stopped") { TerminateButton.IsEnabled = false; }
-                if (os.build < 19041) { GlobalSettingsButton.IsEnabled = false; }
+                if (OsInfo.GetOsBuild() < 19041) { GlobalSettingsButton.IsEnabled = false; }
                 RunCommandButton.IsEnabled = true;
                 LaunchButton.IsEnabled = true;
                 InstallUninstallButton.IsEnabled = true;
@@ -196,7 +193,7 @@ namespace wslcontrol_gui
             {
                 var _ = new ShellExecuteBp(selectedDistro.Name);
             }
-            else if ((selectedDistro != null) && os.build > 22000) //W11 doesn't need the distro running
+            else if ((selectedDistro != null) && OsInfo.GetOsBuild() > 22000) //W11 doesn't need the distro running
             {
                 var _ = new ShellExecuteBp(selectedDistro.Name);
             }

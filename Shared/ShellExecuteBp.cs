@@ -5,10 +5,9 @@ namespace wslcontrol_gui
 {
     public partial class ShellExecuteBp
     {
-        readonly OsInfo os = new();
         public ShellExecuteBp(String Distro)
         {
-            if (os.build < 22000)
+            if (OsInfo.GetOsBuild() < 22000)
             {
                 ShellExecute(IntPtr.Zero, "open", "explorer.exe", "\\\\wsl$\\" + Distro, "", ShowCommands.SW_NORMAL);//checked and working for Windows 10
             }
@@ -19,7 +18,7 @@ namespace wslcontrol_gui
         }
         public ShellExecuteBp()
         {
-            if (os.build < 22000)
+            if (OsInfo.GetOsBuild() < 22000)
             {
                 ShellExecute(IntPtr.Zero, "open", "explorer.exe", "\\\\wsl$\\", "", ShowCommands.SW_NORMAL);
             }

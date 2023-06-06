@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿//this is going to be drive connecting code
 namespace wslcontrol_gui
 {
     internal class DriveManager

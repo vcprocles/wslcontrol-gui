@@ -25,7 +25,7 @@ namespace REghZyFramework.Themes
         }
         public static void SetTheme(ThemeTypes theme)
         {
-            string themeName="";//the original dev was assigning null, recipe for disaster and new C# versions malding
+            string themeName = "";//the original dev was assigning null, recipe for disaster and new C# versions malding
             CurrentTheme = theme;
             switch (theme)
             {
@@ -33,7 +33,7 @@ namespace REghZyFramework.Themes
                 case ThemeTypes.Light: themeName = "LightTheme"; break;
             }
             if (!string.IsNullOrEmpty(themeName))
-                    ChangeTheme(new Uri($"Assets/Thirdparty/{themeName}.xaml", UriKind.Relative)); 
+                ChangeTheme(new Uri($"Assets/Thirdparty/{themeName}.xaml", UriKind.Relative));
             //the original dev was doing nothing in try-catch???
         }
     }
