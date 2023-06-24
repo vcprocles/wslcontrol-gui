@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using System;
 using System.Security.Principal;
 
 namespace wslcontrol_gui
@@ -29,6 +30,15 @@ namespace wslcontrol_gui
                     return false;
             }
         }
+
+        public static string WSLVersion()
+        {
+            WSLInterface wsli = new();
+            string result = wsli.PassToWSL("--version");
+            result = result.Split("\r\n")[0].Split(" ")[2];
+            return result;
+        }
+        public const string testedWSLVersion = "1.2.5.0";
         public static UACStatus GetUACStatus()
         {
             bool isAdmin = (new WindowsPrincipal(WindowsIdentity.GetCurrent()))

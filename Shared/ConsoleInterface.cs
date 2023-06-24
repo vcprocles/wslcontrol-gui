@@ -56,7 +56,7 @@ namespace wslcontrol_gui
             };
             Process.Start(processInfo);
         }
-        private string PassToWSL(string parameters)
+        public string PassToWSL(string parameters)
         {
             return RunCommand("C:\\Windows\\System32\\wsl.exe", parameters);
         }

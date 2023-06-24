@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.IO;
+using System.Reflection;
+using System.Security.Policy;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -57,6 +60,21 @@ namespace wslcontrol_gui
                 Close();
             }
             ThemeResolver.SetTheme();
+            CheckVersion();
+        }
+        private void CheckVersion()
+        {
+            AssemblyInfo assemblyInfo = new(Assembly.GetExecutingAssembly());
+            var appver = assemblyInfo.Version.ToString();
+            var wslver = OsInfo.WSLVersion();
+            if (wslver==OsInfo.testedWSLVersion)
+            {
+                WSLVersionWarningLabel.Text = "v" + appver+ " WSL Version: " + wslver;
+            }
+            else
+            {
+                WSLVersionWarningLabel.Text = "v" + appver + " This version was tested with WSL v" + OsInfo.testedWSLVersion + ", current version: " + wslver;
+            }
         }
         private void SetInitialStatuses()
         {

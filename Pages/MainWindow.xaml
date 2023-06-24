@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:wslcontrol_gui"
         mc:Ignorable="d"
         Style="{DynamicResource CustomWindowStyle}"
-        Title="WSLControl" Height="610" MinHeight="610" Width="575" MinWidth="575" ResizeMode="CanResize">
+        Title="WSLControl" Height="670" MinHeight="670" Width="575" MinWidth="575" ResizeMode="CanResize">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -64,6 +64,7 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
+            <TextBlock Grid.Row="1" TextWrapping="Wrap" Name="WSLVersionWarningLabel" Visibility="Visible" FontStyle="Italic" Padding="5,5,5,5"/>
             <TextBlock Grid.Row="0"  TextWrapping="Wrap" Name="WSL2WarningLabel" Visibility="Collapsed" FontStyle="Italic" Padding="5,0,5,5">WARNING: Terminating WSL2 instance doesn't always release system resources, use Shutdown instead</TextBlock>
         </Grid>
     </Grid>
