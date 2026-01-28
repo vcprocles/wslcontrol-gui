@@ -1,0 +1,5 @@
+turns out debian 13 no longer ships Data::Dumper. I now have no idea what to do with the companion, might need to just check and install the dependency
+check all the old features
+close the gap in configurations
+refactor companion
+finish disk connection
