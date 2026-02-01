@@ -13,9 +13,10 @@
             <ColumnDefinition Width="59*"/>
             <ColumnDefinition Width="741*"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="ConsoleWindowWarning" Margin="0,0,149,0" FontSize="11" Grid.ColumnSpan="2">A terminal window will be opened and will ask you for your root password.</Label>
+        <Label x:Name="ConsoleWindowWarning" Margin="0,0,149,0" FontSize="11" Grid.ColumnSpan="2">When you hit "Apply" or "Reset", the terminal window will be opened and will ask you for your root password.</Label>
         <CheckBox Name="SystemdEnableCheckBox" Content="Enable Systemd sypport" Height="26" Margin="10,366,642,50" Click="SystemdEnableCheckBox_Checked" Grid.ColumnSpan="2"/>
-        <Button Name="ResetToDefaultsButton" Content="Reset to defaults" Width="150" Height="20" Margin="421,369,170,53" Click="ResetToDefaultsButton_Click" Grid.Column="1"/>
+        <Button Name="ResetToDefaultsButton" Content="Reset to defaults" Width="100" Height="20" Margin="210,369,170,53" Click="ResetToDefaultsButton_Click" Grid.Column="1"/>
+        <Button Name="ApplyChangesButton" Content="Apply changes" Width="100" Height="20" Margin="300,369,14,53" Click="ApplyChangesButton_Click" Grid.Column="1"/>
         <Rectangle HorizontalAlignment="Left" Height="319" Margin="10,32,0,0" Stroke="Black" VerticalAlignment="Top" Width="362" Grid.ColumnSpan="2"/>
         <CheckBox Name="EnableAutomountCheckMark" Content="Enable" HorizontalAlignment="Left" Margin="23,59,0,0" VerticalAlignment="Top" IsChecked="True" Height="15" Click="EnableAutomountCheckMark_Checked" Grid.ColumnSpan="2"/>
         <Label Content="Automount" HorizontalAlignment="Left" Margin="23,32,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Grid.ColumnSpan="2"/>

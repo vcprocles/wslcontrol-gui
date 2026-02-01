@@ -2,6 +2,6 @@
 {
     partial class CompanionInstaller
     {
-        public const int LastCompanionVersion = 1;
+        public const int LastCompanionVersion = 2;
     }
 }

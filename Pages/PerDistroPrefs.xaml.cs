@@ -15,9 +15,7 @@ namespace wslcontrol_gui
             Enable,
             Disable
         }
-#pragma warning disable CS8618 // Oh my god piss off I am checking for it to not be null
-        private static Distro distro;
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        private static Distro? distro;
         public PerDistroPrefs(Distro selectedDistro, WSLInterface _)
         {
             distro = selectedDistro ?? throw new ArgumentNullException(nameof(selectedDistro));
@@ -36,7 +34,7 @@ namespace wslcontrol_gui
             InitializeSetOrDefault();
             if (!CompanionInstaller.CheckCompanionInstallation(selectedDistro.Name)) Close();
         }
-        private void DisableUnsupported()
+        private void DisableUnsupported()//consider just refusing to run on w10
         {
             bool buildNotOk = true;
             if (OsInfo.GetOsBuild() > 19041) buildNotOk = false;
@@ -222,9 +220,14 @@ namespace wslcontrol_gui
             if (sender is TextBox a)
                 ini.SetParameter("boot", "command", a.Text);
         }
-        private void Window_Closed(object sender, EventArgs e)
+        private void ApplyChangesButton_Click(object sender, RoutedEventArgs e)
         {
             ini.WriteOut();
+            ini.SetConfig();
+        }
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            //ini.WriteOut(); no longer saving on close
             Thread.Sleep(100);
             if (removeConfig)
             {
@@ -232,7 +235,7 @@ namespace wslcontrol_gui
             }
             else
             {
-                ini.SetConfig();
+                //ini.SetConfig(); no longer saving on close
             }
         }
 
